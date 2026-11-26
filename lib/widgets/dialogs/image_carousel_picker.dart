@@ -31,6 +31,7 @@ import '../../utils/atomic_file.dart';
 import '../../utils/log.dart';
 import '../../utils/user_facing_error.dart';
 import '../safe_svg_image.dart';
+import '../text_input_focus.dart';
 import '../../theme/app_theme.dart';
 import 'ai_image_outbound_dialog.dart';
 
@@ -215,67 +216,65 @@ class _ImageCarouselPickerState extends ConsumerState<ImageCarouselPicker> {
   /// instance members of a State subclass), so they route through this wrapper.
   void _rebuild(VoidCallback fn) => setState(fn);
 
+  Map<ShortcutActivator, VoidCallback> get _shortcuts => {
+    const SingleActivator(LogicalKeyboardKey.escape): () => _close(),
+    const SingleActivator(LogicalKeyboardKey.enter): () => _confirm(),
+    const SingleActivator(LogicalKeyboardKey.arrowRight): () =>
+        _moveSelection(1),
+    const SingleActivator(LogicalKeyboardKey.arrowLeft): () =>
+        _moveSelection(-1),
+    const SingleActivator(LogicalKeyboardKey.arrowDown): () =>
+        _moveSelection(3),
+    const SingleActivator(LogicalKeyboardKey.arrowUp): () => _moveSelection(-3),
+    if (_supportsPaste) ...{
+      const SingleActivator(LogicalKeyboardKey.keyV, control: true):
+          _pasteClipboardImage,
+      const SingleActivator(LogicalKeyboardKey.keyV, meta: true):
+          _pasteClipboardImage,
+    },
+  };
+
   @override
   Widget build(BuildContext context) {
-    return CallbackShortcuts(
-      bindings: {
-        const SingleActivator(LogicalKeyboardKey.escape): () => _close(),
-        const SingleActivator(LogicalKeyboardKey.enter): () => _confirm(),
-        const SingleActivator(LogicalKeyboardKey.arrowRight): () =>
-            _moveSelection(1),
-        const SingleActivator(LogicalKeyboardKey.arrowLeft): () =>
-            _moveSelection(-1),
-        const SingleActivator(LogicalKeyboardKey.arrowDown): () =>
-            _moveSelection(3),
-        const SingleActivator(LogicalKeyboardKey.arrowUp): () =>
-            _moveSelection(-3),
-        // Tekstvelden houden hun eigen plakbinding. Met focus op de dialoog
-        // importeert dezelfde sneltoets een klembordafbeelding.
-        if (_supportsPaste) ...{
-          const SingleActivator(LogicalKeyboardKey.keyV, control: true):
-              _pasteClipboardImage,
-          const SingleActivator(LogicalKeyboardKey.keyV, meta: true):
-              _pasteClipboardImage,
-        },
-      },
-      child: Focus(
-        focusNode: _focusNode,
-        child: Dialog(
-          backgroundColor: Colors.transparent,
-          insetPadding: const EdgeInsets.all(32),
-          child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 1160, maxHeight: 780),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(20),
-              child: Container(
-                decoration: BoxDecoration(
-                  color: ImagePickerPalette.bg,
-                  borderRadius: BorderRadius.circular(20),
-                  border: Border.all(
-                    color: ImagePickerPalette.surface2,
-                    width: 1,
+    final shortcuts = _shortcuts;
+    return Focus(
+      focusNode: _focusNode,
+      onKeyEvent: (_, event) => _handleCarouselShortcut(event, shortcuts),
+      child: Dialog(
+        backgroundColor: Colors.transparent,
+        insetPadding: const EdgeInsets.all(32),
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 1160, maxHeight: 780),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(20),
+            child: Container(
+              decoration: BoxDecoration(
+                color: ImagePickerPalette.bg,
+                borderRadius: BorderRadius.circular(20),
+                border: Border.all(
+                  color: ImagePickerPalette.surface2,
+                  width: 1,
+                ),
+              ),
+              child: Column(
+                children: [
+                  _buildHeader(),
+                  Expanded(
+                    child: _loading
+                        ? _buildLoading()
+                        : Row(
+                            children: [
+                              _viewMode == _ViewMode.cover
+                                  ? _buildCover()
+                                  : _buildGrid(),
+                              _buildPreview(),
+                            ],
+                          ),
                   ),
-                ),
-                child: Column(
-                  children: [
-                    _buildHeader(),
-                    Expanded(
-                      child: _loading
-                          ? _buildLoading()
-                          : Row(
-                              children: [
-                                _viewMode == _ViewMode.cover
-                                    ? _buildCover()
-                                    : _buildGrid(),
-                                _buildPreview(),
-                              ],
-                            ),
-                    ),
-                    if (_pasteError case final message?)
-                      _carouselPasteFeedback(message),
-                    _buildFooter(),
-                  ],
-                ),
+                  if (_pasteError case final message?)
+                    _carouselPasteFeedback(message),
+                  _buildFooter(),
+                ],
               ),
             ),
           ),
@@ -283,6 +282,25 @@ class _ImageCarouselPickerState extends ConsumerState<ImageCarouselPicker> {
       ),
     );
   }
+}
+
+KeyEventResult _handleCarouselShortcut(
+  KeyEvent event,
+  Map<ShortcutActivator, VoidCallback> shortcuts,
+) {
+  // Flutter handelt tekstnavigatie en plakken hoger in de focusboom af.
+  final key = event.logicalKey;
+  if (key != LogicalKeyboardKey.escape &&
+      key != LogicalKeyboardKey.enter &&
+      textInputHasFocus) {
+    return KeyEventResult.ignored;
+  }
+  for (final entry in shortcuts.entries) {
+    if (!entry.key.accepts(event, HardwareKeyboard.instance)) continue;
+    entry.value();
+    return KeyEventResult.handled;
+  }
+  return KeyEventResult.ignored;
 }
 
 Widget _carouselPasteFeedback(String message) => Semantics(

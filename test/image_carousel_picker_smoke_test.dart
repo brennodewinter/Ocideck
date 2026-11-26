@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/gestures.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
@@ -175,6 +176,57 @@ void main() {
 
     expect(find.byType(ImageCarouselPicker), findsOneWidget);
     expect(find.byType(ErrorWidget), findsNothing);
+  });
+
+  testWidgets('arrow down edits the caption until focus leaves it', (
+    tester,
+  ) async {
+    await pumpPicker(tester);
+    final previewName = find.textContaining(
+      RegExp(r'^(alpha|beta|gamma)\.png$'),
+    );
+    final initialName = tester.widget<Text>(previewName).data;
+    final caption = find.widgetWithText(TextField, 'Caption / bronvermelding');
+    final controller = tester.widget<TextField>(caption).controller!;
+    await tester.enterText(caption, 'abc\ndef');
+    controller.selection = const TextSelection.collapsed(offset: 1);
+    await tester.pump();
+
+    await tester.sendKeyEvent(LogicalKeyboardKey.arrowDown);
+    await settle(tester);
+    expect(tester.widget<Text>(previewName).data, initialName);
+    expect(controller.selection, const TextSelection.collapsed(offset: 5));
+
+    await tester.sendKeyEvent(LogicalKeyboardKey.tab);
+    await tester.pump();
+    await tester.sendKeyEvent(LogicalKeyboardKey.tab);
+    await tester.pump();
+    await tester.sendKeyEvent(LogicalKeyboardKey.arrowDown);
+    await settle(tester);
+    expect(tester.widget<Text>(previewName).data, isNot(initialName));
+  });
+
+  testWidgets('paste goes to the focused text field', (tester) async {
+    const clipboardText = 'geplakt';
+    final messenger = tester.binding.defaultBinaryMessenger;
+    messenger.setMockMethodCallHandler(SystemChannels.platform, (call) async {
+      if (call.method == 'Clipboard.getData') return {'text': clipboardText};
+      return null;
+    });
+    addTearDown(
+      () => messenger.setMockMethodCallHandler(SystemChannels.platform, null),
+    );
+    await pumpPicker(tester);
+    final search = find.byType(TextField).first;
+    await tester.tap(search);
+    await tester.pump();
+
+    await tester.sendKeyDownEvent(LogicalKeyboardKey.controlLeft);
+    await tester.sendKeyEvent(LogicalKeyboardKey.keyV);
+    await tester.sendKeyUpEvent(LogicalKeyboardKey.controlLeft);
+    await settle(tester);
+
+    expect(tester.widget<TextField>(search).controller!.text, clipboardText);
   });
 
   // ── Beheermodus (#1108) ─────────────────────────────────────────────────
