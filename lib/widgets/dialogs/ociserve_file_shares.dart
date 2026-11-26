@@ -306,10 +306,12 @@ class _OciServeFileSharesState extends ConsumerState<OciServeFileShares> {
                   for (final share in _shares)
                     ListTile(
                       title: Text(
-                        '${l10n.d('Vastgelegde versie')} ${share.rootId}',
+                        share.targetName.isEmpty
+                            ? '${l10n.d('Vastgelegde versie')} ${share.rootId}'
+                            : share.targetName,
                       ),
                       subtitle: Text(
-                        '${share.status} · ${share.expiresAt.toLocal()} (${share.expiresAt.toLocal().timeZoneName})\n${share.expiresAt.toIso8601String()} · ${l10n.d(share.passwordProtected ? 'Met wachtwoord' : 'Zonder wachtwoord')}',
+                        '${share.status} · ${share.expiresAt.toLocal()} (${share.expiresAt.toLocal().timeZoneName})\n${share.expiresAt.toIso8601String()} · ${l10n.d(share.passwordProtected ? 'Met wachtwoord' : 'Zonder wachtwoord')} · ${share.snapshotItems} / ${share.snapshotBytes} B',
                       ),
                       trailing: share.status == 'active'
                           ? PopupMenuButton<String>(

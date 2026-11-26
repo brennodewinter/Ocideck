@@ -1557,6 +1557,12 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.':
+      'Fuq il-web, is-server jimmaniġġja l-cookie tas-sessjoni. Il-progress li ma ntbagħatx jibqa’ biss f’din it-tab.',
+  'Webaanmelding vereist een OciServe-BFF onder dezelfde HTTPS-origin als deze OciDeck-installatie.':
+      'Id-dħul fuq il-web jeħtieġ BFF ta’ OciServe fuq l-istess oriġini HTTPS bħal din l-installazzjoni ta’ OciDeck.',
+  'Sta het aanmeldvenster toe en klik opnieuw op Inloggen.':
+      'Ħalli t-tieqa tad-dħul u erġa’ agħfas Idħol.',
   'Openen in browser': 'Iftaħ fil-browser',
   'Aanpassen': 'Aġġusta',
   'Hoofdmap': 'Fowlder prinċipali',

@@ -1552,6 +1552,12 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.':
+      'In interrete, minister crustulum sessionis administrat. Progressus nondum missus in hac tantum scheda manet.',
+  'Webaanmelding vereist een OciServe-BFF onder dezelfde HTTPS-origin als deze OciDeck-installatie.':
+      'Ingressus interretialis OciServe BFF in eadem origine HTTPS atque haec institutio OciDeck requirit.',
+  'Sta het aanmeldvenster toe en klik opnieuw op Inloggen.':
+      'Fenestram ingressus permitte et rursus Inire preme.',
   'Openen in browser': 'Apertum in pasco',
   'Aanpassen': 'Adjust',
   'Hoofdmap': 'Principalis folder',

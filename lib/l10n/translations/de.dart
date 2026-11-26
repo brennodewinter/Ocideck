@@ -612,6 +612,12 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.':
+      'Im Web verwaltet der Server das Sitzungscookie. Noch nicht gesendeter Fortschritt bleibt nur in diesem Tab.',
+  'Webaanmelding vereist een OciServe-BFF onder dezelfde HTTPS-origin als deze OciDeck-installatie.':
+      'Die Webanmeldung erfordert ein OciServe-BFF unter derselben HTTPS-Origin wie diese OciDeck-Installation.',
+  'Sta het aanmeldvenster toe en klik opnieuw op Inloggen.':
+      'Erlauben Sie das Anmeldefenster und klicken Sie erneut auf Anmelden.',
   'Openen in browser': 'Im Browser öffnen',
   'Aanpassen': 'Anpassen',
   'Hoofdmap': 'Hauptordner',

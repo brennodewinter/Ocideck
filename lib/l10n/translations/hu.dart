@@ -1542,6 +1542,12 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.':
+      'A weben a munkamenet sütijét a kiszolgáló kezeli. Az el nem küldött haladás csak ezen a lapon marad meg.',
+  'Webaanmelding vereist een OciServe-BFF onder dezelfde HTTPS-origin als deze OciDeck-installatie.':
+      'A webes bejelentkezéshez az OciDeck-telepítéssel azonos HTTPS-eredeten működő OciServe BFF szükséges.',
+  'Sta het aanmeldvenster toe en klik opnieuw op Inloggen.':
+      'Engedélyezze a bejelentkezési ablakot, majd kattintson ismét a Bejelentkezés gombra.',
   'Openen in browser': 'Nyissa meg a böngészőben',
   'Aanpassen': 'Állítsa be',
   'Hoofdmap': 'Fő mappa',

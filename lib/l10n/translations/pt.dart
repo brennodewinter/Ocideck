@@ -1566,6 +1566,12 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.':
+      'Na web, o servidor gere o cookie de sessão. O progresso por enviar permanece apenas neste separador.',
+  'Webaanmelding vereist een OciServe-BFF onder dezelfde HTTPS-origin als deze OciDeck-installatie.':
+      'O acesso web requer um BFF OciServe na mesma origem HTTPS desta instalação OciDeck.',
+  'Sta het aanmeldvenster toe en klik opnieuw op Inloggen.':
+      'Permita a janela de início de sessão e clique novamente em Iniciar sessão.',
   'Openen in browser': 'Abrir no navegador',
   'Aanpassen': 'Ajustar',
   'Hoofdmap': 'Pasta principal',

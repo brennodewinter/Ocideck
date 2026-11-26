@@ -1545,6 +1545,12 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.':
+      'Na webu poslužitelj upravlja kolačićem sesije. Neposlani napredak ostaje samo u ovoj kartici.',
+  'Webaanmelding vereist een OciServe-BFF onder dezelfde HTTPS-origin als deze OciDeck-installatie.':
+      'Web prijava zahtijeva OciServe BFF na istom HTTPS izvoru kao ova instalacija OciDecka.',
+  'Sta het aanmeldvenster toe en klik opnieuw op Inloggen.':
+      'Dopustite prozor za prijavu i ponovno kliknite Prijava.',
   'Openen in browser': 'Otvori u pregledniku',
   'Aanpassen': 'prilagoditi',
   'Hoofdmap': 'Glavna mapa',

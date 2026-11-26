@@ -1541,6 +1541,12 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.':
+      'V spletu piškotek seje upravlja strežnik. Neposlan napredek ostane samo na tem zavihku.',
+  'Webaanmelding vereist een OciServe-BFF onder dezelfde HTTPS-origin als deze OciDeck-installatie.':
+      'Spletna prijava zahteva OciServe BFF na istem izvoru HTTPS kot ta namestitev OciDeck.',
+  'Sta het aanmeldvenster toe en klik opnieuw op Inloggen.':
+      'Dovolite prijavno okno in znova kliknite Prijava.',
   'Openen in browser': 'Odpri v brskalniku',
   'Aanpassen': 'Prilagodi',
   'Hoofdmap': 'Glavna mapa',

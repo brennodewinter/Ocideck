@@ -1541,6 +1541,12 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.':
+      'Verkossa palvelin hallitsee istuntoevästettä. Lähettämätön edistyminen säilyy vain tässä välilehdessä.',
+  'Webaanmelding vereist een OciServe-BFF onder dezelfde HTTPS-origin als deze OciDeck-installatie.':
+      'Verkkokirjautuminen edellyttää OciServe-BFF:ää samassa HTTPS-alkuperässä kuin tämä OciDeck-asennus.',
+  'Sta het aanmeldvenster toe en klik opnieuw op Inloggen.':
+      'Salli kirjautumisikkuna ja napsauta Kirjaudu sisään uudelleen.',
   'Openen in browser': 'Avaa selaimessa',
   'Aanpassen': 'Säädä',
   'Hoofdmap': 'Pääkansio',

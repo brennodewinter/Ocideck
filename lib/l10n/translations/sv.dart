@@ -1540,6 +1540,12 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.':
+      'På webben hanterar servern sessionscookien. Framsteg som inte skickats finns bara kvar på den här fliken.',
+  'Webaanmelding vereist een OciServe-BFF onder dezelfde HTTPS-origin als deze OciDeck-installatie.':
+      'Webbinloggning kräver en OciServe-BFF på samma HTTPS-ursprung som denna OciDeck-installation.',
+  'Sta het aanmeldvenster toe en klik opnieuw op Inloggen.':
+      'Tillåt inloggningsfönstret och klicka på Logga in igen.',
   'Openen in browser': 'Öppna i webbläsaren',
   'Aanpassen': 'Justera',
   'Hoofdmap': 'Huvudmapp',

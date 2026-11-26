@@ -1555,6 +1555,12 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.':
+      'У вебверсії сервер керує файлом cookie сеансу. Ненадісланий прогрес зберігається лише в цій вкладці.',
+  'Webaanmelding vereist een OciServe-BFF onder dezelfde HTTPS-origin als deze OciDeck-installatie.':
+      'Вебвхід потребує BFF OciServe з тим самим HTTPS-джерелом, що й ця інсталяція OciDeck.',
+  'Sta het aanmeldvenster toe en klik opnieuw op Inloggen.':
+      'Дозвольте вікно входу та натисніть Увійти знову.',
   'Openen in browser': 'Відкрити в браузері',
   'Aanpassen': 'Налаштувати',
   'Hoofdmap': 'Основна папка',

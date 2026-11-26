@@ -1560,6 +1560,12 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.':
+      'В уебверсията сървърът управлява бисквитката на сесията. Неизпратеният напредък остава само в този раздел.',
+  'Webaanmelding vereist een OciServe-BFF onder dezelfde HTTPS-origin als deze OciDeck-installatie.':
+      'Уебвходът изисква OciServe BFF на същия HTTPS произход като тази инсталация на OciDeck.',
+  'Sta het aanmeldvenster toe en klik opnieuw op Inloggen.':
+      'Разрешете прозореца за вход и натиснете Вход отново.',
   'Openen in browser': 'Отворете в браузъра',
   'Aanpassen': 'Настройте',
   'Hoofdmap': 'Основна папка',

@@ -2397,6 +2397,12 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.':
+      'Web’de oturum çerezini sunucu yönetir. Gönderilmemiş ilerleme yalnızca bu sekmede kalır.',
+  'Webaanmelding vereist een OciServe-BFF onder dezelfde HTTPS-origin als deze OciDeck-installatie.':
+      'Web oturumu açmak için bu OciDeck kurulumuyla aynı HTTPS kaynağında bir OciServe BFF gerekir.',
+  'Sta het aanmeldvenster toe en klik opnieuw op Inloggen.':
+      'Oturum açma penceresine izin verin ve yeniden Oturum aç’a tıklayın.',
   'Openen in browser': 'Tarayıcıda aç',
   'Aanpassen': 'Ayarla',
   'Hoofdmap': 'Ana klasör',

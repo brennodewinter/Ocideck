@@ -10,6 +10,20 @@ class OciServePasskeysButton extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(ociServeProvider);
+    if (state.errorCode == 'web_step_up_required' &&
+        ref.watch(ociServeWebSessionClientProvider).available) {
+      return FilledButton.icon(
+        icon: const Icon(Icons.login),
+        label: Text(context.l10n.d('Inloggen met passkey of andere methode')),
+        onPressed: !enabled
+            ? null
+            : () async {
+                final notifier = ref.read(ociServeProvider.notifier);
+                notifier.prepareBrowserLogin();
+                await notifier.login(forceLogin: true);
+              },
+      );
+    }
     if (!state.authenticated ||
         state.account?.passwordlessEnrollable != true ||
         state.account?.passkeyManagementUrl == null) {

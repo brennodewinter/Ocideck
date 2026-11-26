@@ -7,6 +7,10 @@ typedef OciServeGatewayFactory =
 typedef OciServeAuthenticatorFactory =
     OciServeAuthenticator Function(OciServeSettings settings);
 
+final ociServeWebSessionClientProvider = Provider<OciServeWebSessionClient>(
+  (ref) => createOciServeWebSessionClient(),
+);
+
 final ociServeAccountBrowserProvider = Provider<OciServeBrowserLauncher>(
   (ref) => const ExternalOciServeBrowserLauncher(),
 );

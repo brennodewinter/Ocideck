@@ -4,14 +4,18 @@ import 'dart:typed_data';
 import 'package:web/web.dart' as web;
 import 'ociserve_http.dart';
 import '../../utils/log.dart';
+import 'ociserve_web_session.dart';
 
 OciServeHttpTransport createPublicOciServeHttpTransport() =>
-    _PublicWebTransport();
+    OciServeBrowserHttpTransport();
 
 /// Capability-only fetch. Browser CORS mediation remains mandatory; no proxy,
 /// cookies, redirects, referrer or ambient OIDC session can join this request.
-class _PublicWebTransport
+class OciServeBrowserHttpTransport
     implements OciServeHttpTransport, OciServeClosableTransport {
+  OciServeBrowserHttpTransport({this.accountSession = false, this.csrfToken});
+  final bool accountSession;
+  final String? Function()? csrfToken;
   final _requests = <web.AbortController>{};
   bool _closed = false;
   @override
@@ -37,21 +41,34 @@ class _PublicWebTransport
         url.scheme != 'https' ||
         url.userInfo.isNotEmpty ||
         url.hasFragment ||
-        !url.path.startsWith('/api/v1/public/file-shares/') ||
+        (!accountSession &&
+            !url.path.startsWith('/api/v1/public/file-shares/')) ||
         maxResponseBytes <= 0 ||
-        maxResponseBytes > 32 * 1024 * 1024) {
+        maxResponseBytes > (accountSession ? 100 : 32) * 1024 * 1024) {
       throw const OciServeTransportException('request_refused');
     }
     final abort = web.AbortController();
     _requests.add(abort);
+    final scope = OciServeRequestScope.current;
+    void cancel() => abort.abort();
+    scope?.add(cancel);
     final timer = Timer(timeout, () => abort.abort());
     try {
       final h = web.Headers();
-      headers.forEach((key, value) => h.set(key, value));
+      final outgoing = accountSession
+          ? ociServeBffHeaders(
+              url: url,
+              appOrigin: Uri.base,
+              method: method,
+              headers: headers,
+              csrfToken: csrfToken?.call(),
+            )
+          : headers;
+      outgoing.forEach((key, value) => h.set(key, value));
       final init = web.RequestInit(
         method: method,
         mode: 'cors',
-        credentials: 'omit',
+        credentials: accountSession ? 'same-origin' : 'omit',
         redirect: 'error',
         referrerPolicy: 'no-referrer',
         cache: 'no-store',
@@ -99,7 +116,7 @@ class _PublicWebTransport
         'OciServe: publieke verbinding mislukt (${error.runtimeType})',
       );
       throw OciServeTransportException(
-        _closed
+        (_closed || scope?.cancelled == true)
             ? 'cancelled'
             : abort.signal.aborted
             ? 'timeout'
@@ -108,6 +125,7 @@ class _PublicWebTransport
     } finally {
       timer.cancel();
       _requests.remove(abort);
+      scope?.remove(cancel);
     }
   }
 }

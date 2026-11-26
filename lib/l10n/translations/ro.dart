@@ -1555,6 +1555,12 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.':
+      'Pe web, serverul gestionează cookie-ul sesiunii. Progresul netrimis rămâne doar în această filă.',
+  'Webaanmelding vereist een OciServe-BFF onder dezelfde HTTPS-origin als deze OciDeck-installatie.':
+      'Autentificarea web necesită un BFF OciServe la aceeași origine HTTPS ca această instalare OciDeck.',
+  'Sta het aanmeldvenster toe en klik opnieuw op Inloggen.':
+      'Permiteți fereastra de autentificare și apăsați din nou Autentificare.',
   'Openen in browser': 'Deschideți în browser',
   'Aanpassen': 'Ajustați',
   'Hoofdmap': 'Dosarul principal',

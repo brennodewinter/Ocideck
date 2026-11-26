@@ -1541,6 +1541,12 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.':
+      'Di web, server mengelola cookie sesi. Progres yang belum terkirim hanya disimpan di tab ini.',
+  'Webaanmelding vereist een OciServe-BFF onder dezelfde HTTPS-origin als deze OciDeck-installatie.':
+      'Login web memerlukan BFF OciServe pada origin HTTPS yang sama dengan instalasi OciDeck ini.',
+  'Sta het aanmeldvenster toe en klik opnieuw op Inloggen.':
+      'Izinkan jendela login dan klik Masuk lagi.',
   'Openen in browser': 'Buka di peramban',
   'Aanpassen': 'Sesuaikan',
   'Hoofdmap': 'Folder utama',

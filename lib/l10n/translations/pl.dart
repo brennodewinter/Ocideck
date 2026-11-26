@@ -1551,6 +1551,12 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.':
+      'W przeglądarce serwer zarządza ciasteczkiem sesji. Niewysłany postęp pozostaje tylko na tej karcie.',
+  'Webaanmelding vereist een OciServe-BFF onder dezelfde HTTPS-origin als deze OciDeck-installatie.':
+      'Logowanie w przeglądarce wymaga BFF OciServe w tym samym źródle HTTPS co ta instalacja OciDeck.',
+  'Sta het aanmeldvenster toe en klik opnieuw op Inloggen.':
+      'Zezwól na okno logowania i ponownie kliknij Zaloguj się.',
   'Openen in browser': 'Otwórz w przeglądarce',
   'Aanpassen': 'Dostosuj',
   'Hoofdmap': 'Główny folder',

@@ -1537,6 +1537,12 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.':
+      'Tīmeklī sesijas sīkdatni pārvalda serveris. Nenosūtītais progress paliek tikai šajā cilnē.',
+  'Webaanmelding vereist een OciServe-BFF onder dezelfde HTTPS-origin als deze OciDeck-installatie.':
+      'Lai pieteiktos tīmeklī, vajadzīgs OciServe BFF tajā pašā HTTPS izcelsmē kā šī OciDeck instalācija.',
+  'Sta het aanmeldvenster toe en klik opnieuw op Inloggen.':
+      'Atļaujiet pieteikšanās logu un vēlreiz noklikšķiniet uz Pieteikties.',
   'Openen in browser': 'Atvērt pārlūkprogrammā',
   'Aanpassen': 'Pielāgot',
   'Hoofdmap': 'Galvenais direktorijs',

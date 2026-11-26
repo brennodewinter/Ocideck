@@ -1547,6 +1547,12 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.':
+      'Žiniatinklyje seanso slapuką tvarko serveris. Neišsiųsta pažanga lieka tik šiame skirtuke.',
+  'Webaanmelding vereist een OciServe-BFF onder dezelfde HTTPS-origin als deze OciDeck-installatie.':
+      'Prisijungimui žiniatinklyje reikia OciServe BFF toje pačioje HTTPS kilmėje kaip ši OciDeck diegtis.',
+  'Sta het aanmeldvenster toe en klik opnieuw op Inloggen.':
+      'Leiskite prisijungimo langą ir dar kartą spustelėkite Prisijungti.',
   'Openen in browser': 'Atidaryti naršyklėje',
   'Aanpassen': 'Sureguliuoti',
   'Hoofdmap': 'Pagrindinis aplankas',

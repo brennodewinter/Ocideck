@@ -1533,6 +1533,12 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.':
+      'Veebis haldab seansiküpsist server. Saatmata edenemine jääb ainult sellele vahelehele.',
+  'Webaanmelding vereist een OciServe-BFF onder dezelfde HTTPS-origin als deze OciDeck-installatie.':
+      'Veebis sisselogimine nõuab OciServe BFF-i selle OciDecki paigaldusega samal HTTPS-päritolul.',
+  'Sta het aanmeldvenster toe en klik opnieuw op Inloggen.':
+      'Luba sisselogimisaken ja klõpsa uuesti Logi sisse.',
   'Openen in browser': 'Ava brauseris',
   'Aanpassen': 'Kohandage',
   'Hoofdmap': 'Peakaust',

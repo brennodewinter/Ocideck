@@ -612,6 +612,12 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.':
+      'Riba web, e servidor ta maneha e cookie di seshon. Progreso ku no ta mandá ta keda solamente den e pestaña aki.',
+  'Webaanmelding vereist een OciServe-BFF onder dezelfde HTTPS-origin als deze OciDeck-installatie.':
+      'Pa drenta via web mester tin un BFF di OciServe riba e mesun origen HTTPS ku e instalashon di OciDeck aki.',
+  'Sta het aanmeldvenster toe en klik opnieuw op Inloggen.':
+      'Permití e bentana di entrada i primi Drenta atrobe.',
   'Openen in browser': 'Habri den e browser',
   'Aanpassen': 'Ahustá',
   'Hoofdmap': 'Map prinsipal',

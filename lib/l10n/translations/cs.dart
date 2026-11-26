@@ -1541,6 +1541,12 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.':
+      'Na webu spravuje soubor cookie relace server. Neodeslaný průběh zůstává pouze na této kartě.',
+  'Webaanmelding vereist een OciServe-BFF onder dezelfde HTTPS-origin als deze OciDeck-installatie.':
+      'Webové přihlášení vyžaduje OciServe BFF na stejném původu HTTPS jako tato instalace OciDeck.',
+  'Sta het aanmeldvenster toe en klik opnieuw op Inloggen.':
+      'Povolte přihlašovací okno a znovu klikněte na Přihlásit se.',
   'Openen in browser': 'Otevřít v prohlížeči',
   'Aanpassen': 'Upravte',
   'Hoofdmap': 'Hlavní složka',

@@ -22,7 +22,7 @@ mixin _OciServeOutboxMethods on OciServeNotifierBase {
   }
 
   Future<void> _flushPendingReports() async {
-    if (!state.authenticated || !_secrets.canStore) return;
+    if (!state.authenticated || (!_secrets.canStore && !_web.available)) return;
     final generation = _generation;
     final settings = state.settings;
     final baseUrl = settings.normalizedBaseUrl;
@@ -147,6 +147,9 @@ mixin _OciServeOutboxMethods on OciServeNotifierBase {
 
   @override
   Future<List<Map<String, Object?>>> _readOutbox({String? baseUrl}) async {
+    if (_web.available) {
+      return _webOutbox.map((item) => Map<String, Object?>.from(item)).toList();
+    }
     final raw = await _secrets.readOciServeOutbox(
       baseUrl ?? state.settings.normalizedBaseUrl,
     );
@@ -171,6 +174,12 @@ mixin _OciServeOutboxMethods on OciServeNotifierBase {
     List<Map<String, Object?>> pending, {
     String? baseUrl,
   }) async {
+    if (_web.available) {
+      _webOutbox
+        ..clear()
+        ..addAll(pending.take(100));
+      return;
+    }
     final base = baseUrl ?? state.settings.normalizedBaseUrl;
     if (pending.isEmpty) {
       await _secrets.deleteOciServeOutbox(base);

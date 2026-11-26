@@ -136,12 +136,18 @@ class ManagedFileShare {
     required this.passwordProtected,
     required this.revision,
     this.link,
+    this.targetName = '',
+    this.targetKind = '',
+    this.snapshotItems = 0,
+    this.snapshotBytes = 0,
   });
   final String id, rootId, status;
   final DateTime expiresAt;
   final bool passwordProtected;
   final int revision;
   final String? link;
+  final String targetName, targetKind;
+  final int snapshotItems, snapshotBytes;
   String get etag => '"$revision"';
   factory ManagedFileShare.fromJson(Map<String, Object?> json) =>
       ManagedFileShare(
@@ -152,6 +158,10 @@ class ManagedFileShare {
         passwordProtected: json['password_protected'] as bool,
         revision: json['revision'] as int,
         link: json['link'] as String?,
+        targetName: json['target_name'] as String? ?? '',
+        targetKind: json['target_kind'] as String? ?? '',
+        snapshotItems: json['snapshot_items'] as int? ?? 0,
+        snapshotBytes: json['snapshot_bytes'] as int? ?? 0,
       );
   @override
   String toString() => 'ManagedFileShare(redacted)';
@@ -210,8 +220,9 @@ DateTime parseShareExpiryInput(String value) {
       date.hour == fields[3] &&
       date.minute == fields[4] &&
       date.second == fields[5];
-  if (!matches(normalized))
+  if (!matches(normalized)) {
     throw const FormatException('invalid calendar value');
+  }
   final offset = match.group(7);
   if (offset != null &&
       offset != 'Z' &&
@@ -220,7 +231,8 @@ DateTime parseShareExpiryInput(String value) {
     throw const FormatException('invalid UTC offset');
   }
   final date = DateTime.parse(value);
-  if (offset == null && !matches(date))
+  if (offset == null && !matches(date)) {
     throw const FormatException('nonexistent local time');
+  }
   return date;
 }

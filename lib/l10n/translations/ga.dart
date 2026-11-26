@@ -1569,6 +1569,12 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.':
+      'Ar an ngréasán, bainistíonn an freastalaí fianán an tseisiúin. Ní fhanann dul chun cinn nár seoladh ach sa chluaisín seo.',
+  'Webaanmelding vereist een OciServe-BFF onder dezelfde HTTPS-origin als deze OciDeck-installatie.':
+      'Teastaíonn BFF OciServe ar an mbunús HTTPS céanna leis an suiteáil OciDeck seo chun síniú isteach ar an ngréasán.',
+  'Sta het aanmeldvenster toe en klik opnieuw op Inloggen.':
+      'Ceadaigh an fhuinneog sínithe isteach agus cliceáil ar Sínigh isteach arís.',
   'Openen in browser': 'Oscail sa bhrabhsálaí',
   'Aanpassen': 'Coigeartaigh',
   'Hoofdmap': 'Príomhfhillteán',

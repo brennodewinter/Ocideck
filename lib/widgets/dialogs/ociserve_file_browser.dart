@@ -10,6 +10,7 @@ import '../../services/ociserve/ociserve_auth.dart';
 import '../../services/ociserve/ociserve_http.dart';
 import '../../state/ociserve_provider.dart';
 import 'ociserve_file_shares.dart';
+import 'ociserve_passkeys_button.dart';
 
 class OciServeFileSelection {
   const OciServeFileSelection(this.bytes, this.entry, this.origin);
@@ -22,6 +23,8 @@ String ociServeFileError(BuildContext context, Object error) {
   final code = error is OciServeException ? error.code : 'invalid_response';
   final status = error is OciServeException ? error.statusCode : null;
   return context.l10n.d(switch ((code, status)) {
+    ('browser_refused', _) =>
+      'Sta het aanmeldvenster toe en klik opnieuw op Inloggen.',
     ('cancelled', _) => 'De sessie is gewijzigd. Open de bron opnieuw.',
     ('share_password_required', _) =>
       'Voer het wachtwoord in of probeer opnieuw.',
@@ -402,6 +405,8 @@ class _OciServeFileBrowserState extends ConsumerState<OciServeFileBrowser> {
         ),
       ),
       actions: [
+        if (!_public && state.errorCode == 'web_step_up_required')
+          const OciServePasskeysButton(),
         if (_public && _error != null) _browserFallback(),
         if (!_public && _org != null && membership?.canShareFiles == true)
           TextButton(

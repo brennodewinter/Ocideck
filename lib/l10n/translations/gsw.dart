@@ -1541,6 +1541,12 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.':
+      'Im Web verwaltet de Server s Sitzigscookie. Nöd verschickte Fortschritt bliibt nur i dem Tab.',
+  'Webaanmelding vereist een OciServe-BFF onder dezelfde HTTPS-origin als deze OciDeck-installatie.':
+      'D Webaamäldig bruucht es OciServe-BFF under de gliiche HTTPS-Origin wie die OciDeck-Installation.',
+  'Sta het aanmeldvenster toe en klik opnieuw op Inloggen.':
+      'Erlaubed Si s Aamäldifänschter und klicked Si nomal uf Aamälde.',
   'Openen in browser': 'Im Browser öffne',
   'Aanpassen': 'Ändere',
   'Hoofdmap': 'Hauptordner',

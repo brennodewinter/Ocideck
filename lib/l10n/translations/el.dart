@@ -1564,6 +1564,12 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.':
+      'Στον ιστό, ο διακομιστής διαχειρίζεται το cookie συνεδρίας. Η μη απεσταλμένη πρόοδος παραμένει μόνο σε αυτήν την καρτέλα.',
+  'Webaanmelding vereist een OciServe-BFF onder dezelfde HTTPS-origin als deze OciDeck-installatie.':
+      'Η σύνδεση στον ιστό απαιτεί BFF OciServe στην ίδια προέλευση HTTPS με αυτήν την εγκατάσταση OciDeck.',
+  'Sta het aanmeldvenster toe en klik opnieuw op Inloggen.':
+      'Επιτρέψτε το παράθυρο σύνδεσης και πατήστε ξανά Σύνδεση.',
   'Openen in browser': 'Άνοιγμα στο πρόγραμμα περιήγησης',
   'Aanpassen': 'Προσαρμογή',
   'Hoofdmap': 'Κύριος φάκελος',
