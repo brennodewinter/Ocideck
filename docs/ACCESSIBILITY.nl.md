@@ -472,14 +472,24 @@ de koppeling tussen bullet en beschrijving in de HTML-DOM, de afwezigheid van
 nog niet onthulde markeringen en de bulletbeschrijvingen in de Flutter-
 semantiekboom, en precies één beleefde aankondiging per onthulstap.
 
-Op 2026-11-25 ging de testpresentatie open in een debugsessie op macOS 27.2.1.
-De activering en spraakuitvoer van VoiceOver konden niet worden bevestigd.
-Een Windows-sessie met NVDA was niet beschikbaar. Beide toetsen staan open.
-Presenteer voor de hertest een dia van het type Bullets + Afbeelding met
-stapsgewijs onthullen en twee bullets, één met één markering en één met twee
-markeringen. Controleer per stap of alleen onthulde markeringen bereikbaar
-zijn, of de beschrijving van de bullet één keer wordt voorgelezen en of de
-aankondiging het aantal markeringen noemt dat er in die stap bij komt.
+Op 2026-11-26 vond een echte VoiceOver-sessie plaats tegen een debugbuild op
+macOS 27.2.1, met het testdeck voor markeringen (een dia van het type
+Bullets + Afbeelding met stapsgewijs onthullen en twee bullets, één met één
+markering en één met twee markeringen). De presentatie opende schermvullend,
+elke staptoets zette het onthullen verder en de markeringen verschenen
+zichtbaar op de juiste stap. VoiceOver kondigde de naam van de applicatie
+aan bij activering, maar de cursor bereikte de dia-inhoud nooit: navigeren
+binnen de app leverde geen uitvoer en de stapaankondiging klonk niet. Op
+stderr logde de app `Failed to update ui::AXTree` bij elke
+semantiekupdate, waaronder elke onthulstap — Flutter's accessibility bridge
+verwierp de boomaanpassingen die de automatische tests juist toetsen, dus op
+macOS komt de geteste semantiek mogelijk nooit bij een echte lezer (#3268).
+Een Windows-sessie met NVDA was niet beschikbaar. Zolang #3268 openstaat is
+de schermlezertoets van de punten hierboven geblokkeerd in plaats van
+geslaagd. Presenteer voor de hertest, zodra de bridge werkt, dezelfde dia en
+controleer per stap of alleen onthulde markeringen bereikbaar zijn, of de
+beschrijving van de bullet één keer wordt voorgelezen en of de aankondiging
+het aantal markeringen noemt dat er in die stap bij komt.
 
 **De afbeeldingsscan van de privacycontrole is niet beschikbaar op de
 browserbuild**, wat een capaciteitshiaat is en geen toegankelijkheidshiaat, maar
