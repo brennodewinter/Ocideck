@@ -126,7 +126,14 @@ class IntakeRespondentClient {
       method: 'GET',
       url: _api(['intake', 'forms', formRef.trim()]),
     );
-    return _parse(response, 'intake-formulier', IntakePublicForm.fromJson);
+    final hash = RegExp(
+      r'^"([0-9a-f]{64})"$',
+    ).firstMatch(response.headers['etag'] ?? '')?.group(1);
+    return _parse(
+      response,
+      'intake-formulier',
+      (json) => IntakePublicForm.fromJson(json, snapshotSha256: hash),
+    );
   }
 
   /// Vraagt een mailboxcode aan voor [purpose] (202 — het antwoord is
@@ -247,13 +254,24 @@ class IntakeRespondentClient {
     required String idempotencyKey,
     required String expectedSha256,
     required int expectedSize,
+    String? expectedFormSha256,
   }) async {
     final response = await _send(
       method: 'POST',
       url: _api(['intake', 'submissions', grant.locator, 'submit']),
       grant: grant,
-      headers: {'idempotency-key': idempotencyKey},
-      body: const [],
+      headers: {
+        'idempotency-key': idempotencyKey,
+        if (expectedFormSha256 != null) 'content-type': 'application/json',
+      },
+      body: expectedFormSha256 == null
+          ? const []
+          : utf8.encode(
+              jsonEncode({
+                'form_sha256': expectedFormSha256,
+                'draft_sha256': expectedSha256.toLowerCase(),
+              }),
+            ),
     );
     if (response.statusCode != 201) {
       throw const OciServeException('invalid_response');

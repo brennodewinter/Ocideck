@@ -238,6 +238,9 @@ class _FormIntakeInvitationDialogState
     final intake = FormIntakeContext(
       baseUrl: _parsed!.baseUrl,
       formRef: _parsed!.formRef ?? _grant?.formRef ?? '',
+      // Return links currently resolve metadata against the current form.
+      // A first invitation has the exact original snapshot to bind.
+      formSha256: _parsed!.formRef == null ? null : form.snapshotSha256,
       locator: _parsed!.locator ?? _grant?.locator,
       revision: _submission?.revision,
       lastState: _submission?.state,

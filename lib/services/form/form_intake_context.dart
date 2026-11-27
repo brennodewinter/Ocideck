@@ -21,6 +21,7 @@ class FormIntakeContext {
     required this.baseUrl,
     required this.formRef,
     this.locator,
+    this.formSha256,
     this.revision,
     this.lastState,
   });
@@ -30,6 +31,7 @@ class FormIntakeContext {
 
   /// De publieke formuleerreferentie (`form_ref`) uit de link.
   final String formRef;
+  final String? formSha256;
 
   /// De locator van de eigen inzending, zodra die bestaat. Niet geheim —
   /// op zichzelf opent hij niets.
@@ -49,6 +51,7 @@ class FormIntakeContext {
   }) => FormIntakeContext(
     baseUrl: baseUrl,
     formRef: formRef,
+    formSha256: formSha256,
     locator: locator ?? this.locator,
     revision: revision ?? this.revision,
     lastState: lastState ?? this.lastState,
@@ -58,6 +61,7 @@ class FormIntakeContext {
     'v': 1,
     'base_url': baseUrl,
     'form_ref': formRef,
+    if (formSha256 != null) 'form_sha256': formSha256,
     if (locator != null) 'locator': locator,
     if (revision != null) 'revision': revision,
     if (lastState != null) 'last_state': lastState!.wireName,
@@ -80,11 +84,18 @@ class FormIntakeContext {
         'v',
         'base_url',
         'form_ref',
+        'form_sha256',
         'locator',
         'revision',
         'last_state',
       }.contains(key),
     )) {
+      return null;
+    }
+    final formSha256 = json['form_sha256'];
+    if (formSha256 != null &&
+        (formSha256 is! String ||
+            !RegExp(r'^[a-f0-9]{64}$').hasMatch(formSha256))) {
       return null;
     }
     final locator = json['locator'];
@@ -105,6 +116,7 @@ class FormIntakeContext {
     return FormIntakeContext(
       baseUrl: baseUrl.trim(),
       formRef: formRef.trim(),
+      formSha256: formSha256 as String?,
       locator: (locator as String?)?.trim(),
       revision: revision as int?,
       lastState: state,

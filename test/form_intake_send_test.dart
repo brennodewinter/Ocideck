@@ -110,6 +110,7 @@ class _FakeClient extends IntakeRespondentClient {
     required String idempotencyKey,
     required String expectedSha256,
     required int expectedSize,
+    String? expectedFormSha256,
   }) async {
     if (failSubmit) throw const OciServeException('unavailable');
     submitted = true;

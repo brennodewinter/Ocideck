@@ -187,6 +187,7 @@ class IntakePublicForm {
     required this.accepting,
     required this.operationalStatus,
     required this.snapshot,
+    this.snapshotSha256,
   });
 
   final String formRef;
@@ -194,8 +195,12 @@ class IntakePublicForm {
   final bool accepting;
   final IntakeOperationalStatus operationalStatus;
   final IntakeFormSnapshot snapshot;
+  final String? snapshotSha256;
 
-  factory IntakePublicForm.fromJson(Map<String, Object?> json) {
+  factory IntakePublicForm.fromJson(
+    Map<String, Object?> json, {
+    String? snapshotSha256,
+  }) {
     _requireOnlyKeys(json, const {
       'form_ref',
       'version',
@@ -209,6 +214,7 @@ class IntakePublicForm {
     }
     return IntakePublicForm(
       formRef: _requiredString(json, 'form_ref'),
+      snapshotSha256: snapshotSha256,
       version: _requiredInt(json, 'version', minimum: 1),
       accepting: json['accepting'] is bool
           ? json['accepting'] as bool

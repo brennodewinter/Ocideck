@@ -189,6 +189,7 @@ class _FormIntakeSendDialogState extends State<FormIntakeSendDialog> {
         idempotencyKey: const Uuid().v4(),
         expectedSha256: sha256.convert(widget.package).toString(),
         expectedSize: widget.package.length,
+        expectedFormSha256: _context.formSha256,
       );
       if (!mounted) return;
       setState(() {
