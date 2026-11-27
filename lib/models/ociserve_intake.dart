@@ -5,6 +5,8 @@ import 'package:flutter/foundation.dart';
 /// submission the locator points at.
 enum IntakePurpose {
   start('start'),
+  history('history'),
+  revise('revise'),
   resume('resume'),
   correct('correct'),
   withdraw('withdraw');
@@ -188,6 +190,7 @@ class IntakePublicForm {
     required this.operationalStatus,
     required this.snapshot,
     this.snapshotSha256,
+    this.editorial = false,
   });
 
   final String formRef;
@@ -196,10 +199,12 @@ class IntakePublicForm {
   final IntakeOperationalStatus operationalStatus;
   final IntakeFormSnapshot snapshot;
   final String? snapshotSha256;
+  final bool editorial;
 
   factory IntakePublicForm.fromJson(
     Map<String, Object?> json, {
     String? snapshotSha256,
+    bool editorial = false,
   }) {
     _requireOnlyKeys(json, const {
       'form_ref',
@@ -215,6 +220,7 @@ class IntakePublicForm {
     return IntakePublicForm(
       formRef: _requiredString(json, 'form_ref'),
       snapshotSha256: snapshotSha256,
+      editorial: editorial,
       version: _requiredInt(json, 'version', minimum: 1),
       accepting: json['accepting'] is bool
           ? json['accepting'] as bool
@@ -288,14 +294,19 @@ class IntakeGrant {
       'form_ref',
       'state',
     });
+    final purpose = IntakePurpose.parse(json['purpose']);
     final state = json['state'];
     return IntakeGrant(
       token: _requiredString(json, 'grant'),
       expiresIn: Duration(seconds: _requiredInt(json, 'expires_in')),
-      purpose: IntakePurpose.parse(json['purpose']),
-      locator: _requiredString(json, 'locator'),
+      purpose: purpose,
+      locator: purpose == IntakePurpose.history
+          ? ''
+          : _requiredString(json, 'locator'),
       formRef: (json['form_ref'] as String?)?.trim(),
-      state: state == null ? null : IntakeSubmissionState.parse(state),
+      state: state == null || purpose == IntakePurpose.history
+          ? null
+          : IntakeSubmissionState.parse(state),
     );
   }
 }
@@ -826,4 +837,40 @@ String _hexDigest(Object? value) {
     throw const FormatException('invalid intake sha256');
   }
   return hex;
+}
+
+enum IntakeEditorialStatus {
+  submitted,
+  approved,
+  published,
+  rejected;
+
+  static IntakeEditorialStatus parse(Object? value) =>
+      values.firstWhere((status) => status.name == value);
+}
+
+class IntakeOwnItem {
+  const IntakeOwnItem(
+    this.id,
+    this.title,
+    this.status,
+    this.revision,
+    this.reason,
+    this.publicUrl,
+  );
+  final String id;
+  final String title;
+  final IntakeEditorialStatus status;
+  final int revision;
+  final String? reason;
+  final String? publicUrl;
+
+  factory IntakeOwnItem.fromJson(Map<String, Object?> json) => IntakeOwnItem(
+    _requiredString(json, 'submission_id'),
+    _requiredString(json, 'title'),
+    IntakeEditorialStatus.parse(json['editorial_status']),
+    _requiredInt(json, 'revision'),
+    json['reason_for_submitter'] as String?,
+    json['public_article_url'] as String?,
+  );
 }

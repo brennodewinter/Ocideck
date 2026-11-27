@@ -24,7 +24,16 @@ import '../../services/ociserve/ociserve_intake_respondent.dart';
 import '../../utils/atomic_file.dart';
 import 'form_intake_challenge.dart';
 
-enum _Step { link, loading, landing, challenge, working, confirmWithdraw, done }
+enum _Step {
+  link,
+  loading,
+  landing,
+  challenge,
+  history,
+  working,
+  confirmWithdraw,
+  done,
+}
 
 /// Opent de respondentreis. [onOpenPath] opent een opgeslagen bestand in een
 /// tabblad, [onOpenText] een onopgeslagen document (het web); [pickDestination]
@@ -72,6 +81,11 @@ class FormIntakeInvitationDialog extends StatefulWidget {
 class _FormIntakeInvitationDialogState
     extends State<FormIntakeInvitationDialog> {
   final _link = TextEditingController();
+  bool _lookingUpHistory = false;
+  IntakeGrant? _historyGrant;
+  List<IntakeOwnItem> _ownItems = [];
+  String? _ownCursor;
+
   _Step _step = _Step.link;
   FormIntakeLink? _parsed;
   IntakePublicForm? _form;
@@ -152,6 +166,149 @@ class _FormIntakeInvitationDialogState
       });
     }
   }
+
+  Future<void> _loadHistory(IntakeGrant grant, {String? cursor}) async {
+    setState(() {
+      _step = _Step.working;
+      _error = null;
+    });
+    try {
+      final page = await _client!.ownItems(grant, cursor: cursor);
+      if (!mounted) return;
+      setState(() {
+        _historyGrant = grant;
+        _ownItems = [if (cursor != null) ..._ownItems, ...page.items];
+        _ownCursor = page.next?.isEmpty == true ? null : page.next;
+        _step = _Step.history;
+      });
+    } on Object catch (error) {
+      if (!mounted) return;
+      setState(() {
+        _error = _errorFor(error);
+        _step = _Step.landing;
+      });
+    }
+  }
+
+  Future<void> _openOwn(IntakeOwnItem item, {required bool change}) async {
+    final history = _historyGrant;
+    if (history == null) return;
+    setState(() {
+      _step = _Step.working;
+      _error = null;
+    });
+    try {
+      final previous = await _client!.ownContent(
+        history,
+        item.id,
+        item.revision,
+      );
+      final read = readFormPackage(previous.package);
+      if (read is! FormPackageOpened) {
+        throw const FormatException('invalid submission package');
+      }
+      final source = intakeFormMarkdown(previous.snapshot);
+      if (source == null ||
+          templateTextIssues(source, read.submission).isNotEmpty) {
+        throw const FormatException('invalid submission source');
+      }
+      if (!mounted) return;
+      if (change) {
+        final grant = await _client!.ownRevisionGrant(
+          history,
+          item.id,
+          item.revision,
+        );
+        final session = FormIntakeSession(
+          context: FormIntakeContext(
+            baseUrl: _parsed!.baseUrl,
+            formRef: history.formRef!,
+            formSha256: previous.formSha,
+            locator: grant.locator,
+            revision: item.revision,
+            lastState: grant.state,
+          ),
+          publishedMarkdown: source,
+          revisionGrant: grant,
+        );
+        await session.images.restore(read.images);
+        if (!mounted) return;
+        Navigator.of(context).pop();
+        widget.onOpenText(read.submission, session);
+      } else {
+        setState(() => _step = _Step.history);
+        await showDialog<void>(
+          context: context,
+          builder: (dialogContext) => AlertDialog(
+            title: Text(item.title),
+            content: SizedBox(
+              width: 540,
+              child: SingleChildScrollView(
+                child: SelectableText(read.submission),
+              ),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(dialogContext),
+                child: Text(dialogContext.l10n.d('Sluiten')),
+              ),
+            ],
+          ),
+        );
+      }
+    } on Object catch (error) {
+      if (!mounted) return;
+      setState(() {
+        _step = _Step.history;
+        _error = _errorFor(error);
+      });
+    }
+  }
+
+  List<Widget> _history(AppLocalizations l10n) => [
+    Text(l10n.d('Mijn inzendingen')),
+    if (_ownItems.isEmpty) Text(l10n.d('Je hebt nog geen inzendingen.')),
+    for (final item in _ownItems)
+      Card(
+        child: Padding(
+          padding: const EdgeInsets.all(12),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(item.title),
+              Text(switch (item.status) {
+                IntakeEditorialStatus.submitted => l10n.d('Ingediend'),
+                IntakeEditorialStatus.approved => l10n.d('Goedgekeurd'),
+                IntakeEditorialStatus.published => l10n.d('Gepubliceerd'),
+                IntakeEditorialStatus.rejected => l10n.d('Geweigerd'),
+              }),
+              if (item.reason case final reason?) SelectableText(reason),
+              if (item.publicUrl case final url?) SelectableText(url),
+              Wrap(
+                children: [
+                  TextButton(
+                    onPressed: () => _openOwn(item, change: false),
+                    child: Text(l10n.d('Bekijken')),
+                  ),
+                  if (item.status != IntakeEditorialStatus.published)
+                    TextButton(
+                      onPressed: () => _openOwn(item, change: true),
+                      child: Text(l10n.d('Wijziging indienen')),
+                    ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    if (_ownCursor case final cursor?)
+      TextButton(
+        onPressed: () => _loadHistory(_historyGrant!, cursor: cursor),
+        child: Text(l10n.d('Meer laden')),
+      ),
+    if (_form?.accepting == true)
+      FilledButton(onPressed: _fill, child: Text(l10n.d('Nieuwe inzending'))),
+  ];
 
   Future<void> _onGrant(IntakeGrant grant) async {
     if (_withdrawing) {
@@ -365,12 +522,18 @@ class _FormIntakeInvitationDialogState
         ),
       IntakeChallengeFlow(
         client: _client!,
-        purpose: _withdrawing ? IntakePurpose.withdraw : IntakePurpose.resume,
-        locator: _parsed!.locator,
-        onGrant: _onGrant,
+        purpose: _lookingUpHistory
+            ? IntakePurpose.history
+            : _withdrawing
+            ? IntakePurpose.withdraw
+            : IntakePurpose.resume,
+        formRef: _lookingUpHistory ? _parsed!.formRef : null,
+        locator: _lookingUpHistory ? null : _parsed!.locator,
+        onGrant: _lookingUpHistory ? _loadHistory : _onGrant,
       ),
     ],
     _Step.landing => _landing(l10n, theme),
+    _Step.history => _history(l10n),
     _Step.confirmWithdraw => [
       Text(
         l10n.d(
@@ -463,11 +626,21 @@ class _FormIntakeInvitationDialogState
         runSpacing: 8,
         children: [
           if (form != null &&
+              (form.accepting ||
+                  submission?.state == IntakeSubmissionState.correctionOpen) &&
               (submission == null ||
                   submission.state != IntakeSubmissionState.withdrawn))
             FilledButton(
               onPressed: _fill,
               child: Text(l10n.d('Formulier invullen')),
+            ),
+          if (kIsWeb && form?.editorial == true && _parsed?.formRef != null)
+            OutlinedButton(
+              onPressed: () => setState(() {
+                _lookingUpHistory = true;
+                _step = _Step.challenge;
+              }),
+              child: Text(l10n.d('Mijn inzendingen')),
             ),
           if (submission != null &&
               submission.allowedActions.contains(IntakeAllowedAction.withdraw))

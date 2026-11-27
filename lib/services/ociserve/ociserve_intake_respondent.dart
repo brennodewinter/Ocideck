@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:typed_data';
 
 import 'package:crypto/crypto.dart';
 
@@ -132,8 +133,88 @@ class IntakeRespondentClient {
     return _parse(
       response,
       'intake-formulier',
-      (json) => IntakePublicForm.fromJson(json, snapshotSha256: hash),
+      (json) => IntakePublicForm.fromJson(
+        json,
+        snapshotSha256: hash,
+        editorial: response.headers['x-ociserve-editorial'] == 'true',
+      ),
     );
+  }
+
+  Future<({List<IntakeOwnItem> items, String? next})> ownItems(
+    IntakeGrant history, {
+    String? cursor,
+  }) async {
+    final response = await _send(
+      method: 'GET',
+      url: _api([
+        'intake',
+        'own',
+      ]).replace(queryParameters: cursor == null ? null : {'cursor': cursor}),
+      grant: history,
+    );
+    return _parse(
+      response,
+      'inzendingsoverzicht',
+      (json) => (
+        items: (json['items'] as List)
+            .map(
+              (item) => IntakeOwnItem.fromJson(
+                Map<String, Object?>.from(item as Map),
+              ),
+            )
+            .toList(),
+        next: json['next_cursor'] as String?,
+      ),
+    );
+  }
+
+  Future<({IntakeFormSnapshot snapshot, String formSha, Uint8List package})>
+  ownContent(IntakeGrant history, String id, int revision) async {
+    final meta = await _send(
+      method: 'GET',
+      url: _api(['intake', 'own', id]),
+      grant: history,
+    );
+    final source = _parse(meta, 'formulierbron', (json) {
+      if (json['revision'] != revision) {
+        throw const OciServeException('intake_revision_changed');
+      }
+      return (
+        snapshot: IntakeFormSnapshot.fromJson(
+          Map<String, Object?>.from(json['snapshot'] as Map),
+        ),
+        formSha: json['form_sha256'] as String,
+      );
+    });
+    final bytes = await _send(
+      method: 'GET',
+      url: _api(['intake', 'own', id, 'content']),
+      grant: history,
+      headers: {'if-match': '"$revision"'},
+      cap: maxPackageBytes,
+      timeout: _payloadTimeout,
+    );
+    return (
+      snapshot: source.snapshot,
+      formSha: source.formSha,
+      package: Uint8List.fromList(bytes.body),
+    );
+  }
+
+  Future<IntakeGrant> ownRevisionGrant(
+    IntakeGrant history,
+    String id,
+    int revision,
+  ) async {
+    final response = await _send(
+      method: 'POST',
+      url: _api(['intake', 'own', id, 'revision-grant']),
+      grant: history,
+      headers: const {'content-type': 'application/json'},
+      body: utf8.encode(jsonEncode({'revision': revision})),
+    );
+    return _parse(response, 'wijzigingsrecht', IntakeGrant.fromJson);
   }
 
   /// Vraagt een mailboxcode aan voor [purpose] (202 — het antwoord is
@@ -147,7 +228,8 @@ class IntakeRespondentClient {
     String? locator,
   }) async {
     final trimmedEmail = email.trim();
-    final needsForm = purpose == IntakePurpose.start;
+    final needsForm =
+        purpose == IntakePurpose.start || purpose == IntakePurpose.history;
     if (trimmedEmail.isEmpty ||
         trimmedEmail.length > 320 ||
         (needsForm

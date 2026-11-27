@@ -8,6 +8,8 @@
 // formulier zoals het geopend werd zolang het nog leeg was ([remember]), en vraagt
 // de invuller anders om het bestand dat hij van de organisator kreeg ([pickPublished]).
 
+import '../../models/ociserve_intake.dart';
+
 import 'dart:typed_data';
 
 import 'package:ocideck_form_core/ocideck_form_core.dart';
@@ -65,7 +67,13 @@ class FormExportSupport {
 /// context naast het document lezen en bijwerken. De code en de grant gaan er
 /// nooit doorheen — alleen de verwijzingen die overeind mogen blijven.
 class FormIntakeSupport {
-  const FormIntakeSupport({required this.load, required this.save});
+  const FormIntakeSupport({
+    required this.load,
+    required this.save,
+    this.revisionGrant,
+  });
+
+  final IntakeGrant? Function()? revisionGrant;
 
   /// De bewaarde context van [spec], of `null` als dit document er geen
   /// heeft.

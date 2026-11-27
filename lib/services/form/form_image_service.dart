@@ -276,6 +276,26 @@ class FormSessionImages {
       path: _images[path]?.fact ?? const FormImageFact(exists: false),
   };
 
+  Future<void> restore(Map<String, Uint8List> images) async {
+    for (final entry in images.entries) {
+      final result = await intakeFormImage(
+        entry.value,
+        maxPixels: _maximumPixels,
+        allowUnverified: false,
+      );
+      if (result case FormImageAccepted(:final intake)) {
+        final bytes = intake.report.bytes.length;
+        if (bytes > _maximumBytes - _usedBytes) {
+          throw const FormatException('image limit exceeded');
+        }
+        _usedBytes += bytes;
+        _images[entry.key] = intake;
+      } else {
+        throw const FormatException('unsupported photo in prior submission');
+      }
+    }
+  }
+
   Future<FormImageBatch> add(
     String fieldId,
     Set<String> taken,

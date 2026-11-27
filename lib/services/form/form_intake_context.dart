@@ -126,10 +126,15 @@ class FormIntakeContext {
 
 /// Transient binding between one document tab and its original server snapshot.
 class FormIntakeSession {
-  FormIntakeSession({required this.context, required this.publishedMarkdown});
+  FormIntakeSession({
+    required this.context,
+    required this.publishedMarkdown,
+    this.revisionGrant,
+  });
 
   FormIntakeContext context;
   final String publishedMarkdown;
+  IntakeGrant? revisionGrant;
   final images = FormSessionImages();
 }
 

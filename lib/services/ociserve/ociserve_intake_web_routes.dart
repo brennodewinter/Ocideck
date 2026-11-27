@@ -9,7 +9,6 @@ bool isIntakeWebRequest(Uri base, String method, Uri url) {
       url.host.isEmpty ||
       base.origin != url.origin ||
       url.userInfo.isNotEmpty ||
-      url.hasQuery ||
       url.hasFragment) {
     return false;
   }
@@ -25,9 +24,17 @@ bool isIntakeWebRequest(Uri base, String method, Uri url) {
     if (path[index] != prefix[index]) return false;
   }
   final route = path.sublist(prefix.length);
+  if (url.hasQuery &&
+      !(route.length == 1 &&
+          route.first == 'own' &&
+          url.queryParameters.keys.every((name) => name == 'cursor')))
+    return false;
   if (route.length > 1 && !_intakeIdentifier.hasMatch(route[1])) return false;
   return switch (route) {
     ['forms', _] => method == 'GET',
+    ['own'] || ['own', _] || ['own', _, 'content'] => method == 'GET',
+    ['own', _, 'revision-grant'] => method == 'POST',
+
     ['challenges'] || ['challenges', _, 'verify'] => method == 'POST',
     ['submissions', _] => method == 'GET',
     ['submissions', _, 'draft'] => method == 'PUT',

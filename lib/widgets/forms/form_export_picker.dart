@@ -110,13 +110,19 @@ FormExportSupport formExportSupportFor({
             forget: (spec) => _sealMemory.remove(_intakeKey(spec)),
           ),
     intake: FormIntakeSupport(
+      revisionGrant: () => intakeSession?.revisionGrant,
       load: (_) async {
         if (intakeSession != null) return intakeSession.context;
         if (documentPath == null || kIsWeb) return null;
         return readIntakeContext(documentPath);
       },
       save: (_, context) async {
-        if (intakeSession != null) intakeSession.context = context;
+        if (intakeSession != null) {
+          if (context.revision != intakeSession.context.revision) {
+            intakeSession.revisionGrant = null;
+          }
+          intakeSession.context = context;
+        }
         if (documentPath != null && !kIsWeb) {
           await writeIntakeContext(documentPath, context);
         }

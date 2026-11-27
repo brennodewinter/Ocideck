@@ -55,7 +55,14 @@ class OciServeBrowserHttpTransport
         url.hasFragment ||
         !_allowsRoute(method, url) ||
         maxResponseBytes <= 0 ||
-        maxResponseBytes > (accountSession ? 100 : 32) * 1024 * 1024) {
+        maxResponseBytes >
+            (intakeBase != null
+                    ? 120
+                    : accountSession
+                    ? 100
+                    : 32) *
+                1024 *
+                1024) {
       throw const OciServeTransportException('request_refused');
     }
     final abort = web.AbortController();
@@ -145,6 +152,7 @@ Map<String, String> ociServeBrowserResponseHeaders(web.Headers headers) => {
     'cache-control',
     'digest',
     'x-ociserve-package-profile',
+    'x-ociserve-editorial',
   ])
     key: ?headers.get(key),
 };

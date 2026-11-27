@@ -254,6 +254,7 @@ class _FormExportBarState extends State<FormExportBar> {
         context,
         intakeContext: intakeContext,
         package: built.bytes,
+        revisionGrant: widget.support.intake?.revisionGrant?.call(),
       );
       if (updated != null) {
         await widget.support.intake?.save(fill.spec, updated);

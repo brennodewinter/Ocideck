@@ -41,12 +41,14 @@ Future<FormIntakeContext?> showFormIntakeSendDialog(
   BuildContext context, {
   required FormIntakeContext intakeContext,
   required List<int> package,
+  IntakeGrant? revisionGrant,
   IntakeRespondentClient Function(String baseUrl)? clientFor,
 }) => showDialog<FormIntakeContext>(
   context: context,
   builder: (_) => FormIntakeSendDialog(
     intakeContext: intakeContext,
     package: package,
+    revisionGrant: revisionGrant,
     clientFor:
         clientFor ?? (baseUrl) => IntakeRespondentClient(baseUrl: baseUrl),
   ),
@@ -57,10 +59,12 @@ class FormIntakeSendDialog extends StatefulWidget {
     super.key,
     required this.intakeContext,
     required this.package,
+    this.revisionGrant,
     required this.clientFor,
   });
 
   final FormIntakeContext intakeContext;
+  final IntakeGrant? revisionGrant;
 
   /// Het gebouwde inzendpakket — dezelfde bytes als "opslaan als zip".
   final List<int> package;
@@ -396,9 +400,17 @@ class _FormIntakeSendDialogState extends State<FormIntakeSendDialog> {
           spacing: 8,
           runSpacing: 8,
           children: [
-            if (form != null && form.accepting)
+            if ((form != null && form.accepting) ||
+                widget.revisionGrant != null)
               FilledButton(
-                onPressed: () => _startChallenge(withdraw: false),
+                onPressed: () {
+                  final grant = widget.revisionGrant;
+                  if (grant != null) {
+                    _onGrant(grant);
+                  } else {
+                    _startChallenge(withdraw: false);
+                  }
+                },
                 child: Text(
                   _context.locator == null
                       ? l10n.d('Insturen…')
