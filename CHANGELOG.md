@@ -8,6 +8,71 @@ All notable changes to OciDeck are documented in this file.
 
 ## Unreleased
 
+## [0.7.19] — 2026-11-27
+
+### Added
+
+- Open OciServe-bestanden op desktop en web, deel ze met beveiligde links en
+  meld aan met passkeys via de systeembrowser (#3184–#3187).
+- Bedien video op het publieksscherm vanaf de laptop (#3195).
+
+### Changed
+
+- Laat een gekozen diastijl doorwerken tot het einde van de presentatie (#3234).
+- Toets de echte app automatisch op Linux, macOS en Windows: een korte PR-reis
+  en een volledige nachtreis met alle diatypes en opslagrondgangen (#3214).
+- Controleer webimport, relatieve afbeeldingen, logo’s en browsermodi automatisch
+  en toets Linux-start en vensters afzonderlijk op X11 en Wayland (#3210, #3212).
+- Bewaak opslagvelden, upstream Flutter-workarounds en registratietests expliciet
+  (#3217–#3219).
+
+### Fixed
+
+- Houd presentatievensters aan de juiste schermidentiteit vast, ook wanneer
+  schermindices veranderen (#3216).
+- Laat tekstvelden hun eigen navigatietoetsen verwerken (#3273).
+- Geef tooltip-identifiers afzonderlijke semantieknodes (#3268).
+- Bewaar verwijderde witregels en geschreven audiobijlagen correct in documenten
+  (#3193, #3278).
+- Sluit Linux via de bewaakte Flutter/GTK-route af en registreer de sluitbewaking
+  vóór het eerste zichtbare venster (#3287).
+- Herstel runtime-afhankelijkheden en installatieproeven van Linux-pakketten
+  (#3251, #3254).
+
+## [0.7.18] — 2026-11-25
+
+### Added
+
+- feat(document): kop- en voettekst meenemen in ODT, DOCX, ePub en Markdown (#3166)
+- feat(presentatie): instelbare lettergrootte voor kop- en voettekst (#3164)
+- feat(presentatie): voortgangsbalk talktijd onder het presentatiescherm (#3146)
+- feat: stijl op alle dia's toepassen vanuit Presentatie-eigenschappen (#3143) (#3144)
+
+### Changed
+
+- ci: scanner-pins bijwerken naar de laatste upstream
+- Toets documentstijlbeheer op het juiste stijlvlak
+- Actualiseer profiel-IO-test voor het stijlenmenu
+- Documenteer alle stijlprofielmaten voor release 0.7.18
+- Ververs SBOM-boomhash voor release 0.7.18
+- Herstel documentomvang en broncodekaart voor 0.7.18
+- Herstel documentexport en behoud extra witregels
+- Lijn lettergrootteschuifjes voor kop en voet uit
+- Maak documentkop- en voettekst instelbaar en hernoem Stijlen
+- test(privacy): maak de memoregressietest tijdsonafhankelijk (#3147)
+- docs: neem releaseherstel voor broncodekaart en Flutter-licentie over
+- docs: vul bestandsformaatsectie 14.19 in het Nederlands aan
+
+### Fixed
+
+- fix(presentatie): meerregelige koptekst lezen en ruimte reserveren (#3165)
+- fix: multi-engine- en schermraces in beamerpad (#3160, #3161, #3162) (#3163)
+- fix(ci): neem geslaagde Windows-testshards over uit 0.7.17 (#3151)
+- fix(scan): volg symlinks bij het zoeken naar decks (#3145)
+- fix(presentatie): begrens het sluiten van het beamervenster (#3149)
+- fix(linux): weiger coverScreen op een weggevallen monitor (#3150)
+- fix(appimage): bundel de Ayatana-trayketen in de AppDir (#3148)
+
 ## [0.7.15] — 2026-11-20
 
 ### Changed
