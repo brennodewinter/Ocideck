@@ -1522,6 +1522,13 @@ shared `macos` label. Signing uses this Mac's
 **file-based login keychain**; no private key or notary credential is exported
 into repository secrets.
 
+The full release gate and macOS candidate each copy the pinned SDK into their
+own temporary directory before resolving dependencies. They reuse the SDK
+isolation helper from the native app journey: known backport files are restored
+inside the copy, and the build wrapper applies its patch there. The shared SDK
+and any existing backport lock remain untouched. An `always()` cleanup removes
+only the job's own SDK copy, including after a failed build.
+
 The local LaunchAgent uses the exact official Flutter SDK pinned by
 `.tool-versions`, ahead of other SDKs in `PATH`. Its runner configuration has
 `ocideck-macos-release-local:host` in `runner.labels`, with capacity 1 to avoid
