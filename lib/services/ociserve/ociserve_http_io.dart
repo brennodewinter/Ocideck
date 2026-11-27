@@ -10,6 +10,9 @@ import 'ociserve_http.dart';
 OciServeHttpTransport createOciServeHttpTransport() =>
     const PinnedOciServeHttpTransport();
 
+OciServeHttpTransport createIntakeRespondentTransport(Uri base) =>
+    createOciServeHttpTransport();
+
 class PinnedOciServeHttpTransport implements OciServeHttpTransport {
   const PinnedOciServeHttpTransport();
 

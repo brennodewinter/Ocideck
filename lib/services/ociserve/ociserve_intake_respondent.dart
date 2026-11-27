@@ -24,10 +24,11 @@ class IntakeRespondentClient {
     required String baseUrl,
     this.trustedInternal = false,
     OciServeHttpTransport? transport,
-  }) : _transport = transport ?? createOciServeHttpTransport() {
+  }) {
     final refusal = validateOciServeBaseUrl(baseUrl);
     if (refusal != null) throw OciServeException(refusal);
     _base = Uri.parse(normalizeOciServeBaseUrl(baseUrl));
+    _transport = transport ?? createIntakeRespondentTransport(_base);
   }
 
   /// De contractgrens voor een inzendpakket — grotere uploads stopt de
@@ -38,7 +39,7 @@ class IntakeRespondentClient {
   static const _controlTimeout = Duration(seconds: 30);
   static const _payloadTimeout = Duration(minutes: 2);
 
-  final OciServeHttpTransport _transport;
+  late final OciServeHttpTransport _transport;
 
   /// De beheerder van de respondentmachine heeft deze installatie als
   /// intern vertrouwd gemarkeerd — zie [OciServeGateway.trustedInternal].

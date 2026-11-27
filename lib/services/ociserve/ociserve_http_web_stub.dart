@@ -3,6 +3,9 @@ import 'ociserve_http.dart';
 OciServeHttpTransport createBrowserAccountTransport() =>
     const WebRefusingOciServeHttpTransport();
 
+OciServeHttpTransport createBrowserIntakeTransport(Uri base) =>
+    const WebRefusingOciServeHttpTransport();
+
 class WebRefusingOciServeHttpTransport implements OciServeHttpTransport {
   const WebRefusingOciServeHttpTransport();
 

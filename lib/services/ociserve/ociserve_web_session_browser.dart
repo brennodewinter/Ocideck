@@ -17,6 +17,9 @@ OciServeHttpTransport createBrowserAccountTransport() =>
       csrfToken: () => _session._csrf,
     );
 
+OciServeHttpTransport createBrowserIntakeTransport(Uri base) =>
+    OciServeBrowserHttpTransport(intakeBase: base);
+
 class _BrowserSession implements OciServeWebSessionClient {
   String? _csrf;
   web.Window? _popup;

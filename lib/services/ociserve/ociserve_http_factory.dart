@@ -5,3 +5,6 @@ import 'ociserve_http_io.dart'
 
 OciServeHttpTransport createOciServeHttpTransport() =>
     implementation.createOciServeHttpTransport();
+
+OciServeHttpTransport createIntakeRespondentTransport(Uri base) =>
+    implementation.createIntakeRespondentTransport(base);

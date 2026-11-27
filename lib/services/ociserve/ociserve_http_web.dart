@@ -7,3 +7,6 @@ export 'ociserve_http_web_stub.dart' show WebRefusingOciServeHttpTransport;
 
 OciServeHttpTransport createOciServeHttpTransport() =>
     implementation.createBrowserAccountTransport();
+
+OciServeHttpTransport createIntakeRespondentTransport(Uri base) =>
+    implementation.createBrowserIntakeTransport(base);

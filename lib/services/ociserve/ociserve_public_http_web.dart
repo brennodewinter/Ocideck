@@ -3,6 +3,7 @@ import 'dart:js_interop';
 import 'dart:typed_data';
 import 'package:web/web.dart' as web;
 import 'ociserve_http.dart';
+import 'ociserve_intake_web_routes.dart';
 import '../../utils/log.dart';
 import 'ociserve_web_session.dart';
 
@@ -13,8 +14,13 @@ OciServeHttpTransport createPublicOciServeHttpTransport() =>
 /// cookies, redirects, referrer or ambient OIDC session can join this request.
 class OciServeBrowserHttpTransport
     implements OciServeHttpTransport, OciServeClosableTransport {
-  OciServeBrowserHttpTransport({this.accountSession = false, this.csrfToken});
+  OciServeBrowserHttpTransport({
+    this.accountSession = false,
+    this.csrfToken,
+    this.intakeBase,
+  }) : assert(!accountSession || intakeBase == null);
   final bool accountSession;
+  final Uri? intakeBase;
   final String? Function()? csrfToken;
   final _requests = <web.AbortController>{};
   bool _closed = false;
@@ -25,6 +31,12 @@ class OciServeBrowserHttpTransport
       c.abort();
     }
     _requests.clear();
+  }
+
+  bool _allowsRoute(String method, Uri url) {
+    final base = intakeBase;
+    if (base != null) return isIntakeWebRequest(base, method, url);
+    return accountSession || url.path.startsWith('/api/v1/public/file-shares/');
   }
 
   @override
@@ -41,8 +53,7 @@ class OciServeBrowserHttpTransport
         url.scheme != 'https' ||
         url.userInfo.isNotEmpty ||
         url.hasFragment ||
-        (!accountSession &&
-            !url.path.startsWith('/api/v1/public/file-shares/')) ||
+        !_allowsRoute(method, url) ||
         maxResponseBytes <= 0 ||
         maxResponseBytes > (accountSession ? 100 : 32) * 1024 * 1024) {
       throw const OciServeTransportException('request_refused');
