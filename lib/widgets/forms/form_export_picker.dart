@@ -76,9 +76,11 @@ FormExportSupport formExportSupportFor({
   return FormExportSupport(
     frontMatter: frontMatter,
     clientVersion: kOciDeckVersion,
-    readImage: (path) async => projectPath == null || kIsWeb
-        ? null
-        : readFormImage(path, projectPath: projectPath),
+    readImage: (path) async {
+      if (intakeSession != null) return intakeSession.images.read(path);
+      if (projectPath == null || kIsWeb) return null;
+      return readFormImage(path, projectPath: projectPath);
+    },
     pickPublished: () => (pick ?? _pickForm)(pickTitle),
     save: (fileName, bytes) => _save(
       fileName,

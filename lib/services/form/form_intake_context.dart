@@ -13,6 +13,7 @@ import 'dart:io';
 
 import '../../models/ociserve_intake.dart';
 import '../../utils/atomic_file.dart';
+import 'form_image_service.dart';
 
 /// Waar een ingevuld formulier op de server om bekend is.
 class FormIntakeContext {
@@ -117,6 +118,7 @@ class FormIntakeSession {
 
   FormIntakeContext context;
   final String publishedMarkdown;
+  final images = FormSessionImages();
 }
 
 /// Explicit web entry point. Ordinary deck imports and other hash routes are

@@ -19,6 +19,7 @@ FormFillView _formFillView(
 }) {
   final l10n = context.l10n;
   final projectPath = _documentProjectPath(ref);
+  final intakeSession = ref.read(documentProvider.notifier).intakeSession;
   return FormFillView(
     body: body,
     onChanged: onChanged,
@@ -26,6 +27,7 @@ FormFillView _formFillView(
     images: formImageSupportFor(
       projectPath: projectPath,
       dialogTitle: l10n.d('Kies een afbeelding'),
+      sessionImages: intakeSession?.images,
     ),
     export: formExportSupportFor(
       projectPath: projectPath,
@@ -34,7 +36,7 @@ FormFillView _formFillView(
       saveTitle: l10n.d('Inzending opslaan'),
       bundleTitle: l10n.d('Kies het bundelbestand van de organisator'),
       documentPath: ref.read(documentProvider).filePath,
-      intakeSession: ref.read(documentProvider.notifier).intakeSession,
+      intakeSession: intakeSession,
     ),
   );
 }

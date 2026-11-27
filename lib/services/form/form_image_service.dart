@@ -79,7 +79,11 @@ class FormImageRejected extends FormImageIntakeResult {
 ///
 /// Een HEIC wordt niet gedecodeerd (besluit D4): OciDeck heeft geen HEIC-decoder en
 /// opent zo'n bestand nooit zelf; het blijft zoals het is en heet *niet gecontroleerd*.
-Future<FormImageIntakeResult> intakeFormImage(Uint8List bytes) async {
+Future<FormImageIntakeResult> intakeFormImage(
+  Uint8List bytes, {
+  int maxPixels = kFormMaxPixels,
+  bool allowUnverified = true,
+}) async {
   if (bytes.isEmpty) return const FormImageRejected(FormImageRefusal.notAPhoto);
   if (bytes.length > kFormMaxImageBytes) {
     return const FormImageRejected(FormImageRefusal.tooLarge);
@@ -89,6 +93,9 @@ Future<FormImageIntakeResult> intakeFormImage(Uint8List bytes) async {
     return const FormImageRejected(FormImageRefusal.notAPhoto);
   }
   if (report.unverified) {
+    if (!allowUnverified) {
+      return const FormImageRejected(FormImageRefusal.unreadable);
+    }
     return FormImageAccepted(
       FormImageIntake(
         report,
@@ -103,7 +110,7 @@ Future<FormImageIntakeResult> intakeFormImage(Uint8List bytes) async {
 
   final width = report.width!;
   final height = report.height!;
-  if (width < 1 || height < 1 || width * height > kFormMaxPixels) {
+  if (width < 1 || height < 1 || width * height > maxPixels) {
     return const FormImageRejected(FormImageRefusal.tooLarge);
   }
   if (!await compute(_decodes, report.bytes)) {
@@ -212,6 +219,21 @@ Future<FormImageBatch> addFormImages({
   required String fieldId,
   required List<Future<Uint8List> Function()> readers,
   Set<String> taken = const {},
+}) => _addFormImages(
+  readers: readers,
+  validate: intakeFormImage,
+  store: (intake) => storeFormImage(
+    projectPath: projectPath,
+    fieldId: fieldId,
+    intake: intake,
+    taken: taken,
+  ),
+);
+
+Future<FormImageBatch> _addFormImages({
+  required List<Future<Uint8List> Function()> readers,
+  required Future<FormImageIntakeResult> Function(Uint8List) validate,
+  required Future<FormImageStored?> Function(FormImageIntake) store,
 }) async {
   final stored = <FormImageStored>[];
   final refused = <FormImageRefusal>[];
@@ -223,16 +245,11 @@ Future<FormImageBatch> addFormImages({
       refused.add(FormImageRefusal.notAPhoto);
       continue;
     }
-    switch (await intakeFormImage(bytes)) {
+    switch (await validate(bytes)) {
       case FormImageRejected(:final reason):
         refused.add(reason);
       case FormImageAccepted(:final intake):
-        final saved = await storeFormImage(
-          projectPath: projectPath,
-          fieldId: fieldId,
-          intake: intake,
-          taken: taken,
-        );
+        final saved = await store(intake);
         if (saved == null) {
           refused.add(FormImageRefusal.writeFailed);
         } else {
@@ -241,6 +258,54 @@ Future<FormImageBatch> addFormImages({
     }
   }
   return FormImageBatch(stored, refused);
+}
+
+/// Browser form images live only as long as the corresponding document tab.
+/// Keep their relative package paths for the same validation and ZIP builder.
+class FormSessionImages {
+  static const _maximumBytes = 96 * 1024 * 1024;
+  static const _maximumPixels = 32 * 1000 * 1000;
+
+  final _images = <String, FormImageIntake>{};
+  int _usedBytes = 0;
+
+  Uint8List? read(String path) => _images[path]?.report.bytes;
+
+  Future<Map<String, FormImageFact>> probe(Iterable<String> paths) async => {
+    for (final path in paths)
+      path: _images[path]?.fact ?? const FormImageFact(exists: false),
+  };
+
+  Future<FormImageBatch> add(
+    String fieldId,
+    Set<String> taken,
+    List<Future<Uint8List> Function()> readers,
+  ) => _addFormImages(
+    readers: readers,
+    validate: (bytes) async {
+      if (bytes.length > _maximumBytes - _usedBytes) {
+        return const FormImageRejected(FormImageRefusal.tooLarge);
+      }
+      return intakeFormImage(
+        bytes,
+        maxPixels: _maximumPixels,
+        allowUnverified: false,
+      );
+    },
+    store: (intake) async {
+      final bytes = intake.report.bytes.length;
+      if (bytes > _maximumBytes - _usedBytes) return null;
+      final base = fieldId.length > 50 ? fieldId.substring(0, 50) : fieldId;
+      for (var index = 1; index < 10000; index++) {
+        final path = 'images/$base-$index.${intake.report.kind.extension}';
+        if (taken.contains(path) || _images.containsKey(path)) continue;
+        _images[path] = intake;
+        _usedBytes += bytes;
+        return FormImageStored(path, intake);
+      }
+      return null;
+    },
+  );
 }
 
 /// De bytes van de foto op [path] in de map van het document, of `null` als hij er

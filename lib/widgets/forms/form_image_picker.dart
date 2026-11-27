@@ -6,6 +6,7 @@ import 'dart:typed_data';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:flutter/painting.dart' show MemoryImage;
 
 import '../../services/form/form_image_service.dart';
 import '../../utils/image_limits.dart';
@@ -35,7 +36,25 @@ FormImageSupport? formImageSupportFor({
   required String dialogTitle,
   Future<List<FormImagePick>> Function(String dialogTitle)? pick,
   Map<String, List<FormImagePreset>> presets = const {},
+  FormSessionImages? sessionImages,
 }) {
+  if (sessionImages != null) {
+    return FormImageSupport(
+      add: (fieldId, taken) async {
+        final files = await (pick ?? _pickPhotos)(dialogTitle);
+        if (files.isEmpty) return null;
+        return sessionImages.add(fieldId, taken, [
+          for (final file in files) file.read,
+        ]);
+      },
+      addReaders: sessionImages.add,
+      probe: sessionImages.probe,
+      preview: (path) {
+        final bytes = sessionImages.read(path);
+        return bytes == null ? null : MemoryImage(bytes);
+      },
+    );
+  }
   if (projectPath == null || kIsWeb) return null;
   return FormImageSupport(
     add: (fieldId, taken) async {
@@ -76,7 +95,9 @@ Future<List<FormImagePick>> _pickPhotos(String dialogTitle) async {
   final files = await FilePicker.pickFiles(
     dialogTitle: dialogTitle,
     type: FileType.custom,
-    allowedExtensions: kFormImageExtensions,
+    allowedExtensions: kIsWeb
+        ? const ['jpg', 'jpeg', 'png', 'webp']
+        : kFormImageExtensions,
   );
   return [for (final file in files) (name: file.name, read: file.readAsBytes)];
 }
