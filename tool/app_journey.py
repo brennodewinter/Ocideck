@@ -6,6 +6,7 @@ import os
 from pathlib import Path
 import platform
 import shutil
+import signal
 import subprocess
 import sys
 import time
@@ -15,7 +16,8 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def scenarios(device, full):
     """PRs exercise two real processes; nights include persistence and navigation."""
-    result = [('lifecycle', ['dart', 'run', 'tool/run_desktop_smoke.dart', device]
+    launcher = 'run' if device == 'windows' else '--disable-dart-dev'
+    result = [('lifecycle', ['dart', launcher, 'tool/run_desktop_smoke.dart', device]
                + (['--roundtrip'] if full else []), None)]
     if full:
         result.append(('navigation', 'document_navigation_profile_test',
@@ -26,15 +28,75 @@ def scenarios(device, full):
     return result
 
 
+def session_process_groups(session):
+    """Xcode scripts create additional groups inside the command's private session."""
+    groups = set()
+    rows = subprocess.check_output(['ps', '-axo', 'pid=,stat='], text=True)
+    for row in rows.splitlines():
+        pid, state = row.split()
+        if state.startswith('Z'):
+            continue
+        try:
+            if os.getsid(int(pid)) == session:
+                groups.add(os.getpgid(int(pid)))
+        except (ProcessLookupError, PermissionError):
+            pass
+    return groups
+
+
+def stop_process_session(child):
+    """Stop every group in our private session, without signalling other jobs."""
+    if child.pid == os.getsid(0):
+        raise RuntimeError('Refusing to stop the shared parent session')
+    sent = set()
+    groups = session_process_groups(child.pid)
+    deadline = time.monotonic() + 2
+    while groups and time.monotonic() < deadline:
+        for group in groups - sent:
+            try:
+                os.killpg(group, signal.SIGTERM)
+            except ProcessLookupError:
+                pass
+            sent.add(group)
+        time.sleep(0.05)
+        child.poll()
+        groups = session_process_groups(child.pid)
+    deadline = time.monotonic() + 5
+    while groups and time.monotonic() < deadline:
+        for group in groups:
+            try:
+                os.killpg(group, signal.SIGKILL)
+            except ProcessLookupError:
+                pass
+        time.sleep(0.05)
+        child.poll()
+        groups = session_process_groups(child.pid)
+    child.wait(timeout=5)
+    if groups:
+        raise RuntimeError('Native command session did not stop completely')
+
+
 def run_command(command, log, environment=None, timeout=3600):
     """Keep compiler/app output even when a child fails or times out."""
     with log.open('w', encoding='utf-8') as stream:
         stream.write('Command: ' + repr(command) + '\n')
         stream.flush()
         # Windows' Flutter/Dart launchers are .bat files; COMSPEC resolves them.
-        child = subprocess.run(command, cwd=ROOT, env=environment,
-                               stdout=stream, stderr=subprocess.STDOUT,
-                               timeout=timeout, shell=(os.name == 'nt'))
+        if os.name == 'nt':
+            child = subprocess.run(command, cwd=ROOT, env=environment,
+                                   stdout=stream, stderr=subprocess.STDOUT,
+                                   timeout=timeout, shell=True)
+        else:
+            child = subprocess.Popen(command, cwd=ROOT, env=environment,
+                                     stdout=stream, stderr=subprocess.STDOUT,
+                                     start_new_session=True)
+            try:
+                child.wait(timeout=timeout)
+            except BaseException:
+                stop_process_session(child)
+                raise
+            if child.returncode:
+                stop_process_session(child)
     if child.returncode:
         raise subprocess.CalledProcessError(child.returncode, command)
 
@@ -103,7 +165,13 @@ def main():
     parser.add_argument('--evidence', type=Path, default=ROOT / 'build/app-journey')
     args = parser.parse_args()
     device = {'Darwin': 'macos', 'Linux': 'linux', 'Windows': 'windows'}[platform.system()]
-    result = journey(device, args.full, args.evidence.resolve())
+    def interrupted(signum, frame):
+        raise SystemExit(128 + signum)
+    previous = signal.signal(signal.SIGTERM, interrupted)
+    try:
+        result = journey(device, args.full, args.evidence.resolve())
+    finally:
+        signal.signal(signal.SIGTERM, previous)
     print(json.dumps(result, indent=2), flush=True)
 
 

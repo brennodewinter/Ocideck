@@ -5,10 +5,10 @@ mode=${1:?Use appimage, debian12, elf, or desktop}
 if command -v apt-get >/dev/null; then
   export DEBIAN_FRONTEND=noninteractive
   install=(apt-get install -y --no-install-recommends)
-  desktop=(xvfb xauth fonts-dejavu-core dbus-daemon libglib2.0-bin gnome-keyring)
+  desktop=(xvfb xauth fonts-dejavu-core dbus-daemon libglib2.0-bin gnome-keyring procps)
 else
   install=(dnf install -y --setopt=install_weak_deps=False)
-  desktop=(xorg-x11-server-Xvfb xorg-x11-xauth dejavu-sans-fonts dbus-daemon glib2 gnome-keyring)
+  desktop=(xorg-x11-server-Xvfb xorg-x11-xauth dejavu-sans-fonts dbus-daemon glib2 gnome-keyring procps-ng)
 fi
 
 case "$mode" in
