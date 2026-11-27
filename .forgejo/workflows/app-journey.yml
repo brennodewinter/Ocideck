@@ -57,7 +57,8 @@ jobs:
           VERSIE="$(grep -A8 '^  dartcv4:' pubspec.lock | grep 'version:' | sed 's/.*version: "//;s/".*//')"
           test -n "$VERSIE"
           echo "versie=$VERSIE" >> "$GITHUB_OUTPUT"
-      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
+      - uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
+        id: dartcv-cache
         continue-on-error: true
         with:
           path: |
@@ -75,6 +76,15 @@ jobs:
           chown -R ubuntu:ubuntu "$GITHUB_WORKSPACE"
           runuser --user ubuntu --preserve-environment -- env HOME=/home/ubuntu \
             xvfb-run -a dbus-run-session -- scripts/gate_lock.sh python3 tool/app_journey.py $full_arg
+      - name: Native compilatie bewaren, ook na een rode app-assertie
+        if: ${{ always() && steps.dartcv-cache.outputs.cache-primary-key != '' && steps.dartcv-cache.outputs.cache-hit != 'true' && hashFiles('.dart_tool/hooks_runner/**/CMakeCache.txt') != '' }}
+        continue-on-error: true
+        uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
+        with:
+          path: |
+            .dart_tool/hooks_runner
+            build/native_assets
+          key: ${{ steps.dartcv-cache.outputs.cache-primary-key }}
       - name: Bewijs bewaren, ook als een scenario faalt
         if: always()
         uses: actions/upload-artifact@ff15f0306b3f739f7b6fd43fb5d26cd321bd4de5 # v3.2.1
