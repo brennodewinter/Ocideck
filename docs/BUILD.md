@@ -1529,6 +1529,14 @@ inside the copy, and the build wrapper applies its patch there. The shared SDK
 and any existing backport lock remain untouched. An `always()` cleanup removes
 only the job's own SDK copy, including after a failed build.
 
+The Linux and macOS app-journey controller invokes its pure Dart lifecycle
+orchestrator directly with `dart --disable-dart-dev`. This avoids a separate
+native-hook build for the controller; Flutter still builds the actual app and
+runs every lifecycle assertion. On these hosts each command owns a separate
+process session. A failed command, timeout or handled interruption terminates
+that session, including compiler descendants, while preserving its log. The
+existing one-hour command budget and scenario checks remain in force.
+
 The local LaunchAgent uses the exact official Flutter SDK pinned by
 `.tool-versions`, ahead of other SDKs in `PATH`. Its runner configuration has
 `ocideck-macos-release-local:host` in `runner.labels`, with capacity 1 to avoid

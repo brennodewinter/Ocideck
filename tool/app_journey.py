@@ -6,6 +6,7 @@ import os
 from pathlib import Path
 import platform
 import shutil
+import signal
 import subprocess
 import sys
 import time
@@ -15,7 +16,8 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def scenarios(device, full):
     """PRs exercise two real processes; nights include persistence and navigation."""
-    result = [('lifecycle', ['dart', 'run', 'tool/run_desktop_smoke.dart', device]
+    launcher = 'run' if device == 'windows' else '--disable-dart-dev'
+    result = [('lifecycle', ['dart', launcher, 'tool/run_desktop_smoke.dart', device]
                + (['--roundtrip'] if full else []), None)]
     if full:
         result.append(('navigation', 'document_navigation_profile_test',
@@ -26,15 +28,50 @@ def scenarios(device, full):
     return result
 
 
+def stop_process_group(child):
+    """Stop only the session created for this command, including stubborn children."""
+    try:
+        os.killpg(child.pid, signal.SIGTERM)
+    except ProcessLookupError:
+        child.wait()
+        return
+    deadline = time.monotonic() + 2
+    while time.monotonic() < deadline:
+        child.poll()
+        try:
+            os.killpg(child.pid, 0)
+        except ProcessLookupError:
+            child.wait()
+            return
+        time.sleep(0.05)
+    try:
+        os.killpg(child.pid, signal.SIGKILL)
+    except ProcessLookupError:
+        pass
+    child.wait(timeout=5)
+
+
 def run_command(command, log, environment=None, timeout=3600):
     """Keep compiler/app output even when a child fails or times out."""
     with log.open('w', encoding='utf-8') as stream:
         stream.write('Command: ' + repr(command) + '\n')
         stream.flush()
         # Windows' Flutter/Dart launchers are .bat files; COMSPEC resolves them.
-        child = subprocess.run(command, cwd=ROOT, env=environment,
-                               stdout=stream, stderr=subprocess.STDOUT,
-                               timeout=timeout, shell=(os.name == 'nt'))
+        if os.name == 'nt':
+            child = subprocess.run(command, cwd=ROOT, env=environment,
+                                   stdout=stream, stderr=subprocess.STDOUT,
+                                   timeout=timeout, shell=True)
+        else:
+            child = subprocess.Popen(command, cwd=ROOT, env=environment,
+                                     stdout=stream, stderr=subprocess.STDOUT,
+                                     start_new_session=True)
+            try:
+                child.wait(timeout=timeout)
+            except BaseException:
+                stop_process_group(child)
+                raise
+            if child.returncode:
+                stop_process_group(child)
     if child.returncode:
         raise subprocess.CalledProcessError(child.returncode, command)
 
@@ -103,7 +140,13 @@ def main():
     parser.add_argument('--evidence', type=Path, default=ROOT / 'build/app-journey')
     args = parser.parse_args()
     device = {'Darwin': 'macos', 'Linux': 'linux', 'Windows': 'windows'}[platform.system()]
-    result = journey(device, args.full, args.evidence.resolve())
+    def interrupted(signum, frame):
+        raise SystemExit(128 + signum)
+    previous = signal.signal(signal.SIGTERM, interrupted)
+    try:
+        result = journey(device, args.full, args.evidence.resolve())
+    finally:
+        signal.signal(signal.SIGTERM, previous)
     print(json.dumps(result, indent=2), flush=True)
 
 

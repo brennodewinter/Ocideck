@@ -2,11 +2,13 @@
 import importlib.util
 import json
 import os
+import signal
 import shutil
 from pathlib import Path
 import subprocess
 import sys
 import tempfile
+import time
 import unittest
 from unittest.mock import patch
 
@@ -59,6 +61,129 @@ else:
 
 
 class AppJourneyTest(unittest.TestCase):
+    @unittest.skipIf(os.name == 'nt', 'The native startup fix is for POSIX hosts')
+    def test_lifecycle_controller_runs_without_native_hook_discovery(self):
+        command = journey.scenarios('macos', False)[0][1]
+        for device in ['macos', 'linux']:
+            self.assertEqual(journey.scenarios(device, False)[0][1][:2],
+                             ['dart', '--disable-dart-dev'])
+        self.assertEqual(journey.scenarios('windows', False)[0][1][:2], ['dart', 'run'])
+        dart = shutil.which('dart')
+        if dart is None:
+            self.skipTest('Requires the pinned Dart SDK')
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            for name in ['tool/run_desktop_smoke.dart',
+                         'test_driver/desktop_smoke_process.dart',
+                         'test_driver/desktop_roundtrip_plan.dart']:
+                target = root / name
+                target.parent.mkdir(exist_ok=True)
+                shutil.copyfile(ROOT / name, target)
+            result = subprocess.run([
+                dart, command[1], '--packages=' + str(ROOT / '.dart_tool/package_config.json'),
+                str(root / command[2]), 'invalid-device'], cwd=root,
+                capture_output=True, text=True, timeout=10)
+            self.assertNotEqual(result.returncode, 0)
+            self.assertIn('Run on the matching macos, linux or windows host', result.stderr)
+            self.assertFalse((root / '.dart_tool').exists())
+            self.assertNotIn('Building native assets', result.stdout + result.stderr)
+
+    @unittest.skipIf(os.name == 'nt', 'Exercises native POSIX process groups')
+    def test_timeout_kills_a_descendant_ignoring_term_and_keeps_output(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            pidfile = root / 'descendant.pid'
+            child = root / 'descendant.py'
+            child.write_text('import os,signal,time\nfrom pathlib import Path\n'
+                             'signal.signal(signal.SIGTERM, signal.SIG_IGN)\n'
+                             f'Path({str(pidfile)!r}).write_text(str(os.getpid()))\n'
+                             'print("descendant started",flush=True)\ntime.sleep(30)\n')
+            parent = [sys.executable, '-u', '-c',
+                      'import subprocess,sys,time; '
+                      f'subprocess.Popen([sys.executable,{str(child)!r}]); '
+                      'print("parent started",flush=True); time.sleep(30)']
+            try:
+                with self.assertRaises(subprocess.TimeoutExpired):
+                    journey.run_command(parent, root / 'run.log', timeout=1)
+                self.assertTrue(pidfile.exists())
+                pid = int(pidfile.read_text())
+                state = subprocess.run(['ps', '-p', str(pid), '-o', 'stat='],
+                                       capture_output=True, text=True).stdout.strip()
+                self.assertTrue(not state or state.startswith('Z'),
+                                'Timed-out native descendant is still running')
+                self.assertIn('parent started', (root / 'run.log').read_text())
+                self.assertIn('descendant started', (root / 'run.log').read_text())
+            finally:
+                if pidfile.exists():
+                    pid = int(pidfile.read_text())
+                    args = subprocess.run(['ps', '-p', str(pid), '-o', 'args='],
+                                          capture_output=True, text=True).stdout
+                    if str(child) in args:
+                        try:
+                            os.kill(pid, signal.SIGKILL)
+                        except ProcessLookupError:
+                            pass
+
+    @unittest.skipIf(os.name == 'nt', 'Exercises native POSIX cancellation')
+    def test_sigterm_retains_failed_journey_and_reaps_native_descendants(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            subprocess.run(['git', 'init', '-q', str(root)], check=True)
+            subprocess.run(['git', '-C', str(root), '-c', 'user.name=Fixture',
+                            '-c', 'user.email=fixture@example.test', 'commit',
+                            '--allow-empty', '-qm', 'fixture'], check=True)
+            parent_pid = root / 'parent.pid'
+            child_pid = root / 'child.pid'
+            child = root / 'descendant.py'
+            child.write_text('import os,signal,time\nfrom pathlib import Path\n'
+                             'signal.signal(signal.SIGTERM, signal.SIG_IGN)\n'
+                             f'Path({str(child_pid)!r}).write_text(str(os.getpid()))\n'
+                             'print("descendant started",flush=True)\ntime.sleep(30)\n')
+            command = [sys.executable, '-u', '-c',
+                       'import os,subprocess,sys,time; from pathlib import Path; '
+                       f'Path({str(parent_pid)!r}).write_text(str(os.getpid())); '
+                       f'subprocess.Popen([sys.executable,{str(child)!r}]); '
+                       'print("parent started",flush=True); time.sleep(30)']
+            evidence = root / 'evidence'
+            bootstrap = ('import importlib.util,sys; from pathlib import Path; '
+                         f's=importlib.util.spec_from_file_location("journey",{journey.__file__!r}); '
+                         'm=importlib.util.module_from_spec(s); s.loader.exec_module(m); '
+                         f'm.ROOT=Path({str(root)!r}); '
+                         f'm.scenarios=lambda device,full:[("cancel",{command!r},None)]; '
+                         f'sys.argv=["journey","--evidence",{str(evidence)!r}]; m.main()')
+            worker = subprocess.Popen([sys.executable, '-u', '-c', bootstrap],
+                                      stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            try:
+                deadline = time.monotonic() + 10
+                while not child_pid.exists() and time.monotonic() < deadline:
+                    time.sleep(0.02)
+                self.assertTrue(child_pid.exists(), 'Controlled native child did not start')
+                worker.terminate()
+                worker.communicate(timeout=10)
+                self.assertEqual(worker.returncode, 128 + signal.SIGTERM)
+                report = json.loads((evidence / 'journey.json').read_text())
+                self.assertFalse(report['success'])
+                self.assertFalse(report['scenarios'][0]['success'])
+                self.assertIn('descendant started', (evidence / 'cancel/run.log').read_text())
+                for file in [parent_pid, child_pid]:
+                    state = subprocess.run(['ps', '-p', file.read_text(), '-o', 'stat='],
+                                           capture_output=True, text=True).stdout.strip()
+                    self.assertTrue(not state or state.startswith('Z'))
+            finally:
+                if worker.poll() is None:
+                    worker.kill()
+                    worker.communicate(timeout=5)
+                for file in [parent_pid, child_pid]:
+                    if file.exists():
+                        pid = int(file.read_text())
+                        args = subprocess.run(['ps', '-p', str(pid), '-o', 'args='],
+                                              capture_output=True, text=True).stdout
+                        if str(child) in args:
+                            try:
+                                os.kill(pid, signal.SIGKILL)
+                            except ProcessLookupError:
+                                pass
+
     def test_short_and_full_sets_are_fixed_across_platforms(self):
         for device in ['linux', 'macos', 'windows']:
             self.assertEqual([s[0] for s in journey.scenarios(device, False)], ['lifecycle'])
