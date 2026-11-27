@@ -4,7 +4,10 @@ import 'dart:typed_data';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
+import 'package:ocideck/models/ociserve_intake.dart';
 import 'package:ocideck/services/form/form_intake_snapshot.dart';
+import 'package:ocideck/services/form/form_intake_context.dart';
+import 'package:ocideck_form_core/ocideck_form_core.dart';
 import 'package:ocideck/services/ociserve/ociserve_http.dart';
 import 'package:ocideck/services/ociserve/ociserve_intake_respondent.dart';
 import 'package:ocideck/widgets/forms/form_intake_invitation_dialog.dart';
@@ -18,6 +21,21 @@ const _markdown = '''<!-- form id=recept version=1 lang=nl -->
 <!-- answer -->
 <!-- /field id=gerecht -->
 ''';
+
+final _filled = _markdown.replaceFirst(
+  '<!-- answer -->',
+  '<!-- answer -->\nNasi goreng',
+);
+
+IntakeFormSnapshot _snapshot() => buildIntakeSnapshot(
+  markdown: _markdown,
+  title: 'Kookboek',
+  purposes: ['recept'],
+  privacyText: 'Een jaar bewaren.',
+  retentionDraftDays: 30,
+  retentionSubmittedDays: 365,
+  correctionAllowed: true,
+);
 
 class _EditorialTransport implements OciServeHttpTransport {
   final routes = <String>[];
@@ -43,15 +61,7 @@ class _EditorialTransport implements OciServeHttpTransport {
             'version': 1,
             'accepting': true,
             'operational_status': 'open',
-            'snapshot': buildIntakeSnapshot(
-              markdown: _markdown,
-              title: 'Kookboek',
-              purposes: ['recept'],
-              privacyText: 'Een jaar bewaren.',
-              retentionDraftDays: 30,
-              retentionSubmittedDays: 365,
-              correctionAllowed: true,
-            ).toJson(),
+            'snapshot': _snapshot().toJson(),
           },
           headers: {'x-ociserve-editorial': 'true', 'etag': '"${'a' * 64}"'},
         );
@@ -96,6 +106,41 @@ class _EditorialTransport implements OciServeHttpTransport {
           ],
           'next_cursor': '',
         });
+      case '/api/v1/intake/own/one':
+        expect(headers['authorization'], 'Bearer mailbox-proof');
+        return _json({
+          'snapshot': _snapshot().toJson(),
+          'revision': 1,
+          'form_sha256': 'a' * 64,
+        });
+      case '/api/v1/intake/own/one/content':
+        expect(headers['if-match'], '"1"');
+        expect(headers['authorization'], 'Bearer mailbox-proof');
+        final form = parseForm(_markdown) as ParsedForm;
+        return OciServeHttpResponse(
+          statusCode: 200,
+          body: buildFormPackage(
+            submission: _filled,
+            template: _markdown,
+            spec: form.spec,
+            images: const {},
+            submissionId: 'a' * 26,
+            created: DateTime.utc(2026, 11, 27),
+            clientRules: form.spec.rules,
+          ),
+          headers: {'content-type': 'application/octet-stream'},
+        );
+      case '/api/v1/intake/own/one/revision-grant':
+        expect(headers['authorization'], 'Bearer mailbox-proof');
+        expect(jsonDecode(utf8.decode(body!)), {'revision': 1});
+        return _json({
+          'grant': 'revision-proof',
+          'expires_in': 600,
+          'purpose': 'revise',
+          'locator': 'existing',
+          'form_ref': 'ref',
+          'state': 'submitted',
+        }, status: 201);
     }
     throw StateError('Onverwacht pad: ${url.path}');
   }
@@ -116,6 +161,8 @@ void main() {
     'browserlink geeft na mailboxcode toegang tot de eigen revisies',
     (tester) async {
       final transport = _EditorialTransport();
+      FormIntakeSession? editing;
+      String? openedText;
       await tester.binding.setSurfaceSize(const Size(1050, 850));
       addTearDown(() => tester.binding.setSurfaceSize(null));
       await tester.pumpWidget(
@@ -131,7 +178,10 @@ void main() {
               clientFor: (origin) =>
                   IntakeRespondentClient(baseUrl: origin, transport: transport),
               onOpenPath: (_) async {},
-              onOpenText: (_, _) {},
+              onOpenText: (text, session) {
+                editing = session;
+                openedText = text;
+              },
               initialLink: 'https://serve.example.nl/api/v1/intake/forms/ref',
             ),
           ),
@@ -170,11 +220,21 @@ void main() {
         find.text('https://public.example.nl/recept/indo'),
         findsOneWidget,
       );
+      await tester.ensureVisible(find.text('Wijziging indienen'));
+      await tester.tap(find.text('Wijziging indienen'));
+      await pumpUntil(tester, () => editing != null);
+      expect(openedText, _filled);
+      expect(editing!.context.revision, 1);
+      expect(editing!.context.locator, 'existing');
+      expect(editing!.revisionGrant?.token, 'revision-proof');
       expect(transport.routes, [
         'GET /api/v1/intake/forms/ref',
         'POST /api/v1/intake/challenges',
         'POST /api/v1/intake/challenges/challenge/verify',
         'GET /api/v1/intake/own',
+        'GET /api/v1/intake/own/one',
+        'GET /api/v1/intake/own/one/content',
+        'POST /api/v1/intake/own/one/revision-grant',
       ]);
     },
   );

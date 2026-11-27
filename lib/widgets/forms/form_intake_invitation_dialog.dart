@@ -13,6 +13,7 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:material_ui/material_ui.dart';
 import 'package:ocideck_form_core/ocideck_form_core.dart';
 import 'package:uuid/uuid.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../l10n/app_localizations.dart';
 import '../../models/ociserve_intake.dart';
@@ -283,7 +284,26 @@ class _FormIntakeInvitationDialogState
                 IntakeEditorialStatus.rejected => l10n.d('Geweigerd'),
               }),
               if (item.reason case final reason?) SelectableText(reason),
-              if (item.publicUrl case final url?) SelectableText(url),
+              if (Uri.tryParse(item.publicUrl ?? '') case final Uri uri
+                  when uri.scheme == 'https' &&
+                      uri.host.isNotEmpty &&
+                      uri.userInfo.isEmpty)
+                TextButton(
+                  onPressed: () async {
+                    if (!await launchUrl(
+                          uri,
+                          mode: LaunchMode.externalApplication,
+                        ) &&
+                        mounted) {
+                      setState(
+                        () => _error = l10n.d(
+                          'De artikellink kon niet worden geopend.',
+                        ),
+                      );
+                    }
+                  },
+                  child: Text(uri.toString()),
+                ),
               Wrap(
                 children: [
                   TextButton(
