@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:yaml/yaml.dart';
 
 void main() {
   const sha = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa';
@@ -8,17 +9,19 @@ void main() {
   const ref = 'codex/release-candidate-v0.7.6-$sha';
   final skip = Platform.isWindows ? 'Executes the Unix release shell' : null;
 
-  String validationBlock(String path, String step, String nextStep) {
-    final source = File(path).readAsStringSync();
-    final section = source.split('- name: $step\n')[1].split(nextStep)[0];
-    return section
-        .split('run: |\n')[1]
-        .split('\n')
-        .map(
-          (line) => line.startsWith('          ') ? line.substring(10) : line,
+  String validationBlock(String path, String name) {
+    final source = loadYaml(File(path).readAsStringSync()) as YamlMap;
+    final jobs = source['jobs'] as YamlMap;
+    final step = jobs.values
+        .whereType<YamlMap>()
+        .expand(
+          (job) => (job['steps'] as YamlList? ?? const []).whereType<YamlMap>(),
         )
-        .join('\n')
-        .replaceAll(r'${{ inputs.mode }}', 'candidate');
+        .singleWhere((step) => step['name'] == name);
+    return (step['run'] as String).replaceAll(
+      r'${{ inputs.mode }}',
+      'candidate',
+    );
   }
 
   test('tagged publication accepts only the attested successful candidate', () {
@@ -61,16 +64,8 @@ void main() {
   }, skip: skip);
 
   for (final workflow in [
-    (
-      path: '.forgejo/workflows/release.yml',
-      step: 'Release-invoer valideren',
-      next: '      - name: Afhankelijkheden ophalen',
-    ),
-    (
-      path: '.github/workflows/release.yml',
-      step: 'Kandidateninvoer valideren',
-      next: '      - name: Set up Flutter',
-    ),
+    (path: '.forgejo/workflows/release.yml', step: 'Release-invoer valideren'),
+    (path: '.github/workflows/release.yml', step: 'Kandidateninvoer valideren'),
   ]) {
     group(workflow.path, () {
       ProcessResult validate(Map<String, String> overrides) {
@@ -86,7 +81,7 @@ git() {
   test "\$1 \$2" = 'rev-parse HEAD'
   printf '%s\\n' "\$CHECKOUT_SHA"
 }
-${validationBlock(workflow.path, workflow.step, workflow.next)}
+${validationBlock(workflow.path, workflow.step)}
 ''');
         return Process.runSync(
           'bash',
