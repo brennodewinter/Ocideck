@@ -4,7 +4,7 @@
 // a route, this test goes red — *before* a user hits a broken endpoint.
 //
 // Pinned spec:  test/fixtures/ociserve_openapi.yaml
-// OciServe commit:  fe6594a15c64b217adf7bff50683e40da06d7972
+// OciServe commit:  5cfba224c7b337d438baacf6f7eb203665487b69
 //
 // Updaten:  zie docs/CHECKS.md → "OciServe contractpoort".
 
@@ -19,12 +19,12 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/ociserve_privacy_dictionary.dart';
 
 /// The OciServe commit the pinned spec was copied from.
-const pinnedOciServeCommit = 'fe6594a15c64b217adf7bff50683e40da06d7972';
+const pinnedOciServeCommit = '5cfba224c7b337d438baacf6f7eb203665487b69';
 
 /// SHA-256 of the pinned spec file itself — a spec silently replaced or
 /// hand-edited shows up here, not in a subtle field rename.
 const pinnedOciServeSpecSha256 =
-    'a87dc3f76818c62a2046f9037d0679d62c400e98d1f551f77b6a4a982c43e461';
+    'bf8617a9ba2f88148771d3b7ad3a5cb9efa3345ee59f324f305eb05f39adb7c0';
 
 /// The capability catalogue the pinned spec declares (`info.x-capability-
 /// catalog-version`) and the intake capabilities OciDeck may rely on.
@@ -779,6 +779,39 @@ const gatewayRoutes = <GatewayRoute>[
     security: 'none',
     responseSchema: 'IntakeGrantResponse',
     responseFields: ['grant', 'expires_in', 'purpose', 'locator', 'state'],
+  ),
+  GatewayRoute(
+    method: 'GET',
+    path: '/api/v1/intake/own',
+    security: 'IntakeGrant',
+    responseSchema: 'IntakeOwnPage',
+    responseFields: ['items', 'next_cursor'],
+  ),
+  GatewayRoute(
+    method: 'GET',
+    path: '/api/v1/intake/own/{}',
+    security: 'IntakeGrant',
+    responseSchema: 'IntakeOwnSource',
+    responseFields: ['revision', 'form_sha256', 'snapshot'],
+  ),
+  GatewayRoute(
+    method: 'GET',
+    path: '/api/v1/intake/own/{}/content',
+    security: 'IntakeGrant',
+  ),
+  GatewayRoute(
+    method: 'POST',
+    path: '/api/v1/intake/own/{}/revision-grant',
+    security: 'IntakeGrant',
+    responseSchema: 'IntakeGrantResponse',
+    responseFields: [
+      'grant',
+      'locator',
+      'purpose',
+      'expires_in',
+      'form_ref',
+      'state',
+    ],
   ),
   GatewayRoute(
     method: 'GET',

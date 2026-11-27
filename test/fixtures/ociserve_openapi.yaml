@@ -9707,6 +9707,48 @@ paths:
 
   # --- Managed Intake: public respondent chain (ADR 0016) ---
 
+  /intake/forms/{form_ref}:
+    get:
+      tags: [IntakeRespondent]
+      summary: Open a shared Managed Intake form in OciDeck Web
+      security: []
+      parameters:
+        - { name: form_ref, in: path, required: true, schema: { type: string, maxLength: 128 } }
+      responses:
+        "303":
+          description: Browser redirect with a public, non-authorizing reference in the OciDeck Web fragment.
+          headers:
+            Location: { schema: { type: string, format: uri } }
+        "404": { description: This browser link is unavailable. }
+
+  /intake/{locator}:
+    get:
+      tags: [IntakeRespondent]
+      summary: Open mailbox verification for an existing Managed Intake submission
+      security: []
+      parameters:
+        - { name: locator, in: path, required: true, schema: { type: string, maxLength: 128 } }
+      responses:
+        "303":
+          description: Browser redirect with a public, non-authorizing reference in the OciDeck Web fragment.
+          headers:
+            Location: { schema: { type: string, format: uri } }
+        "404": { description: This browser link is unavailable. }
+
+  /inzenden/{form_ref}:
+    get:
+      tags: [IntakeRespondent]
+      summary: Open the editorial form in the web origin configured for its box
+      security: []
+      parameters:
+        - { name: form_ref, in: path, required: true, schema: { type: string, maxLength: 128 } }
+      responses:
+        "303":
+          description: Browser redirect with a public, non-authorizing reference in the OciDeck Web fragment.
+          headers:
+            Location: { schema: { type: string, format: uri } }
+        "404": { description: This browser link is unavailable. }
+
   /api/v1/intake/forms/{form_ref}:
     get:
       tags: [IntakeRespondent]
@@ -9727,6 +9769,9 @@ paths:
       responses:
         "200":
           description: Published form snapshot.
+          headers:
+            ETag: { schema: { type: string }, description: Strong SHA-256 tag of the displayed immutable snapshot. }
+            X-OciServe-Editorial: { schema: { type: string, const: 'true' }, description: Present only for editorial forms with mailbox history. }
           content:
             application/json:
               schema: { $ref: '#/components/schemas/IntakePublicForm' }
@@ -9891,6 +9936,18 @@ paths:
       parameters:
         - { name: locator, in: path, required: true, schema: { type: string, minLength: 20, maxLength: 64 } }
         - { name: Idempotency-Key, in: header, required: true, schema: { type: string, maxLength: 255 }, description: Required — a retry with the same key returns the same revision outcome and never creates a second revision. }
+      requestBody:
+        required: false
+        description: Checked clients supply both digests. A mismatch aborts before a revision is created. An empty body preserves compatibility with older clients.
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: false
+              required: [form_sha256, draft_sha256]
+              properties:
+                form_sha256: { type: string, pattern: '^[a-f0-9]{64}$', description: Displayed published snapshot hash without the surrounding ETag quotes. }
+                draft_sha256: { type: string, pattern: '^[a-f0-9]{64}$', description: SHA-256 of the successfully staged package. }
       responses:
         "201":
           description: Immutable revision created.
@@ -10211,6 +10268,7 @@ paths:
         - { name: cursor, in: query, required: false, schema: { type: string }, description: Opaque keyset cursor from a previous response's `next_cursor`. }
         - { name: limit, in: query, required: false, schema: { type: integer, minimum: 1, maximum: 200, default: 50 } }
         - { name: state, in: query, required: false, schema: { type: string, enum: [draft, submitted, correction_open, withdrawn] } }
+        - { name: editorial_status, in: query, required: false, schema: { type: string, enum: [any, submitted, approved, published, rejected] }, description: Include editorial status on box inbox items and optionally filter by it. }
         - { name: handled, in: query, required: false, schema: { type: boolean } }
         - { name: If-None-Match, in: header, required: false, schema: { type: string }, description: ETag from a previous response; returns 304 if the page is unchanged. }
       responses:
@@ -10380,6 +10438,138 @@ paths:
         "403": { $ref: '#/components/responses/ProblemResponse' }
         "404": { $ref: '#/components/responses/ProblemResponse' }
         "409": { $ref: '#/components/responses/ProblemResponse' }
+
+  /api/v1/intake/own:
+    get:
+      tags: [IntakeRespondent]
+      summary: List retained submissions for the verified mailbox in this editorial box
+      security: [{ IntakeGrant: [] }]
+      parameters:
+        - { name: cursor, in: query, required: false, schema: { type: string } }
+        - { name: limit, in: query, required: false, schema: { type: integer, minimum: 1, maximum: 100 } }
+      responses:
+        "200": {"description": "Private page of the submitter\u2019s own items.", "content": {"application/json": {"schema": { $ref: '#/components/schemas/IntakeOwnPage' }}}}
+        default: { $ref: '#/components/responses/ProblemResponse' }
+  /api/v1/intake/own/{submission_id}:
+    parameters:
+      - { name: submission_id, in: path, required: true, schema: { type: string, format: uuid } }
+    get:
+      tags: [IntakeRespondent]
+      summary: Read the exact bound form snapshot and revision of an owned submission
+      security: [{ IntakeGrant: [] }]
+      responses:
+        "200": {"description": "Bound form snapshot and source revision.", "content": {"application/json": {"schema": { $ref: '#/components/schemas/IntakeOwnSource' }}}}
+        default: { $ref: '#/components/responses/ProblemResponse' }
+  /api/v1/intake/own/{submission_id}/content:
+    parameters:
+      - { name: submission_id, in: path, required: true, schema: { type: string, format: uuid } }
+    get:
+      tags: [IntakeRespondent]
+      summary: Download a retained source revision from the verified mailbox history
+      security: [{ IntakeGrant: [] }]
+      parameters:
+        - { name: If-Match, in: header, required: true, schema: { type: string } }
+      responses:
+        "200": { description: Private original package, content: { application/octet-stream: { schema: { type: string, format: binary } } } }
+        default: { $ref: '#/components/responses/ProblemResponse' }
+  /api/v1/intake/own/{submission_id}/revision-grant:
+    parameters:
+      - { name: submission_id, in: path, required: true, schema: { type: string, format: uuid } }
+    post:
+      tags: [IntakeRespondent]
+      summary: Issue a revision grant for an owned and unpublished current submission
+      security: [{ IntakeGrant: [] }]
+      requestBody: { required: true, content: { application/json: { schema: { $ref: '#/components/schemas/IntakeOwnReviseRequest' } } } }
+      responses:
+        "201": {"description": "Short-lived grant bound to this source revision.", "content": {"application/json": {"schema": { $ref: '#/components/schemas/IntakeGrantResponse' }}}}
+        default: { $ref: '#/components/responses/ProblemResponse' }
+  /api/v1/organizations/{organization_id}/intake-forms/{form_id}/editorial-box:
+    parameters:
+      - { name: organization_id, in: path, required: true, schema: { type: string, format: uuid } }
+      - { name: form_id, in: path, required: true, schema: { type: string, format: uuid } }
+    get:
+      tags: [IntakeOrganizer]
+      summary: Read editorial intake box configuration and invitation
+      responses:
+        "200": {"description": "Requires intake.manage and a beheerder form grant.", "content": {"application/json": {"schema": { $ref: '#/components/schemas/IntakeEditorialBox' }}}}
+        default: { $ref: '#/components/responses/ProblemResponse' }
+    put:
+      tags: [IntakeOrganizer]
+      summary: Configure an editorial box and its browser origin and notification members
+      parameters:
+        - { name: If-Match, in: header, required: true, schema: { type: string } }
+      requestBody: { required: true, content: { application/json: { schema: { $ref: '#/components/schemas/IntakeEditorialBoxInput' } } } }
+      responses:
+        "200": {"description": "Configured box.", "content": {"application/json": {"schema": { $ref: '#/components/schemas/IntakeEditorialBox' }}}}
+        default: { $ref: '#/components/responses/ProblemResponse' }
+  /api/v1/organizations/{organization_id}/intake-forms/{form_id}/submissions/{submission_id}/editorial:
+    parameters:
+      - { name: organization_id, in: path, required: true, schema: { type: string, format: uuid } }
+      - { name: form_id, in: path, required: true, schema: { type: string, format: uuid } }
+      - { name: submission_id, in: path, required: true, schema: { type: string, format: uuid } }
+    get:
+      tags: [IntakeOrganizer]
+      summary: Read the editorial status and latest work for a submission
+      parameters:
+        - { name: work_version, in: query, required: false, schema: { type: integer, minimum: 1 }, description: View an older immutable work version. }
+      responses:
+        "200": {"description": "Requires intake.read and a processing form grant.", "content": {"application/json": {"schema": { $ref: '#/components/schemas/IntakeEditorialItem' }}}, "headers": {"ETag": {"schema": {"type": "string"}}}}
+        default: { $ref: '#/components/responses/ProblemResponse' }
+    put:
+      tags: [IntakeOrganizer]
+      summary: Append a work version based on the current source revision
+      parameters:
+        - { name: If-Match, in: header, required: true, schema: { type: string } }
+      requestBody: { required: true, content: { application/json: { schema: { $ref: '#/components/schemas/IntakeEditorialWorkInput' } } } }
+      responses:
+        "200": {"description": "Updated work and independent editorial revision tag.", "content": {"application/json": {"schema": { $ref: '#/components/schemas/IntakeEditorialItem' }}}, "headers": {"ETag": {"schema": {"type": "string"}}}}
+        default: { $ref: '#/components/responses/ProblemResponse' }
+    post:
+      tags: [IntakeOrganizer]
+      summary: Change editorial status and enqueue the matching mail atomically
+      parameters:
+        - { name: If-Match, in: header, required: true, schema: { type: string } }
+        - { name: Idempotency-Key, in: header, required: true, schema: { type: string, maxLength: 255 }, description: A matching retry returns the current dossier without another transition or email. }
+      requestBody: { required: true, content: { application/json: { schema: { $ref: '#/components/schemas/IntakeEditorialDecision' } } } }
+      responses:
+        "200": {"description": "Updated status. Requires intake.manage and a beheerder form grant.", "content": {"application/json": {"schema": { $ref: '#/components/schemas/IntakeEditorialItem' }}}, "headers": {"ETag": {"schema": {"type": "string"}}}}
+        default: { $ref: '#/components/responses/ProblemResponse' }
+  /api/v1/organizations/{organization_id}/intake-forms/{form_id}/submissions/{submission_id}/editorial/preview:
+    parameters:
+      - { name: organization_id, in: path, required: true, schema: { type: string, format: uuid } }
+      - { name: form_id, in: path, required: true, schema: { type: string, format: uuid } }
+      - { name: submission_id, in: path, required: true, schema: { type: string, format: uuid } }
+    post:
+      tags: [IntakeOrganizer]
+      summary: Queue a preview of the exact current work version
+      parameters:
+        - { name: If-Match, in: header, required: true, schema: { type: string } }
+      responses:
+        "200": { description: Private static preview, content: { text/html: { schema: { type: string } } } }
+        "202": { description: Preview queued or running. Retry-After signals the polling interval. }
+        default: { $ref: '#/components/responses/ProblemResponse' }
+    get:
+      tags: [IntakeOrganizer]
+      summary: Read the preview job state or its authorised HTML
+      parameters:
+        - { name: If-Match, in: header, required: true, schema: { type: string } }
+      responses:
+        "200": { description: Private static preview, content: { text/html: { schema: { type: string } } } }
+        "202": { description: Preview queued or running. Retry-After signals the polling interval. }
+        default: { $ref: '#/components/responses/ProblemResponse' }
+
+  /api/v1/organizations/{organization_id}/intake-forms/{form_id}/submissions/{submission_id}/editorial/source-check:
+    post:
+      tags: [IntakeOrganizer]
+      summary: Requeue a failed source integrity check for the current revision
+      parameters:
+        - { name: organization_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: form_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: submission_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: If-Match, in: header, required: true, schema: { type: string } }
+      responses:
+        "204": { description: A new check is queued. Content rejected as invalid requires a new source revision. }
+        default: { $ref: '#/components/responses/ProblemResponse' }
 
   /api/v1/organizations/{organization_id}/intake-readiness:
     get:
@@ -15806,13 +15996,173 @@ components:
 
     # --- Managed Intake (ADR 0016) ---
 
+
+    IntakeEditorialStatus:
+      type: string
+      enum: [submitted, approved, published, rejected]
+      description: Separate from the receipt lifecycle and handled flag.
+
+    IntakeEditorialBoxInput:
+      type: object
+      additionalProperties: false
+      required: [profile, web_origin, notification_members]
+      properties:
+        profile: { type: string, enum: [recipe, article] }
+        web_origin: { type: string, format: uri, description: Exact approved HTTPS origin. }
+        notification_members: { type: array, maxItems: 20, uniqueItems: true, items: { type: string, format: uuid } }
+        publication_host: { type: string, description: Exact public host allowed for article URLs. }
+
+    IntakeEditorialBox:
+      type: object
+      required: [form_id, profile, web_origin, notification_members, publication_host, allowed_web_origins]
+      properties:
+        form_id: { type: string, format: uuid }
+        profile: { type: string, enum: ['', recipe, article] }
+        web_origin: { type: string }
+        notification_members: { type: array, items: { type: string, format: uuid } }
+        publication_host: { type: string }
+        allowed_web_origins: { type: array, items: { type: string, format: uri } }
+        invite_url: { type: string, format: uri }
+
+    IntakeEditorialWorkInput:
+      type: object
+      additionalProperties: false
+      required: [source_revision, title, body]
+      properties:
+        source_revision: { type: integer, minimum: 1 }
+        title: { type: string, minLength: 1, maxLength: 200 }
+        body: { type: string, minLength: 1, maxLength: 50000 }
+        projection: { $ref: '#/components/schemas/IntakeEditorialProjection' }
+
+    IntakeEditorialProjection:
+      type: object
+      additionalProperties: false
+      properties:
+        language: { type: string, enum: [nl, en, id] }
+        intro: { type: string, maxLength: 4000 }
+        ingredients: { type: array, maxItems: 100, items: { type: string, maxLength: 500 } }
+        media:
+          type: array
+          maxItems: 3
+          description: Approved source-relative raster references. The server verifies the source digest and manifest and strips metadata by decoding and re-encoding the photo.
+          items:
+            type: object
+            additionalProperties: false
+            required: [path, alt]
+            properties:
+              path: { type: string, pattern: '^images/[a-zA-Z0-9_-]{1,80}\.(jpg|png)$' }
+              alt: { type: string, minLength: 1, maxLength: 400 }
+              caption: { type: string, maxLength: 1000 }
+              credit: { type: string, maxLength: 300 }
+
+    IntakeEditorialItem:
+      type: object
+      required: [editorial_status, can_decide, source_check, revision, form_version, version]
+      properties:
+        editorial_status: { $ref: '#/components/schemas/IntakeEditorialStatus' }
+        source_check: { type: string, enum: [queued, running, checked, invalid, failed], description: Background verification of the archive and exact published template binding. }
+        can_decide: { type: boolean, description: Current caller may record a decision on this box. }
+        revision: { type: integer, minimum: 1 }
+        form_version: { type: integer, minimum: 1 }
+        version: { type: integer, minimum: 0 }
+        reason_for_submitter: { type: string, maxLength: 1000 }
+        public_article_url: { type: string, format: uri }
+        published_at: { type: string, format: date-time }
+        mail_delivery:
+          type: object
+          description: Mail delivery counts for the dossier, available only to members who may record decisions.
+          properties:
+            pending: { type: integer, minimum: 0 }
+            delivered: { type: integer, minimum: 0 }
+            failed: { type: integer, minimum: 0 }
+        history:
+          type: object
+          description: The 50 most recent work versions and status transitions.
+          properties:
+            work_versions:
+              type: array
+              items:
+                type: object
+                properties:
+                  version: { type: integer }
+                  source_revision: { type: integer }
+            decisions:
+              type: array
+              items:
+                type: object
+                properties:
+                  work_version: { type: integer }
+                  source_revision: { type: integer }
+                  editorial_status: { $ref: '#/components/schemas/IntakeEditorialStatus' }
+                  reason_for_submitter: { type: string }
+                  public_article_url: { type: string, format: uri }
+                  decided_at: { type: string, format: date-time }
+        work:
+          type: object
+          required: [source_revision, version, title, body]
+          properties:
+            source_revision: { type: integer, minimum: 1 }
+            version: { type: integer, minimum: 1 }
+            title: { type: string }
+            body: { type: string }
+            projection: { $ref: '#/components/schemas/IntakeEditorialProjection' }
+
+    IntakeEditorialDecision:
+      type: object
+      additionalProperties: false
+      required: [editorial_status]
+      description: Approval needs current work. Publication needs approval for the exact current revision and a confirmed public article URL. If omitted, the server records the confirmation time. A rejection requires a reader-facing plain-text reason.
+      properties:
+        editorial_status: { $ref: '#/components/schemas/IntakeEditorialStatus' }
+        reason_for_submitter: { type: string, maxLength: 1000 }
+        public_article_url: { type: string, format: uri, maxLength: 2048 }
+        published_at: { type: string, format: date-time }
+
+    IntakeOwnPage:
+      type: object
+      additionalProperties: false
+      required: [items, next_cursor]
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+            required: [submission_id, editorial_status, revision, title, submitted_at]
+            properties:
+              submission_id: { type: string, format: uuid }
+              editorial_status: { $ref: '#/components/schemas/IntakeEditorialStatus' }
+              revision: { type: integer, minimum: 1 }
+              title: { type: string }
+              submitted_at: { type: string, format: date-time }
+              reason_for_submitter: { type: string }
+              public_article_url: { type: string, format: uri }
+        next_cursor: { type: string, description: Empty for the final page. }
+
+    IntakeOwnSource:
+      type: object
+      additionalProperties: false
+      required: [snapshot, revision, form_sha256]
+      properties:
+        snapshot: { type: object, additionalProperties: true }
+        revision: { type: integer, minimum: 1 }
+        form_sha256: { type: string, pattern: '^[a-f0-9]{64}$' }
+
+    IntakeOwnReviseRequest:
+      type: object
+      additionalProperties: false
+      required: [revision]
+      properties:
+        revision: { type: integer, minimum: 1 }
+
     IntakePurpose:
       type: string
-      enum: [start, resume, correct, withdraw]
+      enum: [start, resume, correct, withdraw, history, revise]
       description: |
         The respondent goal a mailbox challenge verifies. `start` creates a
         new submission after verification; `resume`, `correct` and
-        `withdraw` act on the existing submission the locator points at.
+        `withdraw` act on the existing submission the locator points at. `history` verifies a
+        mailbox within one editorial form without creating a draft. The
+        `revise` grant is only returned by the authenticated history route.
 
     IntakeSubmissionState:
       type: string
@@ -15849,7 +16199,7 @@ components:
           minLength: 20
           maxLength: 64
           example: frm_7kQ9v2mX8nR4tW6jY3hB
-          description: Public form identifier from the shared link. Required when purpose is `start`.
+          description: Public form identifier from the shared link. Required when purpose is `start` or `history`.
         locator:
           type: string
           minLength: 20
@@ -15890,12 +16240,12 @@ components:
       properties:
         grant:
           type: string
-          description: Short-lived bearer grant for the IntakeGrant security scheme — bound to one submission, one form and this purpose.
+          description: Short-lived bearer grant for the IntakeGrant security scheme — bound to one submission and form, or to one verified mailbox and form for history.
         expires_in: { type: integer, description: Seconds the grant stays valid. }
         purpose: { $ref: '#/components/schemas/IntakePurpose' }
         locator:
           type: string
-          description: The submission locator — issued only after successful verification; for `start` it points at the newly created submission.
+          description: The submission locator — issued only after successful verification; for `start` it points at the newly created submission; empty for `history`.
         form_ref: { type: string }
         state: { $ref: '#/components/schemas/IntakeSubmissionState' }
 
@@ -15995,6 +16345,7 @@ components:
       required: [name, snapshot]
       properties:
         name: { type: string, minLength: 1, maxLength: 300, description: Organizer-facing name; distinct from the published title. }
+        start_paused: { type: boolean, default: false, description: Publish version 1 with respondent starts disabled until explicitly opened. }
         snapshot: { $ref: '#/components/schemas/IntakeFormSnapshot' }
 
     IntakeFormPatch:
@@ -16113,6 +16464,7 @@ components:
       properties:
         submission_id: { type: string, format: uuid }
         state: { $ref: '#/components/schemas/IntakeSubmissionState' }
+        editorial_status: { $ref: '#/components/schemas/IntakeEditorialStatus' }
         revision: { type: integer, minimum: 0 }
         handled: { type: boolean }
         submitted_at: { type: string, format: date-time }
@@ -16138,6 +16490,7 @@ components:
       properties:
         submission_id: { type: string, format: uuid }
         state: { $ref: '#/components/schemas/IntakeSubmissionState' }
+        editorial: { type: boolean, description: Present for editorial boxes. }
         revision: { type: integer, minimum: 0 }
         handled: { type: boolean }
         created_at: { type: string, format: date-time }
