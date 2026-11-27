@@ -1532,8 +1532,10 @@ only the job's own SDK copy, including after a failed build.
 The Linux and macOS app-journey controller invokes its pure Dart lifecycle
 orchestrator directly with `dart --disable-dart-dev`. This avoids a separate
 native-hook build for the controller; Flutter still builds the actual app and
-runs every lifecycle assertion. On these hosts each command owns a separate
-process session. Xcode can create additional process groups inside that session.
+runs every lifecycle assertion. Linux desktop probes install `procps` (or
+`procps-ng` on Fedora) for process-session inspection. On these hosts each command
+owns a separate process session. Xcode can create additional process groups
+inside that session.
 A failed command, timeout or handled interruption terminates every group in
 the owned session, including compiler descendants, while preserving its log. The
 existing one-hour command budget and scenario checks remain in force.
