@@ -1533,8 +1533,9 @@ The Linux and macOS app-journey controller invokes its pure Dart lifecycle
 orchestrator directly with `dart --disable-dart-dev`. This avoids a separate
 native-hook build for the controller; Flutter still builds the actual app and
 runs every lifecycle assertion. On these hosts each command owns a separate
-process session. A failed command, timeout or handled interruption terminates
-that session, including compiler descendants, while preserving its log. The
+process session. Xcode can create additional process groups inside that session.
+A failed command, timeout or handled interruption terminates every group in
+the owned session, including compiler descendants, while preserving its log. The
 existing one-hour command budget and scenario checks remain in force.
 
 The local LaunchAgent uses the exact official Flutter SDK pinned by

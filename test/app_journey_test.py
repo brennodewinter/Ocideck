@@ -95,6 +95,7 @@ class AppJourneyTest(unittest.TestCase):
             pidfile = root / 'descendant.pid'
             child = root / 'descendant.py'
             child.write_text('import os,signal,time\nfrom pathlib import Path\n'
+                             'os.setpgrp()\n'
                              'signal.signal(signal.SIGTERM, signal.SIG_IGN)\n'
                              f'Path({str(pidfile)!r}).write_text(str(os.getpid()))\n'
                              'print("descendant started",flush=True)\ntime.sleep(30)\n')
@@ -136,6 +137,7 @@ class AppJourneyTest(unittest.TestCase):
             child_pid = root / 'child.pid'
             child = root / 'descendant.py'
             child.write_text('import os,signal,time\nfrom pathlib import Path\n'
+                             'os.setpgrp()\n'
                              'signal.signal(signal.SIGTERM, signal.SIG_IGN)\n'
                              f'Path({str(child_pid)!r}).write_text(str(os.getpid()))\n'
                              'print("descendant started",flush=True)\ntime.sleep(30)\n')

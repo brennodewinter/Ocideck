@@ -28,27 +28,52 @@ def scenarios(device, full):
     return result
 
 
-def stop_process_group(child):
-    """Stop only the session created for this command, including stubborn children."""
-    try:
-        os.killpg(child.pid, signal.SIGTERM)
-    except ProcessLookupError:
-        child.wait()
-        return
-    deadline = time.monotonic() + 2
-    while time.monotonic() < deadline:
-        child.poll()
+def session_process_groups(session):
+    """Xcode scripts create additional groups inside the command's private session."""
+    groups = set()
+    rows = subprocess.check_output(['ps', '-axo', 'pid=,stat='], text=True)
+    for row in rows.splitlines():
+        pid, state = row.split()
+        if state.startswith('Z'):
+            continue
         try:
-            os.killpg(child.pid, 0)
-        except ProcessLookupError:
-            child.wait()
-            return
+            if os.getsid(int(pid)) == session:
+                groups.add(os.getpgid(int(pid)))
+        except (ProcessLookupError, PermissionError):
+            pass
+    return groups
+
+
+def stop_process_session(child):
+    """Stop every group in our private session, without signalling other jobs."""
+    if child.pid == os.getsid(0):
+        raise RuntimeError('Refusing to stop the shared parent session')
+    sent = set()
+    groups = session_process_groups(child.pid)
+    deadline = time.monotonic() + 2
+    while groups and time.monotonic() < deadline:
+        for group in groups - sent:
+            try:
+                os.killpg(group, signal.SIGTERM)
+            except ProcessLookupError:
+                pass
+            sent.add(group)
         time.sleep(0.05)
-    try:
-        os.killpg(child.pid, signal.SIGKILL)
-    except ProcessLookupError:
-        pass
+        child.poll()
+        groups = session_process_groups(child.pid)
+    deadline = time.monotonic() + 5
+    while groups and time.monotonic() < deadline:
+        for group in groups:
+            try:
+                os.killpg(group, signal.SIGKILL)
+            except ProcessLookupError:
+                pass
+        time.sleep(0.05)
+        child.poll()
+        groups = session_process_groups(child.pid)
     child.wait(timeout=5)
+    if groups:
+        raise RuntimeError('Native command session did not stop completely')
 
 
 def run_command(command, log, environment=None, timeout=3600):
@@ -68,10 +93,10 @@ def run_command(command, log, environment=None, timeout=3600):
             try:
                 child.wait(timeout=timeout)
             except BaseException:
-                stop_process_group(child)
+                stop_process_session(child)
                 raise
             if child.returncode:
-                stop_process_group(child)
+                stop_process_session(child)
     if child.returncode:
         raise subprocess.CalledProcessError(child.returncode, command)
 
