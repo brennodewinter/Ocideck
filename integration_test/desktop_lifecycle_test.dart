@@ -30,6 +30,7 @@ void main() {
   late ProviderContainer container;
   late String rootPath;
   late String phaseName;
+  late int nativeWindowId;
   int Function()? sendQuit;
   testWidgets('open, add, save, close and reopen in native app processes', (
     tester,
@@ -92,6 +93,9 @@ void main() {
     await binding.waitUntilFirstFrameRasterized.timeout(
       const Duration(seconds: 30),
     );
+    final nativeWindow = WindowManager.instance.getCurrent();
+    expect(nativeWindow, isNotNull, reason: 'The app must own a real window');
+    nativeWindowId = nativeWindow!.id;
     expect(find.byType(AppShell), findsOneWidget);
     final Map<String, Object?> result;
     if (roundtrip) {
@@ -136,8 +140,20 @@ void main() {
           sendQuit!();
         } else {
           final manager = WindowManager.instance;
-          final window = manager.getCurrent();
-          if (window != null) manager.handleWillClose(window.id);
+          stderr.writeln(
+            'Native shutdown dispatch: window=$nativeWindowId '
+            'hook=${manager.hasWillCloseHook()} '
+            'shell=$hasAppExitHandler quitCalls=$debugQuitAppCalls',
+          );
+          manager.handleWillClose(nativeWindowId);
+          if (Platform.isLinux) {
+            Timer.periodic(const Duration(seconds: 1), (timer) {
+              stderr.writeln(
+                'Native shutdown progress: quitCalls=$debugQuitAppCalls',
+              );
+              if (timer.tick == 8) timer.cancel();
+            });
+          }
         }
       });
     });
