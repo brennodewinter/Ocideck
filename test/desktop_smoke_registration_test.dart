@@ -14,6 +14,32 @@ String steps(YamlMap job) => (job['steps'] as YamlList)
     .join('\n');
 
 void main() {
+  test(
+    'release jobs isolate SDK before dependencies and clean only their copy',
+    () {
+      final release = workflow('.forgejo/workflows/release.yml');
+      for (final platform in ['gate', 'macos']) {
+        final job = release['jobs'][platform] as YamlMap;
+        final commands = steps(job);
+        expect(commands, contains('prepare_macos_app_journey_sdk.sh'));
+        expect(
+          commands.indexOf('prepare_macos_app_journey_sdk.sh'),
+          lessThan(commands.indexOf('flutter pub get')),
+        );
+        final cleanup = (job['steps'] as YamlList)
+            .whereType<YamlMap>()
+            .singleWhere(
+              (step) => '${step['run']}'.contains(
+                'Unexpected release SDK cleanup path',
+              ),
+            );
+        expect(cleanup['if'], 'always()');
+        expect('${cleanup['run']}', contains('flutter-app-journey.*'));
+        expect('${cleanup['run']}', contains('APP_JOURNEY_SDK'));
+      }
+    },
+  );
+
   test('one automatic short PR and nightly full journey per platform', () {
     final forge = workflow('.forgejo/workflows/app-journey.yml');
     final triggers = forge['on'] as YamlMap;

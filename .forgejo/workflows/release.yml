@@ -110,6 +110,10 @@ jobs:
           fi
           echo "Release-invoer klopt: $TAG (pubspec $PUBSPEC_VERSION)."
 
+      - name: Geïsoleerde SDK voor de releasepoort
+        if: ${{ inputs.mode == 'candidate' }}
+        run: bash scripts/prepare_macos_app_journey_sdk.sh
+
       - name: Afhankelijkheden ophalen
         if: ${{ inputs.mode == 'candidate' }}
         run: flutter pub get --enforce-lockfile
@@ -119,6 +123,18 @@ jobs:
         run: |
           make check-no-coverage
           make test-golden
+
+      - name: Alleen de eigen release-SDK opruimen
+        if: always()
+        run: |
+          set -eu
+          if [ -n "${APP_JOURNEY_SDK:-}" ]; then
+            release_temp="$(cd "$RUNNER_TEMP" && pwd -P)"
+            case "$APP_JOURNEY_SDK" in
+              "$release_temp"/flutter-app-journey.*) rm -rf -- "$APP_JOURNEY_SDK" ;;
+              *) echo 'Unexpected release SDK cleanup path' >&2; exit 1 ;;
+            esac
+          fi
 
   web:
     name: Web bouwen
@@ -374,6 +390,9 @@ jobs:
           persist-credentials: false
           ref: ${{ inputs.commit_sha || github.sha }}
 
+      - name: Geïsoleerde SDK voor de macOS-kandidaat
+        run: bash scripts/prepare_macos_app_journey_sdk.sh
+
       - name: Afhankelijkheden ophalen
         run: flutter pub get --enforce-lockfile
 
@@ -438,6 +457,18 @@ jobs:
         with:
           name: ocideck-macos
           path: ocideck-macos-${{ env.VERSIE }}.zip
+
+      - name: Alleen de eigen release-SDK opruimen
+        if: always()
+        run: |
+          set -eu
+          if [ -n "${APP_JOURNEY_SDK:-}" ]; then
+            release_temp="$(cd "$RUNNER_TEMP" && pwd -P)"
+            case "$APP_JOURNEY_SDK" in
+              "$release_temp"/flutter-app-journey.*) rm -rf -- "$APP_JOURNEY_SDK" ;;
+              *) echo 'Unexpected release SDK cleanup path' >&2; exit 1 ;;
+            esac
+          fi
 
   windows-ophalen:
     name: Windows ophalen van de spiegel
