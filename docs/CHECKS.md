@@ -1088,7 +1088,7 @@ cannot satisfy that counterfactual. The ordinary static workaround checks remain
 
 ### `make test-packages`
 - **Runs:** per package under `packages/`: `dart pub get --enforce-lockfile`,
-  `dart test --test-randomize-ordering-seed random --coverage=coverage`,
+  `dart --enable-vm-service=0 test --test-randomize-ordering-seed random --coverage=coverage`,
   `coverage:format_coverage` to `coverage/lcov.info`, then
   `dart run tool/package_coverage.dart --package=<dir> --min=90 --per-file-floor=60`
   (`PACKAGE_COVERAGE_MIN` and `PACKAGE_PER_FILE_FLOOR` override the floors).
@@ -1108,6 +1108,12 @@ cannot satisfy that counterfactual. The ordinary static workaround checks remain
   static half is `check-packages`.
 - **Failure means:** a package test failed, the package's `pubspec.lock` drifted
   (run `dart pub get` in the package and commit it), or coverage fell below a floor.
+
+Coverage uses the test runner's loopback VM service. The command starts that
+service before loading parallel suites. This avoids the observed startup failure
+in #3297, where a suite's WebSocket closed before its HTTP header arrived. All
+tests, random ordering and coverage floors remain required; a failed connection
+still fails the gate.
 
 ### `make test-age-interop`
 - **Runs:** `GOBIN=.dart_tool/age-bin go install filippo.io/age/cmd/age@$(AGE_VERSION)` (default
