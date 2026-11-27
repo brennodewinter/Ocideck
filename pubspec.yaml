@@ -1,7 +1,7 @@
 name: ocideck
 description: "Marp Presentation Builder for Desktop and Web"
 publish_to: 'none'
-version: 0.7.15+57
+version: 0.7.19+61
 repository: https://pawprint.vigilis.online/LibreKAT/Ocideck
 issue_tracker: https://pawprint.vigilis.online/LibreKAT/Ocideck/issues
 
