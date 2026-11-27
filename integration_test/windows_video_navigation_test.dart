@@ -14,6 +14,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:material_ui/material_ui.dart';
+import 'package:nativeapi/nativeapi.dart' show WindowManager;
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/models/video_source.dart';
 import 'package:ocideck/platform/native_window.dart';
@@ -25,6 +26,8 @@ import 'package:ocideck/widgets/slides/previews/video_embed_view.dart';
 import 'package:ocideck/widgets/slides/slide_preview.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:webview_win_floating/webview_plugin.dart';
+
+import 'fixtures/video_fixture.dart';
 
 class _Trace implements LogSink {
   final lines = <String>[];
@@ -160,10 +163,40 @@ class _Keyboard {
 
   Future<void> click(Offset logicalPosition, double scale) async {
     final user = DynamicLibrary.open('user32.dll');
-    final window = user
-        .lookupFunction<Pointer<Void> Function(), Pointer<Void> Function()>(
-          'GetForegroundWindow',
-        )();
+    final window = WindowManager.instance.getCurrent()!.nativeObject;
+    final owner = calloc<Uint32>();
+    try {
+      user.lookupFunction<
+        Uint32 Function(Pointer<Void>, Pointer<Uint32>),
+        int Function(Pointer<Void>, Pointer<Uint32>)
+      >('GetWindowThreadProcessId')(window, owner);
+      expect(
+        owner.value,
+        pid,
+        reason: 'Never inject a click into another process',
+      );
+    } finally {
+      calloc.free(owner);
+    }
+    final position = user
+        .lookupFunction<
+          Int32 Function(
+            Pointer<Void>,
+            Pointer<Void>,
+            Int32,
+            Int32,
+            Int32,
+            Int32,
+            Uint32,
+          ),
+          int Function(Pointer<Void>, Pointer<Void>, int, int, int, int, int)
+        >('SetWindowPos');
+    // Reveal only our owned window. The real click, not a mocked focus event,
+    // must make Windows deliver subsequent physical keys to this process.
+    expect(
+      position(window, Pointer<Void>.fromAddress(-1), 0, 0, 0, 0, 0x13),
+      isNot(0),
+    );
     final point = calloc<Int32>(2);
     final input = calloc<Uint8>(40);
     try {
@@ -192,6 +225,7 @@ class _Keyboard {
       bytes.setUint32(20, 4, Endian.little); // MOUSEEVENTF_LEFTUP
       expect(send(1, input.cast(), 40), 1);
     } finally {
+      position(window, Pointer<Void>.fromAddress(-2), 0, 0, 0, 0, 0x13);
       calloc.free(point);
       calloc.free(input);
     }
@@ -335,9 +369,14 @@ Future<void> _policyIsolation(
 
 void main() {
   final binding = IntegrationTestWidgetsFlutterBinding.ensureInitialized();
+  const livePlayer = bool.fromEnvironment(
+    'OCIDECK_LIVE_VIDEO_PROBE',
+    defaultValue: true,
+  );
   final trace = _Trace();
   final evidence = <String, dynamic>{
     'windows': Platform.operatingSystemVersion,
+    'live_youtube_requested': livePlayer,
   };
   setUpAll(() async {
     WindowsWebViewPlatform.registerWith();
@@ -473,7 +512,7 @@ void main() {
       binding.reportData = evidence;
       await tester.pumpWidget(const SizedBox());
     }
-  }, skip: !Platform.isWindows);
+  }, skip: !Platform.isWindows || !livePlayer);
   testWidgets('physical child-frame keys are consumed only after opt-in', (
     tester,
   ) async {
@@ -523,6 +562,18 @@ if(e.origin==='${child.uri.origin}'&&e.source===document.getElementById('f').con
       await configureNativeWindow();
       await tester.pumpAndSettle(const Duration(milliseconds: 16));
       final native = _native(controller).controller;
+      await tester.runAsync(
+        () => keyboard.click(
+          tester.getTopLeft(find.byType(WebViewWidget).first) +
+              const Offset(40, 18),
+          tester.view.devicePixelRatio,
+        ),
+      );
+      await _until(
+        tester,
+        () => keyboard.foregroundProcess() == pid,
+        seconds: 5,
+      );
       await native.requestFocus();
       await controller.runJavaScript("document.getElementById('f').focus()");
       evidence['keyDocument'] = await _documentState(controller);
@@ -597,4 +648,67 @@ if(e.origin==='${child.uri.origin}'&&e.source===document.getElementById('f').con
       };
     }
   }, skip: !Platform.isWindows);
+  testWidgets(
+    'local MP4 decodes, plays, pauses and seeks in WebView2',
+    (tester) => _localVideo(tester, evidence),
+    skip: !Platform.isWindows,
+  );
+}
+
+Future<void> _localVideo(
+  WidgetTester tester,
+  Map<String, dynamic> evidence,
+) async {
+  final directory = await Directory.systemTemp.createTemp(
+    'ocideck-local-video-',
+  );
+  final host = await VideoEmbedHost.start(
+    '<video id="v" muted autoplay playsinline src="data:video/mp4;base64,$videoFixtureBase64"></video>',
+  );
+  final controller = WebViewController.fromPlatformCreationParams(
+    WindowsWebViewControllerCreationParams(
+      userDataFolder: directory.path,
+      suspendDuringDeactive: false,
+    ),
+  );
+  Future<Map<String, dynamic>> snapshot() async {
+    final value = await controller.runJavaScriptReturningResult(
+      '(()=>{var v=document.getElementById("v");return v?{width:v.videoWidth,height:v.videoHeight,duration:v.duration,position:v.currentTime,'
+      'paused:v.paused,frames:v.getVideoPlaybackQuality().totalVideoFrames}:{position:0,frames:0}})()',
+    );
+    return Map<String, dynamic>.from(jsonDecode(value as String) as Map);
+  }
+
+  try {
+    await controller.setJavaScriptMode(JavaScriptMode.unrestricted);
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(body: VideoEmbedView(controller: controller)),
+      ),
+    );
+    await controller.loadRequest(host.uri);
+    await _until(tester, () async {
+      final state = await snapshot();
+      evidence['localVideoPlaying'] = state;
+      return (state['position'] as num) > .1 && (state['frames'] as num) > 0;
+    });
+    final playing = evidence['localVideoPlaying'] as Map;
+    expect(playing['width'], 160);
+    expect(playing['height'], 90);
+    expect(playing['duration'], 3);
+    expect(playing['paused'], isFalse);
+    await controller.runJavaScript(
+      "document.getElementById('v').pause();document.getElementById('v').currentTime=2",
+    );
+    await _until(tester, () async {
+      final state = await snapshot();
+      evidence['localVideoPaused'] = state;
+      return state['paused'] == true &&
+          ((state['position'] as num) - 2).abs() < .1;
+    });
+  } finally {
+    await tester.pumpWidget(const SizedBox());
+    await _native(controller).controller.dispose();
+    await host.close();
+  }
 }

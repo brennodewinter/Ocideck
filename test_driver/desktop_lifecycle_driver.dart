@@ -25,7 +25,19 @@ Future<void> main() => integrationDriver(
           throw StateError('Invalid phase');
         }
         await File(p.join(root, 'close-$phase.request')).writeAsString('close');
-        await waitForDesktopExit(data['pid'] as int);
+        try {
+          await waitForDesktopExit(data['pid'] as int);
+        } on StateError {
+          if (Platform.isLinux) {
+            for (final name in ['stat', 'status', 'wchan']) {
+              final kernel = File('/proc/${data['pid']}/$name');
+              if (kernel.existsSync()) {
+                data['linux_$name'] = kernel.readAsStringSync();
+              }
+            }
+          }
+          rethrow;
+        }
         data['process_exited'] = true;
         if (Platform.isMacOS) {
           final marker = File(p.join(root, 'clean-exit-$phase.txt'));

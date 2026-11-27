@@ -1,5 +1,5 @@
 .PHONY: check-locked check-full-locked test-packages test-age-interop l10n-export l10n-import template-l10n-export template-l10n-import template-l10n-skeleton template-l10n-auto dast sast check-secrets check-marp check-owasp-catalog-sources refresh-catalogs translate-docs translate-docs-check setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter test-xmpp-integration test-jitsi-integration deps-outdated deps-check deps-verify-offline trivy check-pins bump-scanner-pins catalogs-outdated refresh-lexicon licenses sbom sbom-verify prune-hook-cache check-conventions check-linux-impeller check-linux-wayland-scale check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-toolchain check-comment-language check-dated-claims check-rtl-inventory check-improvement-templates check-version-bump check-sbom-version check-packages check-collab-field-parity check-roundtrip-field-parity check-translated-mermaid check-untranslated-templates check-l10n-orphans check-l10n-parity check-l10n-passthrough coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web check-web-browser build-macos build-windows build-windows-installer winget-manifest build-linux package-linux build-all build-release release notarize-macos deploy-web check check-no-coverage check-static check-full check-release help servicenormen doorlooptijd ratchets clean-test-cache ci-image-publish ci-image-scans-publish
-.PHONY: package-deps test-benchmarks test-desktop-smoke test-desktop-roundtrip
+.PHONY: package-deps test-benchmarks test-desktop-smoke test-desktop-roundtrip test-app-journey
 
 # macOS (and some Linux setups) ship a low open-file-descriptor soft limit. The
 # full test suite exhausts it and fails with "Too many open files" — worst under
@@ -227,6 +227,10 @@ test-desktop-smoke:
 # All slide types, Markdown/package persistence and file operations (#3208).
 test-desktop-roundtrip:
 	@scripts/gate_lock.sh dart run tool/run_desktop_smoke.dart $(DEVICE) --roundtrip
+
+# Native PR/nightly scenario set (#3214); FULL=true includes the full journey.
+test-app-journey:
+	@scripts/gate_lock.sh python3 tool/app_journey.py $(if $(filter true 1,$(FULL)),--full,)
 
 # The per-file floor, over the report `coverage` just wrote (no second test run).
 #

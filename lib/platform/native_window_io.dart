@@ -2,6 +2,7 @@ import 'dart:io' show Platform;
 import 'dart:ui' show AppExitResponse, Size;
 
 import 'package:flutter/foundation.dart' show visibleForTesting;
+import 'package:flutter/services.dart' show SystemNavigator;
 import 'package:nativeapi/nativeapi.dart';
 
 import '../utils/log.dart';
@@ -77,11 +78,9 @@ Future<void> configureNativeWindow() async {
   if (!Platform.isMacOS && !Platform.isWindows && !Platform.isLinux) return;
 
   final window = WindowManager.instance.getCurrent();
-  if (window == null) return;
-  window.minimumSize = minimumWindowSize;
-  window.show();
-  window.focus();
 
+  // Het eerste GTK-frame kan nog onzichtbaar zijn. De globale bewaking
+  // moet al bestaan voordat er een actueel venster te vinden is (#3287).
   // nativeapi gebruikt een willClose-hook i.p.v. window_manager's
   // setPreventClose: het native venster roept de hook synchroon aan vóór
   // het sluiten, en de shell beslist dan async of er niet-opgeslagen werk
@@ -90,6 +89,11 @@ Future<void> configureNativeWindow() async {
   WindowManager.instance.setWillCloseHook((_) {
     _willCloseCallback?.call();
   });
+
+  if (window == null) return;
+  window.minimumSize = minimumWindowSize;
+  window.show();
+  window.focus();
 }
 
 /// Haalt het primaire venster naar voren. Een tweede Linux-start zonder
@@ -128,6 +132,13 @@ Future<void> quitApp() async {
     return;
   }
   if (!Platform.isMacOS && !Platform.isWindows && !Platform.isLinux) return;
+  if (Platform.isLinux) {
+    // nativeapi behandelt hier een GdkWindow als GtkWidget. Flutter heeft
+    // zelf de GtkApplication en sluit die via zijn officiële platformroute.
+    await closeLog();
+    await SystemNavigator.pop();
+    return;
+  }
   final window = WindowManager.instance.getCurrent();
   if (window == null) return;
   await closeLog();
