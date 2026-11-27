@@ -31,11 +31,6 @@ final Map<String, String> _publishedForms = {};
 /// inzending leidden, per formulier en versie: een tweede inzending vraagt er niet opnieuw om.
 final Map<String, ({String bundle, String fingerprint})> _sealMemory = {};
 
-/// De intake-context van documenten zonder pad (het web, of nog niet
-/// opgeslagen), per formulier en versie — het sessiegeheugen dat de sidecar
-/// op schijf vervangt zolang er geen bestandsnaam is.
-final Map<String, FormIntakeContext> _intakeMemory = {};
-
 /// Waar de pins staan: per formulier en organisator het hoogste volgnummer dat de invuller zag
 /// (FORM_INTAKE.md §5.1). Blijft over sessies bestaan, anders beschermt het tegen niets.
 const String kFormBundlePinsKey = 'form_bundle_pins';
@@ -45,25 +40,9 @@ const String kFormBundlePinsKey = 'form_bundle_pins';
 void debugClearPublishedForms() {
   _publishedForms.clear();
   _sealMemory.clear();
-  _intakeMemory.clear();
 }
 
 String _intakeKey(FormSpec spec) => '${spec.id}@${spec.version}';
-
-/// Legt [context] vast waar de invulpagina hem vindt (§6.4): naast het
-/// document op [documentPath], of in het sessiegeheugen voor padloze
-/// documenten. De uitnodigingsdialoog gebruikt dit vlak voordat hij het
-/// formulier opent.
-Future<void> rememberIntakeContext({
-  required FormSpec spec,
-  required FormIntakeContext context,
-  String? documentPath,
-}) async {
-  _intakeMemory[_intakeKey(spec)] = context;
-  if (documentPath != null && !kIsWeb) {
-    await writeIntakeContext(documentPath, context);
-  }
-}
 
 /// Waar het opslagvenster naartoe schrijft: een pad, of `null` als de invuller
 /// annuleert. Dezelfde vorm als [pickDocumentExportDestination].
@@ -89,6 +68,7 @@ FormExportSupport formExportSupportFor({
   required String saveTitle,
   String? bundleTitle,
   String? documentPath,
+  FormIntakeSession? intakeSession,
   Future<String?> Function(String dialogTitle)? pick,
   Future<String?> Function(String dialogTitle)? pickBundle,
   FormExportDestination? destination,
@@ -107,7 +87,8 @@ FormExportSupport formExportSupportFor({
       projectPath: projectPath,
       destination: destination ?? pickDocumentExportDestination,
     ),
-    recall: (spec) => _publishedForms[_intakeKey(spec)],
+    recall: (spec) =>
+        intakeSession?.publishedMarkdown ?? _publishedForms[_intakeKey(spec)],
     remember: (spec, published) =>
         _publishedForms[_intakeKey(spec)] = published,
     // Verzegelen gebruikt de age-bibliotheek, en die draait in de webbouw nog niet (dart2js):
@@ -126,20 +107,18 @@ FormExportSupport formExportSupportFor({
                 ),
             forget: (spec) => _sealMemory.remove(_intakeKey(spec)),
           ),
-    // De sidecar naast het document is de duurzame plek; het sessiegeheugen
-    // dekt padloze documenten (het web) en het venster tussen uitnodiging en
-    // eerste opslag.
     intake: FormIntakeSupport(
-      load: (spec) async =>
-          (documentPath != null && !kIsWeb
-              ? await readIntakeContext(documentPath)
-              : null) ??
-          _intakeMemory[_intakeKey(spec)],
-      save: (spec, context) => rememberIntakeContext(
-        spec: spec,
-        context: context,
-        documentPath: documentPath,
-      ),
+      load: (_) async {
+        if (intakeSession != null) return intakeSession.context;
+        if (documentPath == null || kIsWeb) return null;
+        return readIntakeContext(documentPath);
+      },
+      save: (_, context) async {
+        if (intakeSession != null) intakeSession.context = context;
+        if (documentPath != null && !kIsWeb) {
+          await writeIntakeContext(documentPath, context);
+        }
+      },
     ),
   );
 }

@@ -15,6 +15,30 @@ part of '../app_shell.dart';
 /// AppShell, en de bridge bewaakt geen UI-state.
 MarkdownTransferBridge? _markdownTransferBridge;
 
+Future<void> _openWebDeepLink(
+  BuildContext context,
+  WidgetRef ref,
+  bool Function() isMounted,
+) async {
+  if (!isWebPlatform || !isMounted()) return;
+  final page = Uri.base;
+  final invitation = intakeInvitationFromWebUrl(page);
+  if (invitation == null) {
+    await _openDeckDeepLink(context, ref, isMounted);
+    return;
+  }
+  replaceAddressBar(page.removeFragment());
+  await showFormIntakeInvitationDialog(
+    context,
+    initialLink: invitation,
+    onOpenPath: (path) =>
+        ref.read(tabsProvider.notifier).openFileByPath(path).then((_) {}),
+    onOpenText: (text, session) => ref
+        .read(tabsProvider.notifier)
+        .newDocumentFromMarkdown(text, intakeSession: session),
+  );
+}
+
 /// Web-deeplink: `?deck=<url>` haalt de presentatie op en opent haar —
 /// één link deelt zo de app én de inhoud. De volledige importpoort
 /// (CORS/hulppunt, veiligheidsscan met alarm, marp-controle) blijft gelden.

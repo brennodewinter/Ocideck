@@ -111,6 +111,56 @@ class FormIntakeContext {
   }
 }
 
+/// Transient binding between one document tab and its original server snapshot.
+class FormIntakeSession {
+  FormIntakeSession({required this.context, required this.publishedMarkdown});
+
+  FormIntakeContext context;
+  final String publishedMarkdown;
+}
+
+/// Explicit web entry point. Ordinary deck imports and other hash routes are
+/// independent of this parameter.
+String? intakeInvitationFromWebUrl(Uri page) {
+  final String? link;
+  try {
+    link = Uri.splitQueryString(page.fragment)['intake'];
+  } on FormatException {
+    return null;
+  } on ArgumentError {
+    return null;
+  }
+  if (link == null) return null;
+  final uri = Uri.tryParse(link);
+  if (uri == null ||
+      uri.scheme != 'https' ||
+      uri.host.isEmpty ||
+      uri.userInfo.isNotEmpty ||
+      uri.hasQuery ||
+      uri.hasFragment) {
+    return null;
+  }
+  final path = uri.pathSegments;
+  if (path case [
+    'api',
+    'v1',
+    'intake',
+    'forms' || 'submissions',
+    final ref,
+  ] when _intakeWebReference.hasMatch(ref)) {
+    return link;
+  }
+  if (path case [
+    'intake',
+    final locator,
+  ] when _intakeWebReference.hasMatch(locator)) {
+    return link;
+  }
+  return null;
+}
+
+final _intakeWebReference = RegExp(r'^[A-Za-z0-9_-]{1,128}$');
+
 /// Wat [parseIntakeLink] uit een geplakte link haalde.
 class FormIntakeLink {
   const FormIntakeLink({required this.baseUrl, this.formRef, this.locator});
@@ -146,6 +196,9 @@ FormIntakeLink? parseIntakeLink(String raw) {
     if (segments[i] == 'submissions') {
       return FormIntakeLink(baseUrl: baseUrl, locator: segments[i + 1]);
     }
+  }
+  if (segments case ['intake', final locator]) {
+    return FormIntakeLink(baseUrl: baseUrl, locator: locator);
   }
   final locator = uri.queryParameters['locator']?.trim();
   if (locator != null && locator.isNotEmpty) {

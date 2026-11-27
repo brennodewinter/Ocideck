@@ -55,7 +55,7 @@ class _FakeClient extends IntakeRespondentClient {
 Widget _app({
   required IntakeRespondentClient Function(String) clientFor,
   Future<void> Function(String)? onOpenPath,
-  void Function(String)? onOpenText,
+  void Function(String, FormIntakeSession)? onOpenText,
   Future<String?> Function(String, String)? pickDestination,
 }) => MaterialApp(
   locale: const Locale('nl'),
@@ -68,7 +68,7 @@ Widget _app({
     body: FormIntakeInvitationDialog(
       clientFor: clientFor,
       onOpenPath: onOpenPath ?? (_) async {},
-      onOpenText: onOpenText ?? (_) {},
+      onOpenText: onOpenText ?? (_, _) {},
       pickDestination: pickDestination,
     ),
   ),

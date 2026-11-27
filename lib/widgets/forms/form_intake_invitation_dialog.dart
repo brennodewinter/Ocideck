@@ -23,7 +23,6 @@ import '../../services/ociserve/ociserve_http.dart';
 import '../../services/ociserve/ociserve_intake_respondent.dart';
 import '../../utils/atomic_file.dart';
 import 'form_intake_challenge.dart';
-import 'form_export_picker.dart' show rememberIntakeContext;
 
 enum _Step { link, loading, landing, challenge, working, confirmWithdraw, done }
 
@@ -33,14 +32,16 @@ enum _Step { link, loading, landing, challenge, working, confirmWithdraw, done }
 Future<void> showFormIntakeInvitationDialog(
   BuildContext context, {
   required Future<void> Function(String path) onOpenPath,
-  required void Function(String text) onOpenText,
+  required void Function(String text, FormIntakeSession session) onOpenText,
   Future<String?> Function(String title, String fileName)? pickDestination,
   IntakeRespondentClient Function(String baseUrl)? clientFor,
+  String? initialLink,
 }) => showDialog<void>(
   context: context,
   builder: (_) => FormIntakeInvitationDialog(
     onOpenPath: onOpenPath,
     onOpenText: onOpenText,
+    initialLink: initialLink,
     pickDestination: pickDestination,
     clientFor: clientFor ?? (base) => IntakeRespondentClient(baseUrl: base),
   ),
@@ -52,13 +53,15 @@ class FormIntakeInvitationDialog extends StatefulWidget {
     required this.onOpenPath,
     required this.onOpenText,
     this.pickDestination,
+    this.initialLink,
     required this.clientFor,
   });
 
   final Future<void> Function(String path) onOpenPath;
-  final void Function(String text) onOpenText;
+  final void Function(String text, FormIntakeSession session) onOpenText;
   final Future<String?> Function(String title, String fileName)?
   pickDestination;
+  final String? initialLink;
   final IntakeRespondentClient Function(String baseUrl) clientFor;
 
   @override
@@ -78,6 +81,17 @@ class _FormIntakeInvitationDialogState
   bool _withdrawing = false;
   bool _withdrawn = false;
   IntakeRespondentClient? _client;
+
+  @override
+  void initState() {
+    super.initState();
+    final initialLink = widget.initialLink;
+    if (initialLink == null) return;
+    _link.text = initialLink;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) _openLink();
+    });
+  }
 
   @override
   void dispose() {
@@ -117,8 +131,8 @@ class _FormIntakeInvitationDialogState
       _error = null;
       _step = _Step.loading;
     });
-    _client ??= widget.clientFor(parsed.baseUrl);
     try {
+      _client = widget.clientFor(parsed.baseUrl);
       if (parsed.formRef != null) {
         final form = await _client!.publicForm(parsed.formRef!);
         if (!mounted) return;
@@ -212,11 +226,8 @@ class _FormIntakeInvitationDialogState
       );
       return;
     }
-    final spec = switch (parseForm(markdown)) {
-      ParsedForm(:final spec, canFill: true) => spec,
-      _ => null,
-    };
-    if (spec == null) {
+    final parsedForm = parseForm(markdown);
+    if (parsedForm is! ParsedForm || !parsedForm.canFill) {
       setState(
         () => _error = context.l10n.d(
           'Deze publicatie bevat geen formulier dat OciDeck kan invullen.',
@@ -249,20 +260,17 @@ class _FormIntakeInvitationDialogState
       );
       if (path == null || !mounted) return;
       await writeStringAtomic(File(path), markdown);
-      await rememberIntakeContext(
-        spec: spec,
-        context: intake,
-        documentPath: path,
-      );
+      await writeIntakeContext(path, intake);
       if (!mounted) return;
       Navigator.of(context).pop();
       await widget.onOpenPath(path);
       return;
     }
-    await rememberIntakeContext(spec: spec, context: intake);
-    if (!mounted) return;
     Navigator.of(context).pop();
-    widget.onOpenText(markdown);
+    widget.onOpenText(
+      markdown,
+      FormIntakeSession(context: intake, publishedMarkdown: markdown),
+    );
   }
 
   @override

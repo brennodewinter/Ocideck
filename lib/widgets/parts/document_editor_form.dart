@@ -34,6 +34,7 @@ FormFillView _formFillView(
       saveTitle: l10n.d('Inzending opslaan'),
       bundleTitle: l10n.d('Kies het bundelbestand van de organisator'),
       documentPath: ref.read(documentProvider).filePath,
+      intakeSession: ref.read(documentProvider.notifier).intakeSession,
     ),
   );
 }

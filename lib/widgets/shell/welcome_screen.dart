@@ -419,8 +419,9 @@ class _WelcomeScreen extends ConsumerWidget {
           context,
           onOpenPath: (path) =>
               ref.read(tabsProvider.notifier).openFileByPath(path).then((_) {}),
-          onOpenText: (text) =>
-              ref.read(tabsProvider.notifier).newDocumentFromMarkdown(text),
+          onOpenText: (text, session) => ref
+              .read(tabsProvider.notifier)
+              .newDocumentFromMarkdown(text, intakeSession: session),
         ),
       ),
       const SizedBox(height: 10),

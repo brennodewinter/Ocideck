@@ -25,6 +25,7 @@ import '../services/document_deck_bridge.dart';
 import '../services/duplicate_service.dart';
 import '../services/document_integrity.dart';
 import '../services/file_service.dart';
+import '../services/form/form_intake_context.dart';
 import '../services/git/asset_pool.dart';
 import '../services/git/deck_mirror.dart';
 import '../services/git/offline_queue.dart';
@@ -580,6 +581,7 @@ class TabsNotifier extends StateNotifier<TabsState> {
     String? projectPath,
     String? suggestedName,
     String? pendingAudioPath,
+    FormIntakeSession? intakeSession,
   }) {
     _placeDocumentTab(
       this,
@@ -587,6 +589,7 @@ class TabsNotifier extends StateNotifier<TabsState> {
       projectPath: projectPath,
       suggestedName: suggestedName,
       pendingAudioPath: pendingAudioPath,
+      intakeSession: intakeSession,
     );
   }
 

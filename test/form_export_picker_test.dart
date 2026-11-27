@@ -7,6 +7,7 @@ import 'dart:typed_data';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/services/download_delivery.dart';
+import 'package:ocideck/services/form/form_intake_context.dart';
 import 'package:ocideck/widgets/forms/form_export_picker.dart';
 import 'package:ocideck/widgets/forms/form_export_support.dart';
 import 'package:ocideck/widgets/forms/form_text_helpers.dart';
@@ -33,12 +34,14 @@ void main() {
 
   FormExportSupport support({
     String? projectPath,
+    FormIntakeSession? session,
     Future<String?> Function(String)? pick,
     FormExportDestination? destination,
     String? bundleTitle,
     Future<String?> Function(String)? pickBundle,
   }) => formExportSupportFor(
     projectPath: projectPath,
+    intakeSession: session,
     frontMatter: '---\na: b\n---\n',
     pickTitle: 'Kies het formulier',
     saveTitle: 'Opslaan',
@@ -53,6 +56,44 @@ void main() {
     expect(s.frontMatter, '---\na: b\n---\n');
     expect(s.clientVersion, matches(RegExp(r'^\d+\.\d+\.\d+')));
   });
+
+  test(
+    'two invitations with the same form ID keep separate destinations',
+    () async {
+      final spec = specOf('kook', 1);
+      final first = support(
+        session: FormIntakeSession(
+          context: const FormIntakeContext(
+            baseUrl: 'https://one.test',
+            formRef: 'a',
+          ),
+          publishedMarkdown: 'first',
+        ),
+      );
+      final second = support(
+        session: FormIntakeSession(
+          context: const FormIntakeContext(
+            baseUrl: 'https://two.test',
+            formRef: 'b',
+          ),
+          publishedMarkdown: 'second',
+        ),
+      );
+      await second.intake!.save(
+        spec,
+        const FormIntakeContext(
+          baseUrl: 'https://two.test',
+          formRef: 'b',
+          locator: 'sent',
+        ),
+      );
+      expect((await first.intake!.load(spec))?.baseUrl, 'https://one.test');
+      expect((await second.intake!.load(spec))?.locator, 'sent');
+      expect(first.recall(spec), 'first');
+      expect(second.recall(spec), 'second');
+      expect(await support().intake!.load(spec), isNull);
+    },
+  );
 
   group('foto\'s lezen', () {
     test('een foto in de map van het document wordt gelezen', () async {

@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/legacy.dart';
 import '../models/markdown_document.dart';
 import '../utils/visual_markdown_flush.dart';
 import '../services/document_integrity.dart';
+import '../services/form/form_intake_context.dart';
 import '../services/slide_image_refs.dart';
 import '../services/web_asset_store.dart';
 
@@ -158,11 +159,12 @@ class DocumentState {
 /// markeert een losse, discrete stap. Dezelfde coalescing als `DeckNotifier`,
 /// bewust identiek zodat undo overal hetzelfde aanvoelt.
 class DocumentNotifier extends StateNotifier<DocumentState> {
-  DocumentNotifier({DateTime Function()? now})
+  DocumentNotifier({DateTime Function()? now, this.intakeSession})
     : _now = now ?? DateTime.now,
       super(const DocumentState());
 
   final DateTime Function() _now;
+  final FormIntakeSession? intakeSession;
 
   /// De open visuele editor bindt zich hier. Autosave en opslaan roepen
   /// [flushPendingVisualEdit] aan vóór ze de bron lezen, anders mist een

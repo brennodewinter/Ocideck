@@ -125,6 +125,7 @@ void _placeDocumentTab(
   String? projectPath,
   String? suggestedName,
   String? pendingAudioPath,
+  FormIntakeSession? intakeSession,
 }) {
   final state = notifier.currentState;
   final current = state.current;
@@ -137,6 +138,7 @@ void _placeDocumentTab(
     projectPath: projectPath,
     suggestedName: suggestedName,
     pendingAudioPath: pendingAudioPath,
+    intakeSession: intakeSession,
     // De herstelsleutel van het vervangen Nieuw-tabblad gaat mee naar het
     // documenttabblad — het slot blijft van dezelfde werkplek, precies wat
     // _placeDeckInTab doet door het tabblad zelf te hergebruiken.
@@ -169,11 +171,12 @@ TabInfo _createDocumentTab(
   String? projectPath,
   String? suggestedName,
   String? pendingAudioPath,
+  FormIntakeSession? intakeSession,
   bool recovered = false,
 }) {
   final id = notifier._nextId++;
   final key = recoveryId ?? _uuid.v4();
-  final documentNotifier = DocumentNotifier()
+  final documentNotifier = DocumentNotifier(intakeSession: intakeSession)
     ..loadDocument(
       document,
       filePath: filePath,

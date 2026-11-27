@@ -54,6 +54,25 @@ void main() {
     });
   });
 
+  test('the browser invitation accepts only bounded intake links', () {
+    Uri page(String link) => Uri.https(
+      'deck.example.org',
+      '/',
+    ).replace(fragment: 'intake=${Uri.encodeQueryComponent(link)}');
+
+    const invite = 'https://serve.example.org/api/v1/intake/forms/ref-42';
+    const returnLink = 'https://serve.example.org/intake/loc-99';
+    expect(intakeInvitationFromWebUrl(page(invite)), invite);
+    expect(intakeInvitationFromWebUrl(page(returnLink)), returnLink);
+    expect(parseIntakeLink(returnLink)?.locator, 'loc-99');
+    expect(
+      intakeInvitationFromWebUrl(page('https://serve.example.org/api/v1/me')),
+      isNull,
+    );
+    expect(intakeInvitationFromWebUrl(page('$invite?token=x')), isNull);
+    expect(intakeInvitationFromWebUrl(page('$invite%2Felse')), isNull);
+  });
+
   group('intakeInvitationLink', () {
     test('stript overtollige slashes van de basis', () {
       expect(
