@@ -21,6 +21,11 @@ Keep an elapsed-time performance assertion in the `benchmark` lane, which
 runs with concurrency one. Prefer a completion signal in behavioural checks.
 A timeout can bound a call while the result confirms what happened.
 
+The Windows release collector's unit fixture supplies a fixed available-space
+value. Dedicated tests inject insufficient space and check the retained result
+and ability to resume. The runtime collector checks available space before
+downloading or copying an artifact.
+
 ## Evidence sample
 
 The package-suite incident in

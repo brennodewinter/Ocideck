@@ -92,6 +92,13 @@ class WindowsCandidateTest(unittest.TestCase):
         self.addCleanup(self.temp.cleanup)
         self.dist = Path(self.temp.name).resolve() / 'dist'
         self.api = FakeGitHub(ROOT)
+        # These unit tests collect tiny synthetic ZIPs. Use controlled
+        # capacity so the real filesystem does not short-circuit the fixture.
+        free = windows.MAX_ARCHIVE + 32 * 1024 * 1024
+        space = patch.object(windows.shutil, 'disk_usage',
+                             return_value=SimpleNamespace(free=free))
+        space.start()
+        self.addCleanup(space.stop)
 
     def fetch(self):
         return windows.fetch(self.api, ROOT, self.dist, TAG, SHA, REF, 'op-test', Path(self.temp.name) / 'operation.json')
