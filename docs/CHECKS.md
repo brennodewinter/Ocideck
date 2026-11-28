@@ -2103,6 +2103,10 @@ For focused work, run only the relevant slice instead of the whole suite:
 
 ## When the gate fails on something that is not your change
 
+The [timing-sensitive test register](TEST_RELIABILITY.md) records known
+timing dependencies and how to investigate an intermittent result.
+
+
 ### `Failed to load "…_test.dart"` followed by a type-cast error
 
 **The signature** (#798) — the named test file differs from run to run:
