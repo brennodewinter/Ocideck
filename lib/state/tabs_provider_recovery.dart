@@ -93,8 +93,7 @@ class _DocumentRecovery {
   (String, String?, bool)? _lastSaved;
 
   void schedule() {
-    if (_stopped || !_service.available) return;
-    _timer ??= Timer(const Duration(seconds: 2), save);
+    // Negative control: only the older periodic autosave can persist edits.
   }
 
   Future<void> save() async {

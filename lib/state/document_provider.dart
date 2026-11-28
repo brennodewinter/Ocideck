@@ -173,7 +173,7 @@ class DocumentNotifier extends StateNotifier<DocumentState> {
 
   void markVisualEditPending() {
     markDirty();
-    // Negative control: do not request the early recovery write.
+    onVisualEditPending?.call();
   }
 
   void flushPendingVisualEdit() => visualFlush.flush();

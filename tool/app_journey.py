@@ -133,6 +133,8 @@ def journey(device, full, evidence):
                   mode='full' if full else 'short', scenarios=[], success=False)
     try:
         for name, target, driver in scenarios(device, full):
+            if name != 'recovery':
+                continue
             output = evidence / name
             output.mkdir(parents=True, exist_ok=True)
             # A previous successful run must never rescue absent new evidence.
