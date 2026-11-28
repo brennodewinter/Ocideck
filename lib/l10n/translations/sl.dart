@@ -1541,6 +1541,16 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'De artikellink kon niet worden geopend.':
+      'Povezave do članka ni bilo mogoče odpreti.',
+  'Gepubliceerd': 'Objavljeno',
+  'Geweigerd': 'Zavrnjeno',
+  'Je hebt nog geen inzendingen.': 'Nimate še oddanih prispevkov.',
+  'Meer laden': 'Naloži več',
+  'Mijn inzendingen': 'Moji prispevki',
+  'Nieuwe inzending': 'Nov prispevek',
+  'Wijziging indienen': 'Oddaj spremembo',
+  'Goedgekeurd': 'Odobreno',
   'Momentopname: {items} onderdelen, {bytes} bytes':
       'Posnetek: {items} elementov, {bytes} bajtov',
   'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.':

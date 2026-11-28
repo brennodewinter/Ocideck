@@ -1551,6 +1551,16 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'De artikellink kon niet worden geopend.':
+      'Nie udało się otworzyć odnośnika do artykułu.',
+  'Gepubliceerd': 'Opublikowano',
+  'Geweigerd': 'Odrzucono',
+  'Je hebt nog geen inzendingen.': 'Nie masz jeszcze żadnych zgłoszeń.',
+  'Meer laden': 'Załaduj więcej',
+  'Mijn inzendingen': 'Moje zgłoszenia',
+  'Nieuwe inzending': 'Nowe zgłoszenie',
+  'Wijziging indienen': 'Prześlij poprawkę',
+  'Goedgekeurd': 'Zatwierdzono',
   'Momentopname: {items} onderdelen, {bytes} bytes':
       'Migawka: {items} elementów, {bytes} bajtów',
   'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.':

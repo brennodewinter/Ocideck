@@ -1540,6 +1540,16 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'De artikellink kon niet worden geopend.':
+      'Det gick inte att öppna länken till artikeln.',
+  'Gepubliceerd': 'Publicerat',
+  'Geweigerd': 'Avvisat',
+  'Je hebt nog geen inzendingen.': 'Du har ännu inga inskickade bidrag.',
+  'Meer laden': 'Läs in fler',
+  'Mijn inzendingen': 'Mina bidrag',
+  'Nieuwe inzending': 'Nytt bidrag',
+  'Wijziging indienen': 'Skicka in en ändring',
+  'Goedgekeurd': 'Godkänt',
   'Momentopname: {items} onderdelen, {bytes} bytes':
       'Ögonblicksbild: {items} objekt, {bytes} byte',
   'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.':

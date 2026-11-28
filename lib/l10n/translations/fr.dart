@@ -613,6 +613,16 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'De artikellink kon niet worden geopend.':
+      'Le lien vers l’article n’a pas pu être ouvert.',
+  'Gepubliceerd': 'Publié',
+  'Geweigerd': 'Refusé',
+  'Je hebt nog geen inzendingen.': 'Vous n’avez encore rien soumis.',
+  'Meer laden': 'Charger plus',
+  'Mijn inzendingen': 'Mes contributions',
+  'Nieuwe inzending': 'Nouvelle contribution',
+  'Wijziging indienen': 'Soumettre une modification',
+  'Goedgekeurd': 'Approuvé',
   'Momentopname: {items} onderdelen, {bytes} bytes':
       'Instantané : {items} éléments, {bytes} octets',
   'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.':

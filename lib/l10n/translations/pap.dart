@@ -612,6 +612,16 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'De artikellink kon niet worden geopend.':
+      'No por a habri e link di e artíkulo.',
+  'Gepubliceerd': 'Publiká',
+  'Geweigerd': 'Rechasá',
+  'Je hebt nog geen inzendingen.': 'Ainda bo no a entregá nada.',
+  'Meer laden': 'Karga mas',
+  'Mijn inzendingen': 'Mi entreganan',
+  'Nieuwe inzending': 'Entrega nobo',
+  'Wijziging indienen': 'Entregá un kambio',
+  'Goedgekeurd': 'Aprobá',
   'Momentopname: {items} onderdelen, {bytes} bytes':
       'Kopia fiho: {items} elemento, {bytes} byte',
   'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.':

@@ -1564,6 +1564,16 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'De artikellink kon niet worden geopend.':
+      'Δεν ήταν δυνατό να ανοίξει ο σύνδεσμος του άρθρου.',
+  'Gepubliceerd': 'Δημοσιεύτηκε',
+  'Geweigerd': 'Απορρίφθηκε',
+  'Je hebt nog geen inzendingen.': 'Δεν έχετε ακόμη υποβολές.',
+  'Meer laden': 'Φόρτωση περισσότερων',
+  'Mijn inzendingen': 'Οι υποβολές μου',
+  'Nieuwe inzending': 'Νέα υποβολή',
+  'Wijziging indienen': 'Υποβολή αλλαγής',
+  'Goedgekeurd': 'Εγκρίθηκε',
   'Momentopname: {items} onderdelen, {bytes} bytes':
       'Στιγμιότυπο: {items} στοιχεία, {bytes} byte',
   'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.':

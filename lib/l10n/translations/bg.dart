@@ -1560,6 +1560,16 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'De artikellink kon niet worden geopend.':
+      'Връзката към статията не можа да бъде отворена.',
+  'Gepubliceerd': 'Публикувано',
+  'Geweigerd': 'Отхвърлено',
+  'Je hebt nog geen inzendingen.': 'Все още нямате подадени материали.',
+  'Meer laden': 'Зареждане на още',
+  'Mijn inzendingen': 'Моите материали',
+  'Nieuwe inzending': 'Нов материал',
+  'Wijziging indienen': 'Изпращане на промяна',
+  'Goedgekeurd': 'Одобрено',
   'Momentopname: {items} onderdelen, {bytes} bytes':
       'Моментна снимка: {items} елемента, {bytes} байта',
   'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.':

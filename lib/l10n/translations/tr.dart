@@ -2397,6 +2397,15 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'De artikellink kon niet worden geopend.': 'Makale bağlantısı açılamadı.',
+  'Gepubliceerd': 'Yayımlandı',
+  'Geweigerd': 'Reddedildi',
+  'Je hebt nog geen inzendingen.': 'Henüz bir gönderiniz yok.',
+  'Meer laden': 'Daha fazla yükle',
+  'Mijn inzendingen': 'Gönderilerim',
+  'Nieuwe inzending': 'Yeni gönderi',
+  'Wijziging indienen': 'Düzeltme gönder',
+  'Goedgekeurd': 'Onaylandı',
   'Momentopname: {items} onderdelen, {bytes} bytes':
       'Anlık görüntü: {items} öğe, {bytes} bayt',
   'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.':

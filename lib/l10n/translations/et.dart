@@ -1533,6 +1533,16 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'De artikellink kon niet worden geopend.':
+      'Artikli linki ei õnnestunud avada.',
+  'Gepubliceerd': 'Avaldatud',
+  'Geweigerd': 'Tagasi lükatud',
+  'Je hebt nog geen inzendingen.': 'Sul pole veel esitatud kaastöid.',
+  'Meer laden': 'Laadi rohkem',
+  'Mijn inzendingen': 'Minu kaastööd',
+  'Nieuwe inzending': 'Uus kaastöö',
+  'Wijziging indienen': 'Esita muudatus',
+  'Goedgekeurd': 'Heaks kiidetud',
   'Momentopname: {items} onderdelen, {bytes} bytes':
       'Hetktõmmis: {items} üksust, {bytes} baiti',
   'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.':

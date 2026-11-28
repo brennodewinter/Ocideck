@@ -1566,6 +1566,16 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'De artikellink kon niet worden geopend.':
+      'Não foi possível abrir o link do artigo.',
+  'Gepubliceerd': 'Publicado',
+  'Geweigerd': 'Recusado',
+  'Je hebt nog geen inzendingen.': 'Ainda não submeteste nenhuma contribuição.',
+  'Meer laden': 'Carregar mais',
+  'Mijn inzendingen': 'As minhas contribuições',
+  'Nieuwe inzending': 'Nova contribuição',
+  'Wijziging indienen': 'Enviar uma alteração',
+  'Goedgekeurd': 'Aprovado',
   'Momentopname: {items} onderdelen, {bytes} bytes':
       'Snapshot: {items} itens, {bytes} bytes',
   'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.':

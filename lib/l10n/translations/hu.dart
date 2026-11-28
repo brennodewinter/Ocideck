@@ -1542,6 +1542,16 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'De artikellink kon niet worden geopend.':
+      'A cikk hivatkozását nem sikerült megnyitni.',
+  'Gepubliceerd': 'Közzétéve',
+  'Geweigerd': 'Elutasítva',
+  'Je hebt nog geen inzendingen.': 'Még nem küldött be semmit.',
+  'Meer laden': 'Továbbiak betöltése',
+  'Mijn inzendingen': 'Beküldéseim',
+  'Nieuwe inzending': 'Új beküldés',
+  'Wijziging indienen': 'Módosítás beküldése',
+  'Goedgekeurd': 'Jóváhagyva',
   'Momentopname: {items} onderdelen, {bytes} bytes':
       'Pillanatkép: {items} elem, {bytes} bájt',
   'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.':

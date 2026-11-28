@@ -1547,6 +1547,16 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'De artikellink kon niet worden geopend.':
+      'Nepavyko atidaryti straipsnio nuorodos.',
+  'Gepubliceerd': 'Paskelbta',
+  'Geweigerd': 'Atmesta',
+  'Je hebt nog geen inzendingen.': 'Dar nepateikėte nė vieno įrašo.',
+  'Meer laden': 'Įkelti daugiau',
+  'Mijn inzendingen': 'Mano pateikti įrašai',
+  'Nieuwe inzending': 'Naujas įrašas',
+  'Wijziging indienen': 'Pateikti pakeitimą',
+  'Goedgekeurd': 'Patvirtinta',
   'Momentopname: {items} onderdelen, {bytes} bytes':
       'Momentinė kopija: {items} elementai, {bytes} baitai',
   'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.':

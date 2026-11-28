@@ -1541,6 +1541,16 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'De artikellink kon niet worden geopend.':
+      'Linket til artiklen kunne ikke åbnes.',
+  'Gepubliceerd': 'Udgivet',
+  'Geweigerd': 'Afvist',
+  'Je hebt nog geen inzendingen.': 'Du har endnu ingen indsendelser.',
+  'Meer laden': 'Indlæs flere',
+  'Mijn inzendingen': 'Mine indsendelser',
+  'Nieuwe inzending': 'Ny indsendelse',
+  'Wijziging indienen': 'Indsend ændring',
+  'Goedgekeurd': 'Godkendt',
   'Momentopname: {items} onderdelen, {bytes} bytes':
       'Øjebliksbillede: {items} elementer, {bytes} bytes',
   'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.':

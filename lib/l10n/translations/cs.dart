@@ -1541,6 +1541,16 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'De artikellink kon niet worden geopend.':
+      'Odkaz na článek se nepodařilo otevřít.',
+  'Gepubliceerd': 'Zveřejněno',
+  'Geweigerd': 'Zamítnuto',
+  'Je hebt nog geen inzendingen.': 'Zatím jste nic neodeslali.',
+  'Meer laden': 'Načíst další',
+  'Mijn inzendingen': 'Moje příspěvky',
+  'Nieuwe inzending': 'Nový příspěvek',
+  'Wijziging indienen': 'Odeslat úpravu',
+  'Goedgekeurd': 'Schváleno',
   'Momentopname: {items} onderdelen, {bytes} bytes':
       'Snímek: {items} položek, {bytes} bajtů',
   'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.':

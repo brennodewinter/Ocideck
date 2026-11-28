@@ -1544,6 +1544,16 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'De artikellink kon niet worden geopend.':
+      'Odkaz na článok sa nepodarilo otvoriť.',
+  'Gepubliceerd': 'Zverejnené',
+  'Geweigerd': 'Zamietnuté',
+  'Je hebt nog geen inzendingen.': 'Zatiaľ ste nič neodoslali.',
+  'Meer laden': 'Načítať ďalšie',
+  'Mijn inzendingen': 'Moje príspevky',
+  'Nieuwe inzending': 'Nový príspevok',
+  'Wijziging indienen': 'Odoslať úpravu',
+  'Goedgekeurd': 'Schválené',
   'Momentopname: {items} onderdelen, {bytes} bytes':
       'Snímka: {items} položiek, {bytes} bajtov',
   'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.':

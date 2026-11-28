@@ -613,6 +613,16 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'De artikellink kon niet worden geopend.':
+      'De artikellink koe net iepene wurde.',
+  'Gepubliceerd': 'Publisearre',
+  'Geweigerd': 'Ofwiisd',
+  'Je hebt nog geen inzendingen.': 'Do hast noch neat ynstjoerd.',
+  'Meer laden': 'Mear lade',
+  'Mijn inzendingen': 'Myn ynstjoeringen',
+  'Nieuwe inzending': 'Nije ynstjoering',
+  'Wijziging indienen': 'Wiziging ynstjoere',
+  'Goedgekeurd': 'Goedkard',
   'Momentopname: {items} onderdelen, {bytes} bytes':
       'Momintopname: {items} ûnderdielen, {bytes} bytes',
   'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.':

@@ -766,6 +766,16 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'De artikellink kon niet worden geopend.':
+      'The article link could not be opened.',
+  'Gepubliceerd': 'Published',
+  'Geweigerd': 'Rejected',
+  'Je hebt nog geen inzendingen.': 'You have no submissions yet.',
+  'Meer laden': 'Load more',
+  'Mijn inzendingen': 'My submissions',
+  'Nieuwe inzending': 'New submission',
+  'Wijziging indienen': 'Submit a revision',
+  'Goedgekeurd': 'Approved',
   'Momentopname: {items} onderdelen, {bytes} bytes':
       'Snapshot: {items} items, {bytes} bytes',
   'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.':

@@ -1541,6 +1541,16 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'De artikellink kon niet worden geopend.':
+      'Artikkelin linkkiä ei voitu avata.',
+  'Gepubliceerd': 'Julkaistu',
+  'Geweigerd': 'Hylätty',
+  'Je hebt nog geen inzendingen.': 'Et ole vielä lähettänyt kirjoituksia.',
+  'Meer laden': 'Lataa lisää',
+  'Mijn inzendingen': 'Omat lähetykset',
+  'Nieuwe inzending': 'Uusi lähetys',
+  'Wijziging indienen': 'Lähetä muutos',
+  'Goedgekeurd': 'Hyväksytty',
   'Momentopname: {items} onderdelen, {bytes} bytes':
       'Tilannekuva: {items} kohdetta, {bytes} tavua',
   'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.':

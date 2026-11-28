@@ -1557,6 +1557,16 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'De artikellink kon niet worden geopend.':
+      'Il-link tal-artiklu ma setax jinfetaħ.',
+  'Gepubliceerd': 'Ippubblikat',
+  'Geweigerd': 'Miċħud',
+  'Je hebt nog geen inzendingen.': 'Għad m’għandek ebda sottomissjoni.',
+  'Meer laden': 'Għabbi aktar',
+  'Mijn inzendingen': 'Is-sottomissjonijiet tiegħi',
+  'Nieuwe inzending': 'Sottomissjoni ġdida',
+  'Wijziging indienen': 'Ibgħat bidla',
+  'Goedgekeurd': 'Approvat',
   'Momentopname: {items} onderdelen, {bytes} bytes':
       'Kopja fissa: {items} elementi, {bytes} bytes',
   'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.':

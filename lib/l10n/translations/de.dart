@@ -612,6 +612,16 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'De artikellink kon niet worden geopend.':
+      'Der Artikellink konnte nicht geöffnet werden.',
+  'Gepubliceerd': 'Veröffentlicht',
+  'Geweigerd': 'Abgelehnt',
+  'Je hebt nog geen inzendingen.': 'Du hast noch keine Beiträge eingereicht.',
+  'Meer laden': 'Mehr laden',
+  'Mijn inzendingen': 'Meine Einreichungen',
+  'Nieuwe inzending': 'Neue Einreichung',
+  'Wijziging indienen': 'Änderung einreichen',
+  'Goedgekeurd': 'Freigegeben',
   'Momentopname: {items} onderdelen, {bytes} bytes':
       'Snapshot: {items} Elemente, {bytes} Bytes',
   'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.':

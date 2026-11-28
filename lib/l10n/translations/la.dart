@@ -1552,6 +1552,16 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'De artikellink kon niet worden geopend.':
+      'Nexus articuli aperiri non potuit.',
+  'Gepubliceerd': 'Publicatum',
+  'Geweigerd': 'Reiectum',
+  'Je hebt nog geen inzendingen.': 'Nihil adhuc misisti.',
+  'Meer laden': 'Plura onera',
+  'Mijn inzendingen': 'Quae misi',
+  'Nieuwe inzending': 'Novum opus',
+  'Wijziging indienen': 'Mutationem mitte',
+  'Goedgekeurd': 'Probatum',
   'Momentopname: {items} onderdelen, {bytes} bytes':
       'Exemplar fixum: {items} res, {bytes} octeti',
   'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.':

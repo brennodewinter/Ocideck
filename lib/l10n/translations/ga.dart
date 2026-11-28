@@ -1569,6 +1569,16 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'De artikellink kon niet worden geopend.':
+      'Níorbh fhéidir nasc an ailt a oscailt.',
+  'Gepubliceerd': 'Foilsithe',
+  'Geweigerd': 'Diúltaithe',
+  'Je hebt nog geen inzendingen.': 'Níl aon aighneachtaí déanta agat fós.',
+  'Meer laden': 'Lódáil tuilleadh',
+  'Mijn inzendingen': 'M’aighneachtaí',
+  'Nieuwe inzending': 'Aighneacht nua',
+  'Wijziging indienen': 'Cuir leasú isteach',
+  'Goedgekeurd': 'Ceadaithe',
   'Momentopname: {items} onderdelen, {bytes} bytes':
       'Léargas: {items} mír, {bytes} beart',
   'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.':

@@ -1537,6 +1537,15 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'De artikellink kon niet worden geopend.': 'Neizdevās atvērt raksta saiti.',
+  'Gepubliceerd': 'Publicēts',
+  'Geweigerd': 'Noraidīts',
+  'Je hebt nog geen inzendingen.': 'Jums vēl nav iesniegumu.',
+  'Meer laden': 'Ielādēt vairāk',
+  'Mijn inzendingen': 'Mani iesniegumi',
+  'Nieuwe inzending': 'Jauns iesniegums',
+  'Wijziging indienen': 'Iesniegt labojumu',
+  'Goedgekeurd': 'Apstiprināts',
   'Momentopname: {items} onderdelen, {bytes} bytes':
       'Momentuzņēmums: {items} vienumi, {bytes} baiti',
   'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.':

@@ -1541,6 +1541,16 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'De artikellink kon niet worden geopend.':
+      'Tautan artikel tidak dapat dibuka.',
+  'Gepubliceerd': 'Diterbitkan',
+  'Geweigerd': 'Ditolak',
+  'Je hebt nog geen inzendingen.': 'Anda belum memiliki kiriman.',
+  'Meer laden': 'Muat lebih banyak',
+  'Mijn inzendingen': 'Kiriman saya',
+  'Nieuwe inzending': 'Kiriman baru',
+  'Wijziging indienen': 'Kirim revisi',
+  'Goedgekeurd': 'Disetujui',
   'Momentopname: {items} onderdelen, {bytes} bytes':
       'Snapshot: {items} item, {bytes} byte',
   'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.':

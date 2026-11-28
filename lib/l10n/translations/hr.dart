@@ -1545,6 +1545,16 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'De artikellink kon niet worden geopend.':
+      'Poveznicu na članak nije bilo moguće otvoriti.',
+  'Gepubliceerd': 'Objavljeno',
+  'Geweigerd': 'Odbijeno',
+  'Je hebt nog geen inzendingen.': 'Još nemate poslanih priloga.',
+  'Meer laden': 'Učitaj više',
+  'Mijn inzendingen': 'Moji prilozi',
+  'Nieuwe inzending': 'Novi prilog',
+  'Wijziging indienen': 'Pošalji izmjenu',
+  'Goedgekeurd': 'Odobreno',
   'Momentopname: {items} onderdelen, {bytes} bytes':
       'Snimka: {items} stavki, {bytes} bajtova',
   'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.':

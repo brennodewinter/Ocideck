@@ -1555,6 +1555,16 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'De artikellink kon niet worden geopend.':
+      'Linkul articolului nu a putut fi deschis.',
+  'Gepubliceerd': 'Publicat',
+  'Geweigerd': 'Respins',
+  'Je hebt nog geen inzendingen.': 'Nu ați trimis încă nicio contribuție.',
+  'Meer laden': 'Încarcă mai multe',
+  'Mijn inzendingen': 'Contribuțiile mele',
+  'Nieuwe inzending': 'Contribuție nouă',
+  'Wijziging indienen': 'Trimite o modificare',
+  'Goedgekeurd': 'Aprobat',
   'Momentopname: {items} onderdelen, {bytes} bytes':
       'Instantaneu: {items} elemente, {bytes} octeți',
   'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.':

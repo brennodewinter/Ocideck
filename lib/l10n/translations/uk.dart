@@ -1555,6 +1555,16 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'De artikellink kon niet worden geopend.':
+      'Не вдалося відкрити посилання на статтю.',
+  'Gepubliceerd': 'Опубліковано',
+  'Geweigerd': 'Відхилено',
+  'Je hebt nog geen inzendingen.': 'У вас ще немає поданих матеріалів.',
+  'Meer laden': 'Завантажити ще',
+  'Mijn inzendingen': 'Мої матеріали',
+  'Nieuwe inzending': 'Новий матеріал',
+  'Wijziging indienen': 'Подати зміну',
+  'Goedgekeurd': 'Схвалено',
   'Momentopname: {items} onderdelen, {bytes} bytes':
       'Знімок: {items} елементів, {bytes} байтів',
   'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.':

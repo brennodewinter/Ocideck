@@ -1541,6 +1541,16 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'De artikellink kon niet worden geopend.':
+      'De Artikellink het sich nöd la uftue.',
+  'Gepubliceerd': 'Veröffentlecht',
+  'Geweigerd': 'Abglehnt',
+  'Je hebt nog geen inzendingen.': 'Du häsch no nüt iigreicht.',
+  'Meer laden': 'Meh lade',
+  'Mijn inzendingen': 'Mini Iiriichige',
+  'Nieuwe inzending': 'Neui Iiriichig',
+  'Wijziging indienen': 'Änderig iiriiche',
+  'Goedgekeurd': 'Guetgheisse',
   'Momentopname: {items} onderdelen, {bytes} bytes':
       'Momentufnahm: {items} Elemänt, {bytes} Bytes',
   'Op web beheert de server de sessiecookie. Niet-verstuurde voortgang blijft alleen in dit tabblad.':
