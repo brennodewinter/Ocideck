@@ -338,8 +338,10 @@ def exercise_presentation(driver, app, evidence):
     def visible_text(rect, name):
         frame = driver.capture(rect)
         frame.save(evidence / 'last-presenter.png')
-        words = {row['text'].strip().lower() for row in recognized(frame)}
-        return name in words
+        # Tesseract keeps punctuation on words such as the command hint
+        # 'commando…' and the opened tab's 'dualprobe.md' label.
+        return any(name in re.findall(r'[a-z0-9]+', row['text'].casefold())
+                   for row in recognized(frame))
 
     def open_deck():
         state = driver.window(app.pid)
