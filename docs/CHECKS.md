@@ -1197,7 +1197,8 @@ failure path. The run should fail on the labelled negative-control warning.
 - **Automatic lanes:** `.forgejo/workflows/app-journey.yml` runs one journey per
   platform for PRs to main and nightly at 03:27 UTC. Linux uses the pinned build
   image and an ordinary desktop user under Xvfb with a D-Bus session; macOS uses the registered Mac
-  host and its pinned semantics-build wrapper. Each macOS job copies the SDK
+  host and its pinned semantics-build wrapper. On Apple Silicon the journey
+  builds an arm64 app for that host. Each macOS job copies the SDK
   into its own temporary directory (copy-on-write on APFS), restores the known
   backport files from the pinned Git objects there, and removes only the copied
   SDK lock. Cache/worktree containment and a clean SDK diff are checked. The

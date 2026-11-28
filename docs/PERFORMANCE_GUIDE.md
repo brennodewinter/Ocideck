@@ -318,6 +318,14 @@ each step before the first frame took. That is observation, not a budget: it
 tells you where a user's machine stalled, and the fix still needs a measurement
 here.
 
+The native file journey also uses this timer. It starts the monitor at the
+first real frame, reads the isolated app log after each clean exit and fails
+if any stall warning occurs during the journey. The saved warning includes
+any work label logged by the operation. Labels belong at the shared export,
+scan, conversion, indexing and open boundaries so their callers inherit them.
+Use `OCIDECK_APP_JOURNEY_INJECT_STALL=1` with `make test-app-journey` to check
+that a known one-second blockage fails the journey.
+
 ## Release size budgets
 
 The [size limits](../tool/release_size_limits.json) bound the uncompressed

@@ -118,6 +118,9 @@ jobs:
           python3 -m unittest discover -s test -p app_journey_test.py
           full_arg=''
           if [ "$FULL" = true ]; then full_arg=--full; fi
+          # The GUI probe runs on this host, so an Apple Silicon runner only
+          # needs arm64. Universal macOS distribution has its own build lane.
+          if [ "$(uname -m)" = arm64 ]; then export FLUTTER_MACOS_ARM64_ONLY=true; fi
           scripts/gate_lock.sh python3 tool/app_journey.py $full_arg
       - name: Bewijs bewaren, ook als een scenario faalt
         if: always()
