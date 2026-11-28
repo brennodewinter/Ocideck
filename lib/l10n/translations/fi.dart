@@ -1541,6 +1541,8 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Dit wordt revisie {n} van je inzending op {server}. Tot publicatie kun je via Mijn inzendingen een wijziging indienen.':
+      'Tämä on lähetyksesi versio {n} palvelussa {server}. Voit lähettää muutoksen Omat lähetykset -sivulta julkaisuun asti.',
   'De artikellink kon niet worden geopend.':
       'Artikkelin linkkiä ei voitu avata.',
   'Gepubliceerd': 'Julkaistu',

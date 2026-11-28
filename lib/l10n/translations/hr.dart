@@ -1545,6 +1545,8 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Dit wordt revisie {n} van je inzending op {server}. Tot publicatie kun je via Mijn inzendingen een wijziging indienen.':
+      'Ovo će biti revizija {n} vašeg priloga na {server}. Do objave možete poslati izmjenu u Mojim prilozima.',
   'De artikellink kon niet worden geopend.':
       'Poveznicu na članak nije bilo moguće otvoriti.',
   'Gepubliceerd': 'Objavljeno',

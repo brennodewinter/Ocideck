@@ -1537,6 +1537,8 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Dit wordt revisie {n} van je inzending op {server}. Tot publicatie kun je via Mijn inzendingen een wijziging indienen.':
+      'Šī būs jūsu iesnieguma {n}. versija vietnē {server}. Līdz publicēšanai varat iesniegt labojumu sadaļā Mani iesniegumi.',
   'De artikellink kon niet worden geopend.': 'Neizdevās atvērt raksta saiti.',
   'Gepubliceerd': 'Publicēts',
   'Geweigerd': 'Noraidīts',

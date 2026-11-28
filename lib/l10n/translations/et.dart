@@ -1533,6 +1533,8 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Dit wordt revisie {n} van je inzending op {server}. Tot publicatie kun je via Mijn inzendingen een wijziging indienen.':
+      'Sellest saab sinu kaastöö versioon {n} serveris {server}. Avaldamiseni saad muudatusi esitada jaotises Minu kaastööd.',
   'De artikellink kon niet worden geopend.':
       'Artikli linki ei õnnestunud avada.',
   'Gepubliceerd': 'Avaldatud',

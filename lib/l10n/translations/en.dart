@@ -766,6 +766,8 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Dit wordt revisie {n} van je inzending op {server}. Tot publicatie kun je via Mijn inzendingen een wijziging indienen.':
+      'This will be revision {n} of your submission on {server}. Until publication, you can submit changes through My submissions.',
   'De artikellink kon niet worden geopend.':
       'The article link could not be opened.',
   'Gepubliceerd': 'Published',

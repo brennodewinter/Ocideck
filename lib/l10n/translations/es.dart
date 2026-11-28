@@ -610,6 +610,8 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Dit wordt revisie {n} van je inzending op {server}. Tot publicatie kun je via Mijn inzendingen een wijziging indienen.':
+      'Esta será la revisión {n} de tu envío en {server}. Hasta que se publique, puedes enviar cambios desde Mis envíos.',
   'De artikellink kon niet worden geopend.':
       'No se pudo abrir el enlace al artículo.',
   'Gepubliceerd': 'Publicado',

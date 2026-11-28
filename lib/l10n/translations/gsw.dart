@@ -1541,6 +1541,8 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Dit wordt revisie {n} van je inzending op {server}. Tot publicatie kun je via Mijn inzendingen een wijziging indienen.':
+      'Das wird Version {n} vo diner Iiriichig uf {server}. Bis zur Veröffentlichig chasch über Mini Iiriichige e Änderig iiriiche.',
   'De artikellink kon niet worden geopend.':
       'De Artikellink het sich nöd la uftue.',
   'Gepubliceerd': 'Veröffentlecht',

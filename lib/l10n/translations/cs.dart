@@ -1541,6 +1541,8 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Dit wordt revisie {n} van je inzending op {server}. Tot publicatie kun je via Mijn inzendingen een wijziging indienen.':
+      'Toto bude revize {n} vašeho příspěvku na {server}. Do zveřejnění můžete odeslat úpravu přes Moje příspěvky.',
   'De artikellink kon niet worden geopend.':
       'Odkaz na článek se nepodařilo otevřít.',
   'Gepubliceerd': 'Zveřejněno',

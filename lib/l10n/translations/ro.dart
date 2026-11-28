@@ -1555,6 +1555,8 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Dit wordt revisie {n} van je inzending op {server}. Tot publicatie kun je via Mijn inzendingen een wijziging indienen.':
+      'Aceasta va fi versiunea {n} a contribuției dvs. pe {server}. Până la publicare puteți trimite o modificare din Contribuțiile mele.',
   'De artikellink kon niet worden geopend.':
       'Linkul articolului nu a putut fi deschis.',
   'Gepubliceerd': 'Publicat',

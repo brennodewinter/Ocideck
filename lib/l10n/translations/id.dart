@@ -1541,6 +1541,8 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Dit wordt revisie {n} van je inzending op {server}. Tot publicatie kun je via Mijn inzendingen een wijziging indienen.':
+      'Ini akan menjadi revisi {n} dari kiriman Anda di {server}. Hingga diterbitkan, Anda dapat mengirim revisi melalui Kiriman saya.',
   'De artikellink kon niet worden geopend.':
       'Tautan artikel tidak dapat dibuka.',
   'Gepubliceerd': 'Diterbitkan',

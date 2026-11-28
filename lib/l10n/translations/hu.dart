@@ -1542,6 +1542,8 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Dit wordt revisie {n} van je inzending op {server}. Tot publicatie kun je via Mijn inzendingen een wijziging indienen.':
+      'Ez lesz a beküldés {n}. változata a következő helyen: {server}. A közzétételig a Beküldéseim oldalon adhat be módosítást.',
   'De artikellink kon niet worden geopend.':
       'A cikk hivatkozását nem sikerült megnyitni.',
   'Gepubliceerd': 'Közzétéve',

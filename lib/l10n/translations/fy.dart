@@ -613,6 +613,8 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Dit wordt revisie {n} van je inzending op {server}. Tot publicatie kun je via Mijn inzendingen een wijziging indienen.':
+      'Dit wurdt revyzje {n} fan dyn ynstjoering op {server}. Oant publikaasje kinst fia Myn ynstjoeringen in wiziging ynstjoere.',
   'De artikellink kon niet worden geopend.':
       'De artikellink koe net iepene wurde.',
   'Gepubliceerd': 'Publisearre',

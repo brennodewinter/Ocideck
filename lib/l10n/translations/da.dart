@@ -1541,6 +1541,8 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Dit wordt revisie {n} van je inzending op {server}. Tot publicatie kun je via Mijn inzendingen een wijziging indienen.':
+      'Dette bliver revision {n} af din indsendelse på {server}. Indtil udgivelsen kan du indsende en ændring via Mine indsendelser.',
   'De artikellink kon niet worden geopend.':
       'Linket til artiklen kunne ikke åbnes.',
   'Gepubliceerd': 'Udgivet',

@@ -1541,6 +1541,8 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Dit wordt revisie {n} van je inzending op {server}. Tot publicatie kun je via Mijn inzendingen een wijziging indienen.':
+      'To bo različica {n} vašega prispevka na {server}. Do objave lahko spremembo oddate v razdelku Moji prispevki.',
   'De artikellink kon niet worden geopend.':
       'Povezave do članka ni bilo mogoče odpreti.',
   'Gepubliceerd': 'Objavljeno',

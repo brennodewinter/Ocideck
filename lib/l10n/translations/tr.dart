@@ -2397,6 +2397,8 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Dit wordt revisie {n} van je inzending op {server}. Tot publicatie kun je via Mijn inzendingen een wijziging indienen.':
+      'Bu, {server} adresindeki gönderinizin {n}. sürümü olacak. Yayımlanana kadar Gönderilerim üzerinden düzeltme gönderebilirsiniz.',
   'De artikellink kon niet worden geopend.': 'Makale bağlantısı açılamadı.',
   'Gepubliceerd': 'Yayımlandı',
   'Geweigerd': 'Reddedildi',

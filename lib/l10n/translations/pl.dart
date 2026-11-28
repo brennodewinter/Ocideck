@@ -1551,6 +1551,8 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Dit wordt revisie {n} van je inzending op {server}. Tot publicatie kun je via Mijn inzendingen een wijziging indienen.':
+      'To będzie wersja {n} Twojego zgłoszenia w {server}. Do publikacji możesz przesłać poprawkę w sekcji Moje zgłoszenia.',
   'De artikellink kon niet worden geopend.':
       'Nie udało się otworzyć odnośnika do artykułu.',
   'Gepubliceerd': 'Opublikowano',

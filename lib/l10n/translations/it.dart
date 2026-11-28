@@ -611,6 +611,8 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Dit wordt revisie {n} van je inzending op {server}. Tot publicatie kun je via Mijn inzendingen een wijziging indienen.':
+      'Questa sarà la revisione {n} del tuo contributo su {server}. Fino alla pubblicazione puoi inviare modifiche da I miei contributi.',
   'De artikellink kon niet worden geopend.':
       'Non è stato possibile aprire il link all’articolo.',
   'Gepubliceerd': 'Pubblicato',

@@ -1557,6 +1557,8 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Dit wordt revisie {n} van je inzending op {server}. Tot publicatie kun je via Mijn inzendingen een wijziging indienen.':
+      'Din se tkun il-verżjoni {n} tas-sottomissjoni tiegħek fuq {server}. Sa ma tiġi ppubblikata tista’ tibgħat bidla minn Is-sottomissjonijiet tiegħi.',
   'De artikellink kon niet worden geopend.':
       'Il-link tal-artiklu ma setax jinfetaħ.',
   'Gepubliceerd': 'Ippubblikat',

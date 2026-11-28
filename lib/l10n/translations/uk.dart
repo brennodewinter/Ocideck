@@ -1555,6 +1555,8 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Dit wordt revisie {n} van je inzending op {server}. Tot publicatie kun je via Mijn inzendingen een wijziging indienen.':
+      'Це буде версія {n} вашого матеріалу на {server}. До публікації ви можете подати зміни в розділі Мої матеріали.',
   'De artikellink kon niet worden geopend.':
       'Не вдалося відкрити посилання на статтю.',
   'Gepubliceerd': 'Опубліковано',

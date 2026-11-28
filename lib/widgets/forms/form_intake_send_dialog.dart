@@ -444,10 +444,13 @@ class _FormIntakeSendDialogState extends State<FormIntakeSendDialog> {
       ],
       _Step.confirm => [
         Text(
-          l10n
-              .d(
-                'Dit wordt revisie {n} van je inzending op {server}. Na het insturen kun je hem niet meer aanpassen — een fout herstel je met een nieuwe correctieronde.',
-              )
+          (_form?.editorial == true
+                  ? l10n.d(
+                      'Dit wordt revisie {n} van je inzending op {server}. Tot publicatie kun je via Mijn inzendingen een wijziging indienen.',
+                    )
+                  : l10n.d(
+                      'Dit wordt revisie {n} van je inzending op {server}. Na het insturen kun je hem niet meer aanpassen — een fout herstel je met een nieuwe correctieronde.',
+                    ))
               .replaceAll('{n}', '${(_submission?.revision ?? 0) + 1}')
               .replaceAll('{server}', _context.baseUrl),
         ),

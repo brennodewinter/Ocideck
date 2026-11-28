@@ -1569,6 +1569,8 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Dit wordt revisie {n} van je inzending op {server}. Tot publicatie kun je via Mijn inzendingen een wijziging indienen.':
+      'Is é seo leagan {n} de d’aighneacht ar {server}. Go dtí go bhfoilseofar í, is féidir leasú a chur isteach trí M’aighneachtaí.',
   'De artikellink kon niet worden geopend.':
       'Níorbh fhéidir nasc an ailt a oscailt.',
   'Gepubliceerd': 'Foilsithe',

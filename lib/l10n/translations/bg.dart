@@ -1560,6 +1560,8 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Dit wordt revisie {n} van je inzending op {server}. Tot publicatie kun je via Mijn inzendingen een wijziging indienen.':
+      'Това ще е версия {n} на вашия материал в {server}. До публикуването можете да подадете промяна през Моите материали.',
   'De artikellink kon niet worden geopend.':
       'Връзката към статията не можа да бъде отворена.',
   'Gepubliceerd': 'Публикувано',

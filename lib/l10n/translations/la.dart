@@ -1552,6 +1552,8 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Dit wordt revisie {n} van je inzending op {server}. Tot publicatie kun je via Mijn inzendingen een wijziging indienen.':
+      'Haec erit versio {n} operis tui apud {server}. Ante publicationem mutationem mittere potes per Quae misi.',
   'De artikellink kon niet worden geopend.':
       'Nexus articuli aperiri non potuit.',
   'Gepubliceerd': 'Publicatum',

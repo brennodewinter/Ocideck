@@ -1564,6 +1564,8 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Dit wordt revisie {n} van je inzending op {server}. Tot publicatie kun je via Mijn inzendingen een wijziging indienen.':
+      'Αυτή θα είναι η έκδοση {n} της υποβολής σας στο {server}. Μέχρι τη δημοσίευση μπορείτε να υποβάλετε αλλαγή από τις υποβολές σας.',
   'De artikellink kon niet worden geopend.':
       'Δεν ήταν δυνατό να ανοίξει ο σύνδεσμος του άρθρου.',
   'Gepubliceerd': 'Δημοσιεύτηκε',

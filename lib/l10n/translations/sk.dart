@@ -1544,6 +1544,8 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Dit wordt revisie {n} van je inzending op {server}. Tot publicatie kun je via Mijn inzendingen een wijziging indienen.':
+      'Toto bude revízia {n} vášho príspevku na {server}. Do zverejnenia môžete odoslať úpravu cez Moje príspevky.',
   'De artikellink kon niet worden geopend.':
       'Odkaz na článok sa nepodarilo otvoriť.',
   'Gepubliceerd': 'Zverejnené',

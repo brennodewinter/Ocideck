@@ -612,6 +612,8 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Dit wordt revisie {n} van je inzending op {server}. Tot publicatie kun je via Mijn inzendingen een wijziging indienen.':
+      'Esaki ta bira revision {n} di bo entrega na {server}. Te publikashon bo por entregá un kambio via Mi entreganan.',
   'De artikellink kon niet worden geopend.':
       'No por a habri e link di e artíkulo.',
   'Gepubliceerd': 'Publiká',

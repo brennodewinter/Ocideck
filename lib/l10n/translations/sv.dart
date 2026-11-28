@@ -1540,6 +1540,8 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Dit wordt revisie {n} van je inzending op {server}. Tot publicatie kun je via Mijn inzendingen een wijziging indienen.':
+      'Det här blir version {n} av ditt bidrag på {server}. Fram till publiceringen kan du skicka in ändringar via Mina bidrag.',
   'De artikellink kon niet worden geopend.':
       'Det gick inte att öppna länken till artikeln.',
   'Gepubliceerd': 'Publicerat',

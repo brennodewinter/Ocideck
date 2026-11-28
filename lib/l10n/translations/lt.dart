@@ -1547,6 +1547,8 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Dit wordt revisie {n} van je inzending op {server}. Tot publicatie kun je via Mijn inzendingen een wijziging indienen.':
+      'Tai bus jūsų įrašo {n} versija serveryje {server}. Iki paskelbimo galite pateikti pataisymą skiltyje Mano pateikti įrašai.',
   'De artikellink kon niet worden geopend.':
       'Nepavyko atidaryti straipsnio nuorodos.',
   'Gepubliceerd': 'Paskelbta',
