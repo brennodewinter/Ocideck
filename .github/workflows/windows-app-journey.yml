@@ -56,7 +56,7 @@ jobs:
       - name: Korte PR-reis of volledige nachtreis
         shell: bash
         env:
-          FULL: ${{ github.event_name == 'schedule' || inputs.full }}
+          FULL: "true"
         run: |
           set -eu
           python -m unittest discover -s test -p app_journey_test.py
