@@ -335,17 +335,20 @@ def exercise_presentation(driver, app, evidence):
         rows.append({'step': step, 'windows': windows, 'outputs': outputs})
         report.write_text(json.dumps(rows, indent=2) + '\n')
 
-    def visible_text(rect, name):
+    def text_position(rect, name):
         frame = driver.capture(rect)
         frame.save(evidence / 'last-presenter.png')
         # Tesseract keeps punctuation on words such as the command hint
         # 'commando…' and the opened tab's 'dualprobe.md' label.
-        return any(name in re.findall(r'[a-z0-9]+', row['text'].casefold())
-                   for row in recognized(frame))
+        for row in recognized(frame):
+            if name in re.findall(r'[a-z0-9]+', row['text'].casefold()):
+                return (rect.x + int(row['left']) + int(row['width']) // 2,
+                        rect.y + int(row['top']) + int(row['height']) // 2)
+        return None
 
     def open_deck():
         state = driver.window(app.pid)
-        if state and state[2] == 'HEADLESS-1' and visible_text(state[1], 'dualprobe'):
+        if state and state[2] == 'HEADLESS-1' and text_position(state[1], 'dualprobe'):
             return state
         return None
 
@@ -354,10 +357,11 @@ def exercise_presentation(driver, app, evidence):
     def start():
         driver.msg(f'[con_id={main}]', 'focus')
         run('wtype', '-M', 'ctrl', '-k', 'k', '-m', 'ctrl')
-        wait_for('command palette', lambda: visible_text(rect, 'commando'), app)
-        run('wtype', 'F5')
-        wait_for('Presenteren command', lambda: visible_text(rect, 'presenteren'), app)
-        run('wtype', '-k', 'Return')
+        wait_for('command palette', lambda: text_position(rect, 'commando'), app)
+        command = wait_for('Presenteren command',
+                           lambda: text_position(rect, 'presenteren'), app)
+        driver.motion(*command)
+        driver.click()
 
     def separate():
         windows = driver.windows(app.pid)
@@ -369,8 +373,16 @@ def exercise_presentation(driver, app, evidence):
             return windows
         return None
 
+    def wait_for_placement(step):
+        try:
+            note(step, wait_for(step, separate, app))
+        except RuntimeError:
+            note(f'{step}-failed', driver.windows(app.pid))
+            driver.capture(rect).save(evidence / 'presentation-placement-failure.png')
+            raise
+
     start()
-    note('started-on-separate-outputs', wait_for('separate presentation outputs', separate, app))
+    wait_for_placement('started-on-separate-outputs')
     driver.msg('output', 'HEADLESS-2', 'disable')
 
     def removed():
@@ -400,7 +412,7 @@ def exercise_presentation(driver, app, evidence):
     finish()
     note('presentation-ended', driver.windows(app.pid))
     start()
-    note('presentation-restarted', wait_for('reconnected audience placement', separate, app))
+    wait_for_placement('presentation-restarted')
     finish()
     note('final-presentation-ended', driver.windows(app.pid))
 
