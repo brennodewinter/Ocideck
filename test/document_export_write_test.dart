@@ -72,6 +72,69 @@ void main() {
     markdownService: MarkdownService(),
   );
 
+  for (final format in [
+    DocumentExportFormat.pdf,
+    DocumentExportFormat.docx,
+    DocumentExportFormat.odt,
+    DocumentExportFormat.epub,
+  ]) {
+    test('${format.name} document export scales with the source', () async {
+      final renderer = MarpHtmlService(loadAsset: _diskLoader);
+      var run = 0;
+      Future<int> export(int sections) async {
+        final source = [
+          for (var i = 0; i < sections; i++)
+            '## Workshop report $i\n\n'
+                'The author writes a paragraph to review with the team. '
+                'This section has an action and a date for the next review.\n\n'
+                '| Task | Result |\n| --- | --- |\n| Review | Confirmed |',
+        ].join('\n\n');
+        final watch = Stopwatch()..start();
+        final bundle = await buildDocumentExportBundle(
+          source,
+          projectPath: null,
+          profile: PrivacyExportProfile.full,
+          ownIdentity: OwnIdentity.empty,
+          regions: defaultPrivacyRegions,
+          disabledRules: const {},
+          markdownService: MarkdownService(),
+          title: 'Workshop report',
+        );
+        final path = p.join(temp.path, 'document-${run++}.${format.name}');
+        final result = await writeDocumentExport(
+          bundle,
+          format,
+          html: renderer,
+          enforcementPolicy: const ClassificationEnforcementPolicy(),
+          outputPath: path,
+        );
+        expect(result, isA<DocumentExportWritten>());
+        expect(File(path).lengthSync(), greaterThan(0));
+        return watch.elapsedMicroseconds;
+      }
+
+      await export(4);
+      Future<int> twoSmall() async => await export(40) + await export(40);
+      final ratios = <double>[];
+      final largeSamples = <int>[];
+      for (var i = 0; i < 5; i++) {
+        final first = await (i.isEven ? twoSmall() : export(80));
+        final second = await (i.isEven ? export(80) : twoSmall());
+        ratios.add(i.isEven ? second / first : first / second);
+        largeSamples.add(i.isEven ? second : first);
+      }
+      ratios.sort();
+      largeSamples.sort();
+      printOnFailure('${format.name} export scale ratios: $ratios');
+      expect(ratios[2], lessThan(1.6));
+      if (Platform.environment['OCIDECK_EXPORT_TIMINGS'] == '1') {
+        stdout.writeln(
+          '${format.name.toUpperCase()}_DOC_80_MS=${largeSamples[2] ~/ 1000}',
+        );
+      }
+    }, tags: 'benchmark');
+  }
+
   test('md-export schrijft de geprojecteerde platte body', () async {
     await withBundle((bundle) async {
       final out = p.join(temp.path, 'rapport.md');

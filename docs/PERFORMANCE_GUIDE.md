@@ -284,12 +284,29 @@ A single small test (`flutter test test/tlp_test.dart`, 15 cases) completes in
 **~4.7 s** wall-clock — dominated by the Flutter test harness warm-up, not the
 tests themselves.
 
-**Still missing, and worth saying so:** there is no measured wall-clock for a
-PDF export of a large deck, which is the figure a user actually feels.
-`test/large_deck_performance_test.dart` covers serialise/parse and the relative
-local-save regression above — not export or UI latency. There is no broad
-automated throughput suite in CI; profile a specific slowdown with Flutter
-DevTools rather than treating the relative guard as a fixed budget.
+**Export timing, measured 2026-11-28.** The benchmark lane measures the
+production PDF rasterizer and PDF writer, and each document writer with
+production projection and filesystem output. The laptop was an ARM64
+Mac15,7 with 18 GiB RAM, macOS 27.3 and Flutter 3.50.0. These are observations
+from that run.
+
+| Fixture | Wall-clock |
+| --- | ---: |
+| Presentation PDF, 150 text slides at 1920 px | 13.45 s |
+| Document PDF, 80 sections with headings and tables | 200 ms |
+| Document DOCX, same fixture | 74 ms |
+| Document ODT, same fixture | 70 ms |
+| Document ePub, same fixture | 79 ms |
+
+The isolated gate uses the median ratio between one export and two half-size
+exports, with alternating run order. It uses 640 px for the slide scale
+comparison and the production resolution for the separate timing sample.
+The presentation fixture uses text and bullets. A photo-heavy deck has
+additional decode costs.
+
+```sh
+OCIDECK_EXPORT_TIMINGS=1 flutter test --concurrency=1 --tags benchmark test/slide_rasterizer_test.dart test/document_export_write_test.dart
+```
 
 What a release build does record since #2618 is **freezes in the field**: the
 desktop log file gets one line whenever the UI isolate was unreachable for more

@@ -11,6 +11,7 @@ import 'package:ocideck/models/document_signature.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/models/timeline.dart';
+import 'package:ocideck/services/export_service.dart';
 import 'package:ocideck/services/mermaid_render_service.dart';
 import 'package:ocideck/services/privacy/privacy_projection.dart';
 import 'package:ocideck/services/slide_rasterizer.dart';
@@ -95,6 +96,7 @@ Future<List<Uint8List>> _rasterize(
   bool Function()? isCancelled,
   int maxExportBytes = kMaxRasterExportBytes,
   Duration frameTimeout = SlideRasterizer.frameTimeout,
+  int framePumps = 900,
 }) async {
   final context = await _hostContext(tester);
   final audience = PrivacyProjection.forAudience(deck);
@@ -117,7 +119,7 @@ Future<List<Uint8List>> _rasterize(
         onError: (Object error) => failure = error,
       ),
     );
-    for (var i = 0; i < 900 && result == null && failure == null; i++) {
+    for (var i = 0; i < framePumps && result == null && failure == null; i++) {
       await tester.pump(const Duration(milliseconds: 16));
       await Future<void>.delayed(const Duration(milliseconds: 1));
     }
@@ -216,6 +218,72 @@ int _distinctColours(Uint8List rgba) {
 }
 
 void main() {
+  testWidgets(
+    'PDF export cost grows with the slide count',
+    (tester) async {
+      final temp = Directory.systemTemp.createTempSync(
+        'slide-export-benchmark',
+      );
+      addTearDown(() => temp.deleteSync(recursive: true));
+      var run = 0;
+      Future<int> pdf(int count, int width) async {
+        final deck = Deck(
+          title: 'Slide export measurement',
+          slides: [
+            for (var i = 0; i < count; i++)
+              Slide.create(SlideType.bullets).copyWith(
+                title: 'Workshop page $i',
+                bullets: const [
+                  'Preparation',
+                  'Review findings',
+                  'Record actions',
+                ],
+              ),
+          ],
+        );
+        final watch = Stopwatch()..start();
+        final images = await _rasterize(
+          tester,
+          deck,
+          targetWidth: width,
+          framePumps: 24000,
+        );
+        expect(images, hasLength(count));
+        final output = await tester.runAsync(
+          () => ExportService().export(
+            '${temp.path}/deck-${run++}.md',
+            ExportFormat.pdf,
+            images,
+          ),
+        );
+        expect(output?.success, isTrue, reason: output?.error);
+        expect(File(output!.outputPath!).lengthSync(), greaterThan(0));
+        return watch.elapsedMicroseconds;
+      }
+
+      await pdf(4, 640);
+      Future<int> twoSmall() async => await pdf(32, 640) + await pdf(32, 640);
+      final ratios = <double>[];
+      for (var i = 0; i < 3; i++) {
+        final first = await (i.isEven ? twoSmall() : pdf(64, 640));
+        final second = await (i.isEven ? pdf(64, 640) : twoSmall());
+        ratios.add(i.isEven ? second / first : first / second);
+      }
+      ratios.sort();
+      printOnFailure('PDF scale ratios: $ratios');
+      expect(ratios[1], lessThan(1.6));
+
+      final elapsed = await pdf(150, 1920);
+      // Record a reproducible observation without a host-specific time limit.
+      printOnFailure('PDF 150 slides at 1920px: ${elapsed ~/ 1000} ms');
+      if (Platform.environment['OCIDECK_EXPORT_TIMINGS'] == '1') {
+        stdout.writeln('PDF_SLIDES_150_MS=${elapsed ~/ 1000}');
+      }
+    },
+    tags: 'benchmark',
+    timeout: const Timeout(Duration(minutes: 3)),
+  );
+
   testWidgets(
     'een export boven het totaalbudget wordt vooraf geweigerd (#1047)',
     (tester) async {
