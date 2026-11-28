@@ -130,8 +130,9 @@ records the result in the pull request. This is a maintainer agreement.
 Pawprint blocks direct pushes and enforces an up-to-date branch, with no
 required status checks. Its independent PR scan checks incoming commits for
 secrets. The full secret/SAST, static and web workflows remain available on
-demand. Visual checks on `main`, the nightly Linux suite, platform build jobs
-and candidate checks provide additional results. In the historical comparison
+demand. Advisory macOS visual comparisons run on repository PRs and `main`.
+The nightly Linux suite, platform build jobs and candidate checks provide
+additional results. In the historical comparison
 recorded in #790, the former per-PR gate took 22 minutes on the forge and
 2.5 minutes on the maintainer’s machine.
 

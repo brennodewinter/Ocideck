@@ -233,56 +233,27 @@ first, then set the ratchet.
 
 ## Measured figures
 
-These are measured on the current tree (not enforced limits), to set
-expectations for build size and test speed.
+### Codebase and bundled assets
 
-### Bundled asset sizes
-Measured 2026-07-22.
+This inventory counts tracked files in the working tree. Asset sizes are
+source bytes before bundling or compression. Run
+`dart tool/performance_inventory.dart --update` to refresh the table.
+`make check-dated-claims` flags any row that differs by more than 10%.
 
-| Asset group | Size |
-|---|---|
-| `assets/` total | **13 MB** — of which the two privacy lexicons are 2.0 MB *(measured 2026-07-22; this said 10 MB, from before the lexicons were bundled)* |
-| Vendored web-export JS/CSS (`assets/web_export/`) | **5.6 MB** |
-| — `mermaid.min.js` | 3.2 MB |
-| — `tex-svg.js` (MathJax) | 2.0 MB |
-| — `highlight.min.js` / `marked.min.js` / `purify.min.js` | 127 KB / 43 KB / 28 KB |
-| Bundled fonts (`assets/fonts/`) | **3.1 MB** |
-| Privacy lexicons (`assets/privacy/`) | **2.0 MB** |
-| Offline CWE catalog (`assets/cwe/cwe_full.json`) | ~237 KB |
-
-*(Corrected 2026-07-22: the total read 10 MB, from before the two privacy
-lexicons landed. It was 13 MB when this line was written, and the lexicons are
-now broken out so the next drift is visible rather than hidden in a total.)*
-
-Mermaid and MathJax dominate the web/HTML-export payload; they are only pulled in
-where a deck actually uses diagrams or math.
-
-### Codebase & test suite
-| Item | Value |
-|---|---|
-| `lib/` Dart files / lines | ~1 143 files, ~430 000 lines |
-| Test files | ~1 022 |
-| `test(` / `testWidgets(` cases | ~8 030 / ~2 030 |
-
-Counted on 2026-08-30. These grow with every feature; treat them as an order of
-magnitude, not a current figure. *(The row above held the 2026-07-19 counts —
-545 files, 356 test files — and six weeks had roughly doubled every one of them.
-"Order of magnitude" is the right caveat, but it stops being a caveat when the
-figure is off by a factor of two, so re-count it when you touch this table.)*
+| Item | Measured value |
+|---|---:|
+| `lib/` Dart files | 1699 |
+| `lib/` Dart lines | 650488 |
+| `test/` Dart test files | 1448 |
+| `assets/` source bytes | 23034441 |
+| `assets/fonts/` source bytes | 6247378 |
 
 ### Measured timing
 
-**First visit to the web build: ~25 MB raw, ~9 MB compressed before the first
-frame** (`make build-web`, measured 2026-07-22). That is `main.dart.js`
-(13.8 MB / 3.8 MB), `canvaskit.wasm` (6.9 / 2.8), the eighteen fonts in
-`FontManifest.json` (2.7 / 1.4) and `assets/privacy/health_lexicon.json`
-(2.0 / 0.5), which `lib/main.dart` deliberately awaits before `runApp`. Serve
-it compressed — see [HOSTING.md](HOSTING.md) §2 — and keep the static loading splash visible while it arrives. This historical
-baseline predates the WASM measurements below.
-
-A single small test (`flutter test test/tlp_test.dart`, 15 cases) completes in
-**~4.7 s** wall-clock — dominated by the Flutter test harness warm-up, not the
-tests themselves.
+The [WebAssembly release measurements](#webassembly-release-flutter-350-2026-11-18)
+give the compressed bytes and elapsed time to the first frame for both web
+renderers. Serve the bundle compressed and keep the loading splash visible
+until that frame. See [HOSTING.md](HOSTING.md) §2.
 
 **Still missing, and worth saying so:** there is no measured wall-clock for a
 PDF export of a large deck, which is the figure a user actually feels.

@@ -1038,6 +1038,7 @@ check-dated-claims:
 	@echo "        looptijdBasislijn bij als het geschiedenis is."
 	@echo "        Houdbaarheid: dart run tool/check_dated_claims.dart --tegen-de-klok"
 	dart run tool/check_dated_claims.dart
+	dart tool/performance_inventory.dart --check
 
 # De zes tellingen voor de bekende LTR-lay-outbeperking zijn afgeleid uit lib/.
 check-rtl-inventory:
