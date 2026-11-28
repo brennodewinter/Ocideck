@@ -37,11 +37,18 @@ void main() {
     );
     expect(downloaded['with']['name'], uploaded['with']['name']);
     final probe = steps.singleWhere(
-      (s) => '${s['run']}'.contains('run_linux_window_probe.sh'),
+      (s) =>
+          '${s['run']}'.contains('run_linux_window_probe.sh') &&
+          !'${s['run']}'.contains('--presentation'),
     );
     expect(probe.containsKey('if'), isFalse);
     expect(probe['run'], contains(r"'${{ matrix.backend }}'"));
     expect(probe['run'], contains('desktop-bundle/bundle/ocideck'));
+    final presentation = steps.singleWhere(
+      (s) => '${s['run']}'.contains('--presentation'),
+    );
+    expect(presentation['if'], "matrix.backend == 'wayland'");
+    expect(presentation['run'], contains('desktop-bundle/bundle/ocideck'));
     final evidence = steps.singleWhere(
       (s) => '${s['uses']}'.contains('upload-artifact'),
     );
