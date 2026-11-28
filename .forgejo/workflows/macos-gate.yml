@@ -19,16 +19,9 @@
 # gepinde Flutter die `check-toolchain` bewaakt. Er wordt niets geïnstalleerd
 # en er valt niets te cachen — zelfde aanpak als `macos-build.yml`.
 #
-# **Waarom alleen op `push: main` en niet per PR.** De goldens zijn
-# machine-specifiek (Ahem-font op deze Mac), en de Mac-runner staat niet altijd
-# aan — een required PR-check die wacht tot de Mac opstart blokkeert de
-# review-wachtrij. Deze poort is een post-merge vangnet: vangt een regressie
-# binnen minuten na de merge in plaats van pas wanneer iemand lokaal `make
-# check` draait. Staat de Mac uit, dan wacht de run; een volgende merge
-# vervangt een wachtende run.
-#
-# De releasekandidaat draait `make test-golden` op de exacte commit vóór de tag.
-# De losse main-poort blijft een snelle vangnetcontrole na gewone merges.
+# PR's uit de eigen repository krijgen vóór de merge dezelfde pixelvergelijking
+# als main. De Mac-runner staat niet altijd aan, dus die PR-controle is adviserend.
+# De releasekandidaat draait de suite op de exacte broncommit vóór de tag.
 #
 # **Waarom niet samengevoegd met `macos-build.yml`.** Die workflow draait alleen
 # wanneer native-buildpaden veranderen (`pubspec.yaml`, `macos/**`, …); een
@@ -39,21 +32,29 @@ name: macos-gate
 
 on:
   workflow_dispatch:
+  pull_request:
+    branches: [main]
   push:
     branches: [main]
 
 # Zelfde concurrency-gedrag als static-gate: een nieuwe main-push zet de
 # lopende vangnetrun opzij. Een kandidaat draait zijn eigen golden-poort in
 # release.yml en valt niet in deze concurrencygroep.
+permissions:
+  contents: read
 concurrency:
-  group: macos-gate-${{ github.ref }}
+  group: macos-gate-${{ github.event_name }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 
 jobs:
   golden-gate:
+    # Op deze persistente host draait alleen code van eigen repositorytakken.
+    if: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}
     runs-on: macos
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
 
       # Toolchainfeiten vóór de build: run 6375 faalde vóór de tests in de
       # dartcv4/Xcode-proefcompilatie en de log bevatte daarna niets waarmee de
@@ -125,6 +126,8 @@ jobs:
         uses: actions/upload-artifact@ff15f0306b3f739f7b6fd43fb5d26cd321bd4de5 # v3.2.1
         with:
           name: golden-gate-diagnose
-          path: build/golden-diagnose/
+          path: |
+            build/golden-diagnose/
+            test/golden/**/failures/
           if-no-files-found: warn
           retention-days: 30

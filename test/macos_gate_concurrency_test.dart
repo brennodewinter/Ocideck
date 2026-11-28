@@ -4,7 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:yaml/yaml.dart';
 
 /// De releasekandidaat toetst goldens vóór de tag. De losse macOS-poort is
-/// nog het post-merge vangnet voor gewone main-wijzigingen.
+/// toetst gewone wijzigingen vóór de merge en op main.
 void main() {
   final workflow = File('.forgejo/workflows/macos-gate.yml');
   final yaml = loadYaml(workflow.readAsStringSync());
@@ -20,6 +20,22 @@ void main() {
     expect(branches, contains('main'), reason: 'de post-merge vangnet blijft');
     final release = File('.forgejo/workflows/release.yml').readAsStringSync();
     expect(release, contains('make test-golden'));
+  });
+
+  test('PR-goldens draaien alleen voor eigen repositorytakken', () {
+    final on = yaml['on'] as YamlMap;
+    expect(on['pull_request']['branches'], contains('main'));
+    final job = yaml['jobs']['golden-gate'] as YamlMap;
+    expect(
+      job['if'],
+      contains(
+        'github.event.pull_request.head.repo.full_name == github.repository',
+      ),
+    );
+    expect(yaml['permissions']['contents'], 'read');
+    final steps = job['steps'] as YamlList;
+    expect(steps.first['with']['persist-credentials'], false);
+    expect(steps.any((step) => step['run'] == 'make test-golden'), isTrue);
   });
 
   test('golden-tags blijven binnen de gerichte golden-map', () {
@@ -55,6 +71,8 @@ void main() {
       contains('github.ref'),
       reason: 'de groep volgt de ref van de getoetste main-versie',
     );
+    expect(group, contains('github.event_name'));
+    expect(group, contains('github.event.pull_request.number'));
     expect(group, isNot(contains('head_commit')));
     expect(
       concurrency['cancel-in-progress'],
