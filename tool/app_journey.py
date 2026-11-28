@@ -124,7 +124,7 @@ def drive(device, target, driver, evidence):
         raise RuntimeError('The app driver did not supply scenario evidence')
 
 
-def journey(device, full, evidence):
+def journey(device, full, evidence, *, recovery_only=False):
     evidence.mkdir(parents=True, exist_ok=True)
     head = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT,
                                    text=True).strip()
@@ -133,7 +133,7 @@ def journey(device, full, evidence):
                   mode='full' if full else 'short', scenarios=[], success=False)
     try:
         for name, target, driver in scenarios(device, full):
-            if name != 'recovery':
+            if recovery_only and name != 'recovery':
                 continue
             output = evidence / name
             output.mkdir(parents=True, exist_ok=True)
@@ -168,6 +168,7 @@ def journey(device, full, evidence):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--full', action='store_true')
+    parser.add_argument('--recovery-only', action='store_true')
     parser.add_argument('--evidence', type=Path, default=ROOT / 'build/app-journey')
     args = parser.parse_args()
     device = {'Darwin': 'macos', 'Linux': 'linux', 'Windows': 'windows'}[platform.system()]
@@ -175,7 +176,7 @@ def main():
         raise SystemExit(128 + signum)
     previous = signal.signal(signal.SIGTERM, interrupted)
     try:
-        result = journey(device, args.full, args.evidence.resolve())
+        result = journey(device, args.full, args.evidence.resolve(), recovery_only=args.recovery_only)
     finally:
         signal.signal(signal.SIGTERM, previous)
     print(json.dumps(result, indent=2), flush=True)
