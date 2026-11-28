@@ -11,7 +11,7 @@ import 'package:ocideck_form_core/ocideck_form_core.dart';
 const _sid = 'aaaaaaaaaaaaaaaaaaaaaaaaaa'; // 26× [a-z2-7]: geldig form-id
 
 void main() {
-  test('start lege optionele toestemming uitgevinkt in de antwoordkopie', () {
+  test('start lege toestemming uitgevinkt en eist verplicht akkoord', () {
     const template = '''<!-- form id=recept version=1 -->
 <!-- field id=beeld type=consent -->
 Toestemming voor foto's.
@@ -26,7 +26,13 @@ Verplichte toestemming.
     expect(templateTextIssues(template, copy), isEmpty);
     final fill = (FormFill.open(copy) as FormFillReady).fill;
     expect(fill.answerOf('beeld').consent, isFalse);
-    expect(fill.answerOf('akkoord').consent, isNull);
+    expect(fill.answerOf('akkoord').consent, isFalse);
+    expect(fill.canSend, isFalse);
+    final agreed = fill.setAnswer(
+      'akkoord',
+      const FormAnswerValue(consent: true),
+    );
+    expect((agreed as FormFillChanged).fill.canSend, isTrue);
     final accepted = copy.replaceFirst('- [ ]', '- [x]');
     expect(intakeAnswerCopy(accepted), accepted);
     final malformed = copy.replaceFirst('- [ ]', 'ja');

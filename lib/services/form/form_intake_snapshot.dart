@@ -49,13 +49,13 @@ String? intakeFormMarkdown(IntakeFormSnapshot snapshot) {
   return markdown;
 }
 
-/// Start an optional, empty consent answer unchecked in the respondent copy.
+/// Start an empty consent answer unchecked in the respondent copy.
 String intakeAnswerCopy(String markdown) {
   final opened = FormFill.open(markdown);
   if (opened is! FormFillReady) return markdown;
   var fill = opened.fill;
   for (final field in opened.fill.spec.fields) {
-    if (field.type != 'consent' || field.required) continue;
+    if (field.type != 'consent') continue;
     if (markdown
         .substring(field.zone.start, field.zone.end)
         .trim()
