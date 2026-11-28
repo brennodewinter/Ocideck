@@ -9,6 +9,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'app.dart';
 import 'l10n/app_localizations.dart';
+import 'platform/deep_link_cleanup.dart';
 import 'platform/launch_files.dart';
 import 'platform/native_window.dart'
     show configureNativeWindow, hasAppExitHandler;
@@ -18,6 +19,7 @@ import 'services/shared_preferences_atomic.dart';
 import 'services/asset_staging.dart';
 import 'services/diagnostics/diagnostics.dart';
 import 'services/disk_traces.dart';
+import 'services/form/form_intake_context.dart' show intakeInvitationFromWebUrl;
 import 'services/single_instance.dart';
 import 'utils/json_depth_guard.dart';
 import 'utils/log.dart';
@@ -61,6 +63,14 @@ void main(List<String> args) {
   // or leave the UI wedged mid-presentation. Everything is logged via the
   // dart:developer stream and, on desktop, the local log file (#2618).
   runZonedGuarded(() async {
+    // Capture the intake link before Flutter initializes its hash routing.
+    final webLocation = kIsWeb ? Uri.base : null;
+    final intakeInvitation = webLocation == null
+        ? null
+        : intakeInvitationFromWebUrl(webLocation);
+    if (intakeInvitation != null) {
+      replaceAddressBar(webLocation!.removeFragment());
+    }
     WidgetsFlutterBinding.ensureInitialized();
     _installErrorHandlers();
 
@@ -184,7 +194,9 @@ void main(List<String> args) {
     await lexiconReady;
     logMilestone('privacylexicon');
 
-    runApp(const ProviderScope(child: OciDeckApp()));
+    runApp(
+      ProviderScope(child: OciDeckApp(intakeInvitation: intakeInvitation)),
+    );
     _watchSession();
   }, (error, stack) => logError('Uncaught zone error', error, stack));
 }

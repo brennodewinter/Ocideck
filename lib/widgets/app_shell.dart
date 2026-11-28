@@ -203,8 +203,6 @@ import 'shell/ociserve_file_actions.dart';
 import '../services/import/document_import_service.dart'
     show isImportableDocumentName;
 import 'forms/form_inbox_dialog.dart';
-import '../services/form/form_intake_context.dart'
-    show intakeInvitationFromWebUrl;
 import 'forms/form_intake_invitation_dialog.dart';
 import 'shell/document_import_action.dart';
 import 'shell/new_document_action.dart';
@@ -262,7 +260,9 @@ part 'shell/native_quit.dart';
 enum _CloseChoice { cancel, discard, save }
 
 class AppShell extends ConsumerStatefulWidget {
-  const AppShell({super.key});
+  const AppShell({super.key, this.intakeInvitation});
+
+  final String? intakeInvitation;
 
   @override
   ConsumerState<AppShell> createState() => _AppShellState();
@@ -339,7 +339,9 @@ class _AppShellState extends ConsumerState<AppShell> {
       _openLaunchFiles();
       // Web: ?deck=<url>-deeplink die OciDeck én een presentatie tegelijk
       // opent (zelfde security-gate als de importdialoog).
-      unawaited(_openWebDeepLink(context, ref, () => mounted));
+      unawaited(
+        _openWebDeepLink(context, ref, () => mounted, widget.intakeInvitation),
+      );
     });
   }
 

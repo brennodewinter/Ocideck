@@ -19,15 +19,13 @@ Future<void> _openWebDeepLink(
   BuildContext context,
   WidgetRef ref,
   bool Function() isMounted,
+  String? invitation,
 ) async {
   if (!isWebPlatform || !isMounted()) return;
-  final page = Uri.base;
-  final invitation = intakeInvitationFromWebUrl(page);
   if (invitation == null) {
     await _openDeckDeepLink(context, ref, isMounted);
     return;
   }
-  replaceAddressBar(page.removeFragment());
   await showFormIntakeInvitationDialog(
     context,
     initialLink: invitation,

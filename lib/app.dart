@@ -10,7 +10,9 @@ import 'widgets/app_shell.dart';
 import 'widgets/dialogs/consent_dialog.dart';
 
 class OciDeckApp extends ConsumerWidget {
-  const OciDeckApp({super.key});
+  const OciDeckApp({super.key, this.intakeInvitation});
+
+  final String? intakeInvitation;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -57,14 +59,16 @@ class OciDeckApp extends ConsumerWidget {
       ],
       home: AppearanceScope(
         appearance: appearance,
-        child: const _ConsentGate(),
+        child: _ConsentGate(intakeInvitation: intakeInvitation),
       ),
     );
   }
 }
 
 class _ConsentGate extends ConsumerWidget {
-  const _ConsentGate();
+  const _ConsentGate({required this.intakeInvitation});
+
+  final String? intakeInvitation;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -96,6 +100,6 @@ class _ConsentGate extends ConsumerWidget {
       return const Scaffold(body: Center(child: ConsentDialog()));
     }
 
-    return const AppShell();
+    return AppShell(intakeInvitation: intakeInvitation);
   }
 }
