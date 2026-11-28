@@ -27,3 +27,8 @@ Future<void> waitForDesktopExit(int pid) async {
     await Future<void>.delayed(const Duration(milliseconds: 100));
   }
 }
+
+List<String> desktopStallLines(Iterable<String> lines) {
+  final marker = RegExp(r' WARN UI-isolate [0-9]+ ms onbereikbaar(?:$|[ (])');
+  return lines.where(marker.hasMatch).toList();
+}

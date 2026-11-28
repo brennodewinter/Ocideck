@@ -73,8 +73,10 @@ title: Native lifecycle
       if (roundtrip) prepareRoundtripPhase(root.path, phase);
       File(p.join(root.path, 'phase.txt')).writeAsStringSync(phase);
       final resultPath = p.absolute(evidence.path, '$phase.json');
-      final oldResult = File(resultPath);
-      if (oldResult.existsSync()) oldResult.deleteSync();
+      final stallResult = File(p.join(evidence.path, '$phase-stalls.json'));
+      for (final old in [File(resultPath), stallResult]) {
+        if (old.existsSync()) old.deleteSync();
+      }
       await _run(
         'flutter',
         [
@@ -118,6 +120,22 @@ title: Native lifecycle
       await File(
         resultPath,
       ).writeAsString(const JsonEncoder.withIndent('  ').convert(result));
+      final appLog = Directory(p.join(root.path, 'logs'));
+      final currentLog = File(p.join(appLog.path, 'journey-$phase.log'));
+      final rotatedLog = File(p.join(appLog.path, 'journey-$phase.1.log'));
+      final stalls = [
+        if (rotatedLog.existsSync())
+          ...desktopStallLines(rotatedLog.readAsLinesSync()),
+        ...desktopStallLines(currentLog.readAsLinesSync()),
+      ];
+      stallResult.writeAsStringSync(
+        const JsonEncoder.withIndent('  ').convert(stalls),
+      );
+      if (stalls.isNotEmpty) {
+        throw StateError(
+          'UI isolate stalled during $phase:\n${stalls.join('\n')}',
+        );
+      }
       results[phase] = result;
     }
     if (results.values.map((result) => result['pid']).toSet().length !=

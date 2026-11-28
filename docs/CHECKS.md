@@ -1174,6 +1174,12 @@ still fails the gate.
 
 ### `make test-app-journey`
 
+The native file journey starts the production UI stall monitor after the first
+frame. It checks the isolated diagnostic log after each clean app exit and
+retains detected warnings with their work labels in the process evidence.
+Run the same journey with `OCIDECK_APP_JOURNEY_INJECT_STALL=1` to exercise the
+failure path. The run should fail on the labelled negative-control warning.
+
 - **Runs:** `python3 tool/app_journey.py` under the native gate lock. The short
   PR set runs the existing lifecycle harness in two separate app processes.
   `FULL=true` adds the six-process roundtrip and the existing document-navigation

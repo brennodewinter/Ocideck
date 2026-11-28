@@ -7,15 +7,18 @@ import 'package:ffi/ffi.dart';
 import 'package:nativeapi/nativeapi.dart';
 import 'dart:io';
 
-import 'package:flutter/widgets.dart' show runApp;
+import 'package:flutter/widgets.dart' show AppLifecycleState, runApp;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:ocideck/app.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/platform/native_window.dart';
+import 'package:ocideck/services/diagnostics/diagnostics.dart';
+import 'package:ocideck/services/diagnostics/ui_stall_watch.dart';
 import 'package:ocideck/state/deck_provider.dart';
 import 'package:ocideck/state/tabs_provider.dart';
+import 'package:ocideck/utils/log.dart' show noteWork;
 import 'package:ocideck/widgets/app_shell.dart';
 import 'package:path/path.dart' as p;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -45,6 +48,7 @@ void main() {
     rootPath = root;
     phaseName = phase;
     PathProviderPlatform.instance = DesktopSmokePaths(root);
+    await Diagnostics.start(name: 'journey-$phase');
     SharedPreferences.setMockInitialValues({
       'app_consent_accepted': true,
       'languageCode': 'nl',
@@ -97,6 +101,11 @@ void main() {
     expect(nativeWindow, isNotNull, reason: 'The app must own a real window');
     nativeWindowId = nativeWindow!.id;
     expect(find.byType(AppShell), findsOneWidget);
+    Diagnostics.firstFrameShown();
+    if (phase == 'write' &&
+        Platform.environment['OCIDECK_APP_JOURNEY_INJECT_STALL'] == '1') {
+      await _injectStallForGateVerification();
+    }
     final Map<String, Object?> result;
     if (roundtrip) {
       result = await runNativeRoundtripScenario(
@@ -219,4 +228,19 @@ Future<Map<String, Object?>> _basicScenario(
     'dirty': deck.currentState.isDirty,
     'cmd_q_guard': Platform.isMacOS && phase == 'write',
   };
+}
+
+Future<void> _injectStallForGateVerification() async {
+  // The negative control also has to run on a background CI desktop.
+  final watch = UiStallWatch(lifecycle: () => AppLifecycleState.resumed)
+    ..start();
+  try {
+    await Future<void>.delayed(const Duration(milliseconds: 300));
+    noteWork('app-reis-negatieve-controle');
+    final blocked = Stopwatch()..start();
+    while (blocked.elapsedMilliseconds < 1000) {}
+    await Future<void>.delayed(const Duration(milliseconds: 300));
+  } finally {
+    watch.stop();
+  }
 }
