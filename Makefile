@@ -1384,6 +1384,7 @@ check-web-browser:
 	node tool/web-wasm-check/probe.cjs build/web chromium auto 1
 	node tool/web-wasm-check/probe.cjs build/web chromium fallback 1
 	node tool/web-wasm-check/probe.cjs build/web chromium single-thread 1
+	node tool/web-wasm-check/intake_start.cjs build/web chromium
 
 # Native desktop release builds. Each target only works on its own OS — Flutter
 # cannot cross-compile a desktop bundle (a macOS .app needs macOS, a Windows

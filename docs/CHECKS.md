@@ -2466,6 +2466,12 @@ not simulate a physical runner or server outage.
   verifies the embedded image bytes in real style downloads before and after
   reopening the menu. Flutter's accessibility entry point supplies selectors;
   normal pointer/file-chooser/download operations exercise the product.
+- The public intake probe follows a real HTTP 303 into the compiled app, crosses
+  the licence screen in a fresh profile, and repeats with the licence already
+  accepted. It opens a fixture form at desktop and touch viewport sizes. The
+  intake response is a synthetic HTTPS contract fixture. To run it with WebKit
+  as well, install `webkit` with Playwright and use
+  `node tool/web-wasm-check/intake_start.cjs build/web chromium,webkit`.
 - The app is served only under `/ocideck/`; root-relative bootstrap/asset paths
   fail. The server uses the shipped CSP, isolation and MIME rules. Startup and
   the complete journey reject every `console.error`, uncaught page error and
