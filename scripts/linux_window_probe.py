@@ -354,8 +354,13 @@ def exercise_presentation(driver, app, evidence):
 
     main, rect, _ = wait_for('opened deck on left output', open_deck, app, seconds=60)
 
+    def focus_presenter():
+        replies = driver.msg(f'[con_id={main}]', 'focus')
+        if not replies or not all(reply.get('success') for reply in replies):
+            raise RuntimeError(f'Sway could not focus the presenter: {replies}')
+
     def start():
-        driver.msg(f'[con_id={main}]', 'focus')
+        focus_presenter()
         run('wtype', '-M', 'ctrl', '-k', 'k', '-m', 'ctrl')
         wait_for('command palette', lambda: text_position(rect, 'commando'), app)
         command = wait_for('Presenteren command',
@@ -404,10 +409,17 @@ def exercise_presentation(driver, app, evidence):
     note('audience-output-enabled', driver.windows(app.pid))
 
     def finish():
-        driver.msg(f'[con_id={main}]', 'focus')
-        run('wtype', '-k', 'Escape')
-        return wait_for('audience closed and editor visible',
-                        lambda: open_deck() if len(driver.windows(app.pid)) == 1 else None, app)
+        focus_presenter()
+        # Creating a virtual keyboard changes the seat capabilities. Give GTK
+        # time to bind it before sending Escape, and keep it alive through release.
+        run('wtype', '-s', '700', '-k', 'Escape', '-s', '350')
+        try:
+            wait_for('audience closed and editor visible',
+                     lambda: open_deck() if len(driver.windows(app.pid)) == 1 else None, app)
+        except RuntimeError:
+            note('presentation-exit-failed', driver.windows(app.pid))
+            driver.capture(rect).save(evidence / 'presentation-exit-failure.png')
+            raise
 
     finish()
     note('presentation-ended', driver.windows(app.pid))
