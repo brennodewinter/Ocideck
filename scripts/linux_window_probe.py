@@ -206,6 +206,17 @@ class Wayland:
         self.msg(f'[con_id={window}]', 'move', 'container', 'to', 'output', output)
         self.msg(f'[con_id={window}]', 'focus')
 
+    def windows(self, pid):
+        def visit(node, output=None):
+            if node['type'] == 'output':
+                output = node['name']
+            if node.get('pid') == pid and output in self.outputs:
+                yield {'id': node['id'], 'output': output, 'rect': node['rect'],
+                       'fullscreen': node.get('fullscreen_mode', 0)}
+            for child in node.get('nodes', []) + node.get('floating_nodes', []):
+                yield from visit(child, output)
+        return list(visit(self.msg('-t', 'get_tree')))
+
     @staticmethod
     def capture(rect):
         geometry = f'{rect.x},{rect.y} {rect.width}x{rect.height}'
@@ -307,11 +318,99 @@ def check_content(driver, rect, evidence, label):
     raise RuntimeError(f'{label}: {reason}')
 
 
+def presentation_deck(profile):
+    fixture = profile / 'dualprobe.md'
+    fixture.write_text('---\nmarp: true\ntitle: Dualprobe\n---\n\n'
+                       '# Dualprobe\n\n- Presenter and audience\n')
+    return fixture
+
+
+def exercise_presentation(driver, app, evidence):
+    rows = []
+    report = evidence / 'presentation-displays.json'
+
+    def note(step, windows):
+        outputs = [{'name': output['name'], 'scale': output['scale']}
+                   for output in driver.msg('-t', 'get_outputs') if output['active']]
+        rows.append({'step': step, 'windows': windows, 'outputs': outputs})
+        report.write_text(json.dumps(rows, indent=2) + '\n')
+
+    def visible_text(rect, name):
+        frame = driver.capture(rect)
+        frame.save(evidence / 'last-presenter.png')
+        words = {row['text'].strip().lower() for row in recognized(frame)}
+        return name in words
+
+    def open_deck():
+        state = driver.window(app.pid)
+        if state and state[2] == 'HEADLESS-1' and visible_text(state[1], 'dualprobe'):
+            return state
+        return None
+
+    main, rect, _ = wait_for('opened deck on left output', open_deck, app, seconds=60)
+
+    def start():
+        driver.msg(f'[con_id={main}]', 'focus')
+        run('wtype', '-M', 'ctrl', '-k', 'k', '-m', 'ctrl')
+        wait_for('command palette', lambda: visible_text(rect, 'commando'), app)
+        run('wtype', 'F5')
+        wait_for('Presenteren command', lambda: visible_text(rect, 'presenteren'), app)
+        run('wtype', '-k', 'Return')
+
+    def separate():
+        windows = driver.windows(app.pid)
+        presenter = next((win for win in windows if win['id'] == main), None)
+        audience = [win for win in windows if win['id'] != main]
+        if (presenter and presenter['output'] == 'HEADLESS-1' and
+                len(audience) == 1 and audience[0]['output'] == 'HEADLESS-2' and
+                audience[0]['fullscreen'] and audience[0]['rect']['width'] == 1440):
+            return windows
+        return None
+
+    start()
+    note('started-on-separate-outputs', wait_for('separate presentation outputs', separate, app))
+    driver.msg('output', 'HEADLESS-2', 'disable')
+
+    def removed():
+        outputs = driver.msg('-t', 'get_outputs')
+        if any(output['name'] == 'HEADLESS-2' and output['active'] for output in outputs):
+            return None
+        windows = driver.windows(app.pid)
+        return windows if all(window['output'] == 'HEADLESS-1' for window in windows) else None
+
+    note('audience-output-disabled', wait_for('native output removal', removed, app))
+    driver.msg('output', 'HEADLESS-2', 'enable')
+
+    def reconnected():
+        outputs = driver.msg('-t', 'get_outputs')
+        return any(output['name'] == 'HEADLESS-2' and output['active'] and
+                   output['scale'] == 2 for output in outputs)
+
+    wait_for('second output restored at 200 percent', reconnected, app)
+    note('audience-output-enabled', driver.windows(app.pid))
+
+    def finish():
+        driver.msg(f'[con_id={main}]', 'focus')
+        run('wtype', '-k', 'Escape')
+        return wait_for('audience closed and editor visible',
+                        lambda: open_deck() if len(driver.windows(app.pid)) == 1 else None, app)
+
+    finish()
+    note('presentation-ended', driver.windows(app.pid))
+    start()
+    note('presentation-restarted', wait_for('reconnected audience placement', separate, app))
+    finish()
+    note('final-presentation-ended', driver.windows(app.pid))
+
+
 def exercise(args, profile):
     args.evidence.mkdir(parents=True, exist_ok=True)
     data = profile / 'data' / 'com.dewinter.ocideck'
     data.mkdir(parents=True)
-    (data / 'shared_preferences.json').write_text('{"flutter.app_consent_accepted":true}')
+    preferences = {'flutter.app_consent_accepted': True}
+    if args.presentation:
+        preferences['flutter.languageCode'] = 'nl'
+    (data / 'shared_preferences.json').write_text(json.dumps(preferences))
     runtime = profile / 'runtime'
     runtime.mkdir(mode=0o700)
     (profile / 'cache').mkdir(mode=0o700)
@@ -353,7 +452,10 @@ def exercise(args, profile):
             app_env = dict(os.environ)
             if args.backend == 'wayland':
                 app_env['WAYLAND_DEBUG'] = 'client'
-            app = subprocess.Popen([args.executable], env=app_env, stdout=app_log,
+            launch_args = [args.executable]
+            if args.presentation:
+                launch_args.append(presentation_deck(profile))
+            app = subprocess.Popen(launch_args, env=app_env, stdout=app_log,
                                    stderr=subprocess.STDOUT)
             log = data / 'logs' / 'ocideck.log'
             # Allow GTK and the software renderer to initialize on a busy runner.
@@ -365,6 +467,10 @@ def exercise(args, profile):
                 raise RuntimeError('OciDeck did not stay running after its first frame')
             session.update(first_frame=True, stayed_running=True)
             (args.evidence / 'session.json').write_text(json.dumps(session, indent=2) + '\n')
+            if args.presentation:
+                exercise_presentation(driver, app, args.evidence)
+                startup_frame(log)
+                return
             try:
                 window = wait_for('visible native window', lambda: driver.window(app.pid), app,
                                   seconds=launch_timeout)
@@ -452,5 +558,9 @@ if __name__ == '__main__':
     parser.add_argument('backend', choices=('x11', 'wayland'))
     parser.add_argument('executable', type=lambda value: Path(value).resolve(strict=True))
     parser.add_argument('evidence', type=Path)
+    parser.add_argument('--presentation', action='store_true')
+    args = parser.parse_args()
+    if args.presentation and args.backend != 'wayland':
+        parser.error('--presentation requires the private Wayland compositor')
     with tempfile.TemporaryDirectory(prefix='ocideck-window-') as workspace:
-        exercise(parser.parse_args(), Path(workspace))
+        exercise(args, Path(workspace))

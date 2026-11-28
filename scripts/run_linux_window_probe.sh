@@ -4,6 +4,7 @@ backend=${1:?X11 or Wayland backend required}
 executable=$(realpath -- "${2:?App executable required}")
 mkdir -p -- "${3:?Evidence path required}"
 evidence=$(realpath -- "$3")
+shift 3
 script="$(cd -- "$(dirname -- "$0")" && pwd)/linux_window_probe.py"
 launcher=()
 if (( EUID == 0 )); then
@@ -23,7 +24,7 @@ fi
 case "$backend" in
   x11)
     "${launcher[@]}" xvfb-run -a -s '-screen 0 1800x1100x24' \
-      dbus-run-session -- /usr/bin/python3 "$script" x11 "$executable" "$evidence"
+      dbus-run-session -- /usr/bin/python3 "$script" x11 "$executable" "$evidence" "$@"
     ;;
   wayland)
     if [[ -z "${OCIDECK_WAYLAND_POINTER:-}" ]]; then
@@ -36,7 +37,7 @@ case "$backend" in
         -o "$pointer_dir/pointer" "${wayland_flags[@]}"
       export OCIDECK_WAYLAND_POINTER="$pointer_dir/pointer"
     fi
-    "${launcher[@]}" dbus-run-session -- /usr/bin/python3 "$script" wayland "$executable" "$evidence"
+    "${launcher[@]}" dbus-run-session -- /usr/bin/python3 "$script" wayland "$executable" "$evidence" "$@"
     ;;
   *) exit 2 ;;
 esac
