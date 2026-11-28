@@ -266,6 +266,7 @@ and it also indexes the design documents. The current-state documents:
 | [Release operations](docs/RELEASE_OPERATIONS.md) | Operating, stopping and resuming independent release channels |
 | [Changelog](CHANGELOG.md) | Notable changes and release history |
 | [Checks & CI](docs/CHECKS.md) | Every automated check, what it covers, and how each is enforced |
+| [Test reliability](docs/TEST_RELIABILITY.md) | Timing-sensitive checks and how to investigate an intermittent failure |
 | [Compliance attestation](COMPLIANCE.md) | Voluntary security attestation (ORC WG light-weight checklist), including the rows we cannot tick |
 | [Repository instructions](AGENTS.md) | Main repository and issue-tracker routing for coding agents |
 | [Contributing](CONTRIBUTING.md) | Setup, the quality gate, and how to propose changes |

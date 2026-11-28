@@ -40,6 +40,7 @@ void main() {
     'docs/RELEASE_OPERATIONS.md',
     'docs/SECURITY_REVIEW_APT.md',
     'docs/SOURCE_MAP.md',
+    'docs/TEST_RELIABILITY.md',
     'docs/TRANSCRIPTION_RELEASE_MATRIX.md',
     'docs/API_DOCUMENTATION.md',
     // Maintainer integration notes: API contracts, BFF deployment and tests.
