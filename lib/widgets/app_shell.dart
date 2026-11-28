@@ -336,22 +336,13 @@ class _AppShellState extends ConsumerState<AppShell> {
       // opened from Finder while the app is running.
       _openFileChannel.start();
       // Windows/Linux: bestandsassociatie-argumenten van deze start.
-      _openLaunchFiles();
+      unawaited(_openLaunchFiles(_onFilesDropped));
       // Web: ?deck=<url>-deeplink die OciDeck én een presentatie tegelijk
       // opent (zelfde security-gate als de importdialoog).
       unawaited(
         _openWebDeepLink(context, ref, () => mounted, widget.intakeInvitation),
       );
     });
-  }
-
-  /// Open de bestanden waarmee de app via commandoregel-argumenten is gestart
-  /// (Windows/Linux-bestandsassociaties; zie [pendingLaunchFiles]).
-  Future<void> _openLaunchFiles() async {
-    if (pendingLaunchFiles.isEmpty) return;
-    final paths = List<String>.from(pendingLaunchFiles);
-    pendingLaunchFiles.clear();
-    await _onFilesDropped(paths);
   }
 
   /// Bij opstart: zijn er herstelbestanden van een vorige (gecrashte) sessie?

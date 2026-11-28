@@ -877,3 +877,13 @@ Future<void> requestCloseTab(
   }
   ref.read(tabsProvider.notifier).closeTab(index);
 }
+
+/// Opent Windows- en Linux-bestandsassociaties van deze appstart.
+Future<void> _openLaunchFiles(
+  Future<void> Function(List<String>) openFiles,
+) async {
+  if (pendingLaunchFiles.isEmpty) return;
+  final paths = List<String>.from(pendingLaunchFiles);
+  pendingLaunchFiles.clear();
+  await openFiles(paths);
+}
