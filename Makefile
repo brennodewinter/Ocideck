@@ -1383,6 +1383,8 @@ check-web: build-web
 # npx playwright install --with-deps chromium (OS packages may need privileges).
 check-web-browser:
 	node --test tool/web-wasm-check/probe.test.cjs
+	flutter test --no-pub tool/web-wasm-check/export_fixture_test.dart
+	node tool/web-wasm-check/export_a11y.cjs
 	node tool/web-wasm-check/probe.cjs build/web chromium auto 1
 	node tool/web-wasm-check/probe.cjs build/web chromium fallback 1
 	node tool/web-wasm-check/probe.cjs build/web chromium single-thread 1

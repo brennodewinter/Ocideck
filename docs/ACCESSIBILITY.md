@@ -201,13 +201,16 @@ that, the presenter's ordinary navigation (arrow keys, the slide grid,
 jump-to-slide) reaches every slide a menu points at, so a menu is never the only
 route to a slide.
 
-**The HTML export is not audited for accessibility.** It produces genuine text
-and headings, which is already a great deal more than the bitmap formats, but
-nobody has checked its colour contrast or focus order. Its landmark structure
-*is* in place: the slides sit inside a `<main>` landmark with a
-visually-hidden `<h1>` carrying the deck title, so a screen reader can
-identify the document and bypass to the content (WCAG 2.1 SC 1.3.1, 2.4.1;
-fixed 2026-08-05, #1250).
+**The HTML export has a browser accessibility check.** The pinned Chromium
+check in `make check-web-browser` renders an offline export with a table, a
+chart with a data description, a Mermaid diagram, named image callouts and a
+step slide. It checks the document landmark and heading, accessible names,
+selected axe-core rules including colour contrast, and forward and reverse Tab
+order through the fixture's links. Static image callouts have descriptions
+and are read as images. The check also gives a link a low-contrast colour and
+requires the audit to detect it. Those results cover the example deck and
+theme. Check author-supplied colours and assistive-technology behaviour for
+the actual deck that will be shared.
 
 **The page language follows the report, not the UI.** *(Fixed 2026-08-05,
 #1249.)* The HTML export writes `<html lang="…">` from the deck's recorded

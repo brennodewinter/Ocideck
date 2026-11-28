@@ -3,6 +3,11 @@
   "private": true,
   "version": "1.0.0",
   "description": "Release-bundle browser smoke and startup measurements",
-  "scripts": { "check": "node probe.cjs" },
-  "devDependencies": { "playwright": "1.65.1" }
+  "scripts": {
+    "check": "node probe.cjs"
+  },
+  "devDependencies": {
+    "axe-core": "4.14.1",
+    "playwright": "1.65.1"
+  }
 }
