@@ -5,11 +5,16 @@ import 'dart:io';
 import 'package:path/path.dart' as p;
 
 import '../test_driver/desktop_smoke_process.dart';
+import '../test_driver/desktop_recovery_plan.dart';
 import '../test_driver/desktop_roundtrip_plan.dart';
 
 Future<void> main(List<String> args) async {
   final roundtrip = args.contains('--roundtrip');
-  final positional = args.where((arg) => arg != '--roundtrip').toList();
+  final recovery = args.contains('--recovery');
+  if (roundtrip && recovery) throw ArgumentError('Choose one desktop scenario');
+  final positional = args
+      .where((arg) => arg != '--roundtrip' && arg != '--recovery')
+      .toList();
   final device = positional.isEmpty
       ? Platform.operatingSystem
       : positional.single;
@@ -19,7 +24,14 @@ Future<void> main(List<String> args) async {
   }
   final root = Directory.systemTemp.createTempSync('ocideck-desktop-smoke-');
   final evidence = Directory(
-    p.join('build', roundtrip ? 'desktop-roundtrip' : 'desktop-smoke'),
+    p.join(
+      'build',
+      recovery
+          ? 'desktop-recovery'
+          : roundtrip
+          ? 'desktop-roundtrip'
+          : 'desktop-smoke',
+    ),
   )..createSync(recursive: true);
   final revision = await Process.run('git', ['rev-parse', 'HEAD']);
   final status = await Process.run('git', ['status', '--porcelain']);
@@ -68,8 +80,12 @@ title: Native lifecycle
       ]);
     }
     final results = <String, Map<String, dynamic>>{};
-    for (final phase
-        in roundtrip ? nativeRoundtripPhases : ['write', 'reopen']) {
+    final phases = recovery
+        ? nativeRecoveryPhases
+        : roundtrip
+        ? nativeRoundtripPhases
+        : ['write', 'reopen'];
+    for (final phase in phases) {
       if (roundtrip) prepareRoundtripPhase(root.path, phase);
       File(p.join(root.path, 'phase.txt')).writeAsStringSync(phase);
       final resultPath = p.absolute(evidence.path, '$phase.json');
@@ -97,7 +113,9 @@ title: Native lifecycle
       final result = Map<String, dynamic>.from(
         jsonDecode(File(resultPath).readAsStringSync()) as Map,
       );
-      if (result['phase'] != phase ||
+      if (recovery) {
+        _validateRecovery(result, phase, root);
+      } else if (result['phase'] != phase ||
           result['dirty'] != false ||
           (roundtrip
               ? (result['slides'] as int) <= 0
@@ -112,7 +130,9 @@ title: Native lifecycle
         throw StateError('Cmd+Q guard was not tested');
       }
       await waitForDesktopExit(result['pid'] as int);
-      if (device == 'macos' && result['clean_exit'] != true) {
+      if (device == 'macos' &&
+          !isForcedExitPhase(phase) &&
+          result['clean_exit'] != true) {
         throw StateError('No native clean-exit evidence for $phase');
       }
       result['source_commit'] = source;
@@ -120,9 +140,13 @@ title: Native lifecycle
       await File(
         resultPath,
       ).writeAsString(const JsonEncoder.withIndent('  ').convert(result));
-      final appLog = Directory(p.join(root.path, 'logs'));
-      final currentLog = File(p.join(appLog.path, 'journey-$phase.log'));
-      final rotatedLog = File(p.join(appLog.path, 'journey-$phase.1.log'));
+      final support = recovery
+          ? recoveryAppSupport(root.path, phase)
+          : root.path;
+      final name = recovery ? 'journey-recovery' : 'journey-$phase';
+      final appLog = Directory(p.join(support, 'logs'));
+      final currentLog = File(p.join(appLog.path, '$name.log'));
+      final rotatedLog = File(p.join(appLog.path, '$name.1.log'));
       final stalls = [
         if (rotatedLog.existsSync())
           ...desktopStallLines(rotatedLog.readAsLinesSync()),
@@ -161,8 +185,13 @@ title: Native lifecycle
       }
     }
     completed = true;
+    final label = recovery
+        ? 'forced exit and recovery'
+        : roundtrip
+        ? 'file roundtrip'
+        : 'open/add/save/close/reopen';
     stderr.writeln(
-      'PASS: native open/add/save/close/reopen ($device), ${results.length} app processes; roundtrip=$roundtrip.',
+      'PASS: native $label ($device), ${results.length} app processes.',
     );
   } finally {
     if (completed) {
@@ -188,5 +217,38 @@ Future<void> _run(
   final code = await process.exitCode;
   if (code != 0) {
     throw ProcessException(command, args, 'Native smoke command failed', code);
+  }
+}
+
+void _validateRecovery(
+  Map<String, dynamic> result,
+  String phase,
+  Directory root,
+) {
+  final forced = isForcedExitPhase(phase);
+  final support = recoveryAppSupport(root.path, phase);
+  final marker = File(p.join(support, 'logs', 'journey-recovery.sessie'));
+  if (result['phase'] != phase ||
+      result['ready_to_close'] != true ||
+      result['process_exited'] != true ||
+      marker.existsSync() != forced) {
+    throw StateError('Incomplete $phase evidence: $result');
+  }
+  if (forced) {
+    final snapshots = Directory(p.join(support, 'recovery'));
+    final snapshotExists =
+        snapshots.existsSync() &&
+        snapshots.listSync().any(
+          (entry) => entry is File && entry.path.endsWith('.json'),
+        );
+    if (result['force_killed'] != true ||
+        result['snapshot_written'] != snapshotExists ||
+        snapshotExists != (phase == 'document-crash')) {
+      throw StateError('Incomplete forced-exit evidence for $phase: $result');
+    }
+  } else if (result['unclean_exit_detected'] != true ||
+      result['offered_recovery'] != (phase == 'document-restore') ||
+      (phase == 'document-restore' && result['recovered_text'] != true)) {
+    throw StateError('Incomplete restart evidence for $phase: $result');
   }
 }

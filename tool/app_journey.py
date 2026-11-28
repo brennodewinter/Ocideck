@@ -20,6 +20,8 @@ def scenarios(device, full):
     result = [('lifecycle', ['dart', launcher, 'tool/run_desktop_smoke.dart', device]
                + (['--roundtrip'] if full else []), None)]
     if full:
+        result.append(('recovery', ['dart', launcher, 'tool/run_desktop_smoke.dart',
+                                    device, '--recovery'], None))
         result.append(('navigation', 'document_navigation_profile_test',
                        'document_navigation_driver'))
         if device == 'windows':
@@ -146,7 +148,9 @@ def journey(device, full, evidence):
                     try:
                         run_command(target, output / 'run.log')
                     finally:
-                        existing = ROOT / 'build' / ('desktop-roundtrip' if full else 'desktop-smoke')
+                        folder = ('desktop-recovery' if name == 'recovery' else
+                                  'desktop-roundtrip' if full else 'desktop-smoke')
+                        existing = ROOT / 'build' / folder
                         if existing.exists():
                             shutil.copytree(existing, output / 'processes', dirs_exist_ok=True)
                 row['success'] = True

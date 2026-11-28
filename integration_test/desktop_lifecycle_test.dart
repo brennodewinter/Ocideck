@@ -25,6 +25,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 // ignore: depend_on_referenced_packages
 import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
 
+import '../test_driver/desktop_recovery_plan.dart';
+import 'support/desktop_recovery_scenario.dart';
 import 'support/desktop_smoke_paths.dart';
 import 'support/desktop_roundtrip_scenario.dart';
 
@@ -47,8 +49,12 @@ void main() {
     final phase = File(p.join(root, 'phase.txt')).readAsStringSync().trim();
     rootPath = root;
     phaseName = phase;
-    PathProviderPlatform.instance = DesktopSmokePaths(root);
-    await Diagnostics.start(name: 'journey-$phase');
+    final recovery = nativeRecoveryPhases.contains(phase);
+    final support = recovery ? recoveryAppSupport(root, phase) : root;
+    PathProviderPlatform.instance = DesktopSmokePaths(support);
+    await Diagnostics.start(
+      name: recovery ? 'journey-recovery' : 'journey-$phase',
+    );
     SharedPreferences.setMockInitialValues({
       'app_consent_accepted': true,
       'languageCode': 'nl',
@@ -107,7 +113,15 @@ void main() {
       await _injectStallForGateVerification();
     }
     final Map<String, Object?> result;
-    if (roundtrip) {
+    if (recovery) {
+      result = await runNativeRecoveryScenario(
+        tester,
+        container,
+        root,
+        support,
+        phase,
+      );
+    } else if (roundtrip) {
       result = await runNativeRoundtripScenario(
         tester,
         container,
@@ -128,7 +142,10 @@ void main() {
   }, timeout: const Timeout(Duration(minutes: 3)));
 
   tearDownAll(() async {
-    if (binding.reportData?['ready_to_close'] != true) return;
+    if (binding.reportData?['ready_to_close'] != true ||
+        isForcedExitPhase(phaseName)) {
+      return;
+    }
     // Widget tests unmount their tree before reporting success. Restore the
     // real shell around the SAME live state so the driver's later native quit
     // still traverses production cleanup. The driver has not requested it yet.

@@ -1182,8 +1182,8 @@ failure path. The run should fail on the labelled negative-control warning.
 
 - **Runs:** `python3 tool/app_journey.py` under the native gate lock. The short
   PR set runs the existing lifecycle harness in two separate app processes.
-  `FULL=true` adds the six-process roundtrip and the existing document-navigation
-  profile on every platform; Windows also runs the existing WebView2 focus,
+  `FULL=true` adds the six-process roundtrip, a forced-exit recovery scenario,
+  and the document-navigation profile on every platform. Windows also runs WebView2 focus,
   keyboard scenario and a local MP4 decode/play/pause/seek probe. Live provider
   acceptance remains an explicit separate diagnostic. The baseline-ref comparison remains a
   separate manual diagnostic; automatic navigation needs no baseline.

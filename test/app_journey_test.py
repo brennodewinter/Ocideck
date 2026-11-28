@@ -75,7 +75,8 @@ class AppJourneyTest(unittest.TestCase):
             root = Path(directory)
             for name in ['tool/run_desktop_smoke.dart',
                          'test_driver/desktop_smoke_process.dart',
-                         'test_driver/desktop_roundtrip_plan.dart']:
+                         'test_driver/desktop_roundtrip_plan.dart',
+                         'test_driver/desktop_recovery_plan.dart']:
                 target = root / name
                 target.parent.mkdir(exist_ok=True)
                 shutil.copyfile(ROOT / name, target)
@@ -189,7 +190,7 @@ class AppJourneyTest(unittest.TestCase):
     def test_short_and_full_sets_are_fixed_across_platforms(self):
         for device in ['linux', 'macos', 'windows']:
             self.assertEqual([s[0] for s in journey.scenarios(device, False)], ['lifecycle'])
-            expected = ['lifecycle', 'navigation'] + (['video'] if device == 'windows' else [])
+            expected = ['lifecycle', 'recovery', 'navigation'] + (['video'] if device == 'windows' else [])
             self.assertEqual([s[0] for s in journey.scenarios(device, True)], expected)
             self.assertIn('--roundtrip', journey.scenarios(device, True)[0][1])
 

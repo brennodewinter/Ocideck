@@ -5,6 +5,7 @@ import 'package:integration_test/integration_test_driver.dart';
 import 'package:path/path.dart' as p;
 
 import 'desktop_smoke_process.dart';
+import 'desktop_recovery_plan.dart';
 import 'desktop_roundtrip_plan.dart';
 
 Future<void> main() => integrationDriver(
@@ -21,12 +22,27 @@ Future<void> main() => integrationDriver(
       // Ask the app to finish its production shutdown path before starting again.
       if (data?['ready_to_close'] == true) {
         final phase = data!['phase'] as String;
-        if (!{'write', 'reopen', ...nativeRoundtripPhases}.contains(phase)) {
+        if (!{
+          'write',
+          'reopen',
+          ...nativeRoundtripPhases,
+          ...nativeRecoveryPhases,
+        }.contains(phase)) {
           throw StateError('Invalid phase');
+        }
+        final pid = data['pid'] as int;
+        if (isForcedExitPhase(phase)) {
+          if (pid <= 0 || !Process.killPid(pid, ProcessSignal.sigkill)) {
+            throw StateError('Could not forcibly terminate the fixture app');
+          }
+          await waitForDesktopExit(pid);
+          data['force_killed'] = true;
+          data['process_exited'] = true;
+          return;
         }
         await File(p.join(root, 'close-$phase.request')).writeAsString('close');
         try {
-          await waitForDesktopExit(data['pid'] as int);
+          await waitForDesktopExit(pid);
         } on StateError {
           if (Platform.isLinux) {
             for (final name in ['stat', 'status', 'wchan']) {
