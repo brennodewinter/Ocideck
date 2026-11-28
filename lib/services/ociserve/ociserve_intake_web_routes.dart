@@ -27,8 +27,9 @@ bool isIntakeWebRequest(Uri base, String method, Uri url) {
   if (url.hasQuery &&
       !(route.length == 1 &&
           route.first == 'own' &&
-          url.queryParameters.keys.every((name) => name == 'cursor')))
+          url.queryParameters.keys.every((name) => name == 'cursor'))) {
     return false;
+  }
   if (route.length > 1 && !_intakeIdentifier.hasMatch(route[1])) return false;
   return switch (route) {
     ['forms', _] => method == 'GET',
