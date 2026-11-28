@@ -6,10 +6,33 @@ import 'package:ocideck/services/form/form_intake_context.dart';
 import 'package:ocideck/services/form/form_intake_organiser.dart';
 import 'package:ocideck/services/form/form_intake_snapshot.dart';
 import 'package:ocideck/services/form/form_workspace.dart';
+import 'package:ocideck_form_core/ocideck_form_core.dart';
 
 const _sid = 'aaaaaaaaaaaaaaaaaaaaaaaaaa'; // 26× [a-z2-7]: geldig form-id
 
 void main() {
+  test('start lege optionele toestemming uitgevinkt in de antwoordkopie', () {
+    const template = '''<!-- form id=recept version=1 -->
+<!-- field id=beeld type=consent -->
+Toestemming voor foto's.
+<!-- answer -->
+<!-- /field id=beeld -->
+<!-- field id=akkoord type=consent required -->
+Verplichte toestemming.
+<!-- answer -->
+<!-- /field id=akkoord -->
+''';
+    final copy = intakeAnswerCopy(template);
+    expect(templateTextIssues(template, copy), isEmpty);
+    final fill = (FormFill.open(copy) as FormFillReady).fill;
+    expect(fill.answerOf('beeld').consent, isFalse);
+    expect(fill.answerOf('akkoord').consent, isNull);
+    final accepted = copy.replaceFirst('- [ ]', '- [x]');
+    expect(intakeAnswerCopy(accepted), accepted);
+    final malformed = copy.replaceFirst('- [ ]', 'ja');
+    expect(intakeAnswerCopy(malformed), malformed);
+  });
+
   group('parseIntakeLink', () {
     test('leest form_ref uit een uitnodigingslink', () {
       final link = parseIntakeLink(

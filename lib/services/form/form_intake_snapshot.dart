@@ -3,6 +3,8 @@
 // het formulier zoals OciDeck het kent — de hele template-markdown.
 library;
 
+import 'package:ocideck_form_core/ocideck_form_core.dart';
+
 import '../../models/ociserve_intake.dart';
 
 /// Het `format`-veld van de `definition`: OciDeck-formulierdefinitie v1,
@@ -45,4 +47,25 @@ String? intakeFormMarkdown(IntakeFormSnapshot snapshot) {
   final markdown = definition['markdown'];
   if (markdown is! String || markdown.trim().isEmpty) return null;
   return markdown;
+}
+
+/// Start an optional, empty consent answer unchecked in the respondent copy.
+String intakeAnswerCopy(String markdown) {
+  final opened = FormFill.open(markdown);
+  if (opened is! FormFillReady) return markdown;
+  var fill = opened.fill;
+  for (final field in opened.fill.spec.fields) {
+    if (field.type != 'consent' || field.required) continue;
+    if (markdown
+        .substring(field.zone.start, field.zone.end)
+        .trim()
+        .isNotEmpty) {
+      continue;
+    }
+    if (fill.setAnswer(field.id, const FormAnswerValue(consent: false))
+        case FormFillChanged(fill: final updated)) {
+      fill = updated;
+    }
+  }
+  return fill.text;
 }

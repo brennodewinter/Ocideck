@@ -448,7 +448,7 @@ class _FormIntakeInvitationDialogState
     }
     Navigator.of(context).pop();
     widget.onOpenText(
-      markdown,
+      intakeAnswerCopy(markdown),
       FormIntakeSession(context: intake, publishedMarkdown: markdown),
     );
   }
