@@ -1453,6 +1453,21 @@ makepkg --printsrcinfo > .SRCINFO
 git commit -am "ocideck-bin <version>" && git push aur master
 ```
 
+### Package installation and first launch
+
+| Package route | Automated evidence | Check on a fresh consumer system |
+| --- | --- | --- |
+| Debian, Debian 12, RPM, AppImage and Linux tar | The consumer installs or extracts the artifact, checks native links and waits for the desktop first frame. | — |
+| Windows setup | The Windows release build installs, upgrades, observes a first frame, opens a presentation through the native picker, and uninstalls. It requires the three app-local VC++ runtime DLLs because the build image has Visual Studio. | On a Windows image without Visual Studio or the VC++ redistributable, run setup, launch from Start, and open a sample deck. This is the direct check for #2630. |
+| macOS ZIP / app | Notarization checks the signature, stapled ticket, Gatekeeper and launch of the app on the signing host. | On a fresh Mac, download the ZIP with a browser, expand it, move the app to Applications, and open it in Finder. Confirm Gatekeeper permits it and the app window appears. The direct binary probe on the signing host cannot exercise Finder's quarantine path. |
+| Flatpak | The consumer installs the bundle and checks its runtime, bundled binaries and file hashes. It runs inside a build container without a consumer desktop session. | Install the GNOME runtime and the `.flatpak` bundle in a clean desktop user account, run `flatpak run com.dewinter.ocideck` and confirm a window appears. That tests the application through the Flatpak sandbox and desktop integration. |
+| AUR | The PKGBUILD is updated from the verified release manifest. The packaged Linux tar is covered above. | On a fresh Arch environment, run `makepkg -si` as a normal user in the updated package directory and launch `ocideck`. |
+| Homebrew | The cask is checked against the release archive and its hash. | On a Mac with Homebrew, run `brew install --cask librekat/ocideck/ocideck` and open the installed app in Finder. |
+| WinGet | The manifest describes the same installer exercised by the Windows release build. | Run the local manifest check and install above, then launch the installed app from Start. After publication, `winget install --exact --id LibreKAT.OciDeck` also exercises the registry route. |
+
+Record the package version, environment and whether the window appeared. An
+installation or checksum result alone does not establish first launch.
+
 ### Before you tag
 
 Use `scripts/release_auto.sh` for a release. It runs `make check-release`,
