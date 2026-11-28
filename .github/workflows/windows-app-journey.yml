@@ -56,6 +56,7 @@ jobs:
       - name: Korte PR-reis of volledige nachtreis
         shell: bash
         env:
+          OCIDECK_APP_JOURNEY_INJECT_STALL: "1"
           FULL: ${{ github.event_name == 'schedule' || inputs.full }}
         run: |
           set -eu
