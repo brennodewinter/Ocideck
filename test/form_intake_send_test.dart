@@ -43,12 +43,15 @@ IntakePublicForm _publicForm() => IntakePublicForm(
 /// De respondenttransport gesimuleerd: de stappen lopen zoals de server ze
 /// beschrijft, zodat de reis zelf — en wat hij teruggeeft — getoetst wordt.
 class _FakeClient extends IntakeRespondentClient {
-  _FakeClient({this.failSubmit = false})
+  _FakeClient({this.failSubmit = false, this.loseFirstReceipt = false})
     : super(baseUrl: 'https://s.example.org');
 
   final bool failSubmit;
+  final bool loseFirstReceipt;
+  final submissionKeys = <String>[];
 
   List<int>? drafted;
+  var draftWrites = 0;
   var submitted = false;
 
   static const _grant = IntakeGrant(
@@ -100,6 +103,7 @@ class _FakeClient extends IntakeRespondentClient {
     required IntakeGrant grant,
     required List<int> bytes,
   }) async {
+    draftWrites++;
     drafted = bytes;
     return IntakeDraftReceipt(sha256: 'x' * 64, size: bytes.length);
   }
@@ -112,8 +116,14 @@ class _FakeClient extends IntakeRespondentClient {
     required int expectedSize,
     String? expectedFormSha256,
   }) async {
-    if (failSubmit) throw const OciServeException('unavailable');
+    submissionKeys.add(idempotencyKey);
+    if (failSubmit) {
+      throw const OciServeException('http_error', statusCode: 409);
+    }
     submitted = true;
+    if (loseFirstReceipt && submissionKeys.length == 1) {
+      throw const OciServeException('timeout');
+    }
     return IntakeSubmitReceipt(
       revision: 1,
       submittedAt: DateTime.utc(2026, 10, 5),
@@ -227,6 +237,33 @@ void main() {
     },
   );
 
+  testWidgets(
+    'na een ontoegankelijk ontvangstbewijs herhaalt de app dezelfde indiening',
+    (tester) async {
+      final client = _FakeClient(loseFirstReceipt: true);
+      await tester.pumpWidget(_app(client: client, onDone: (_) {}));
+
+      await _driveToConfirm(tester);
+      await tester.tap(find.text('Definitief insturen'));
+      await pumpUntil(
+        tester,
+        () => find.textContaining('Netwerkfout').evaluate().isNotEmpty,
+      );
+      expect(client.submitted, isTrue);
+      expect(find.textContaining('Verstuurd als revisie'), findsNothing);
+      expect(find.textContaining('Er is niets verstuurd'), findsNothing);
+
+      await tester.tap(find.text('Definitief insturen'));
+      await pumpUntil(
+        tester,
+        () => find.text('Verstuurd als revisie 1.').evaluate().isNotEmpty,
+      );
+      expect(client.draftWrites, 1);
+      expect(client.submissionKeys, hasLength(2));
+      expect(client.submissionKeys.toSet(), hasLength(1));
+    },
+  );
+
   testWidgets('een mislukt versturen legt niets vast en het werk blijft', (
     tester,
   ) async {
@@ -237,7 +274,7 @@ void main() {
     await tester.tap(find.text('Definitief insturen'));
     await pumpUntil(
       tester,
-      () => find.textContaining('niet bereikbaar').evaluate().isNotEmpty,
+      () => find.textContaining('Versturen lukte niet').evaluate().isNotEmpty,
       reason: 'de foutmelding verscheen niet',
     );
     expect(find.textContaining('je werk staat veilig'), findsWidgets);

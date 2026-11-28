@@ -81,6 +81,9 @@ class _FormIntakeSendDialogState extends State<FormIntakeSendDialog> {
   IntakeGrant? _grant;
   IntakeRespondentSubmission? _submission;
   IntakeSubmitReceipt? _receipt;
+  String? _stagedLocator;
+  late final String _submitKey = const Uuid().v4();
+  late final String _packageSha256 = sha256.convert(widget.package).toString();
   String? _error;
   String? _notice;
 
@@ -183,15 +186,18 @@ class _FormIntakeSendDialogState extends State<FormIntakeSendDialog> {
       _error = null;
     });
     try {
-      await _client.putDraft(grant: grant, bytes: widget.package);
+      if (_stagedLocator != grant.locator) {
+        await _client.putDraft(grant: grant, bytes: widget.package);
+        _stagedLocator = grant.locator;
+      }
       if (!mounted) return;
       setState(
         () => _notice = context.l10n.d('De inzending wordt vastgelegd…'),
       );
       final receipt = await _client.submit(
         grant: grant,
-        idempotencyKey: const Uuid().v4(),
-        expectedSha256: sha256.convert(widget.package).toString(),
+        idempotencyKey: _submitKey,
+        expectedSha256: _packageSha256,
         expectedSize: widget.package.length,
         expectedFormSha256: _context.formSha256,
       );
@@ -203,10 +209,28 @@ class _FormIntakeSendDialogState extends State<FormIntakeSendDialog> {
       });
     } on Object catch (error) {
       if (!mounted) return;
+      // The submit may already have committed. Reuse the same request for
+      // this locator and package, without writing over the staged draft.
+      final canReplay =
+          _stagedLocator == grant.locator &&
+          error is OciServeException &&
+          ((error.statusCode ?? 0) >= 500 ||
+              const {
+                'network',
+                'network_error',
+                'timeout',
+                'unavailable',
+                'invalid_response',
+                'intake_digest_mismatch',
+              }.contains(error.code));
       setState(() {
         _notice = null;
-        _error = _errorFor(error);
-        _step = _Step.intro;
+        _error = canReplay
+            ? context.l10n.d(
+                'Netwerkfout — controleer je verbinding en probeer het opnieuw.',
+              )
+            : _errorFor(error);
+        _step = canReplay ? _Step.confirm : _Step.intro;
       });
     }
   }
