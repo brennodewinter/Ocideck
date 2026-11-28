@@ -6,7 +6,6 @@ import 'dart:typed_data';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
-import 'package:flutter/painting.dart' show MemoryImage;
 
 import '../../services/form/form_image_service.dart';
 import '../../utils/image_limits.dart';
@@ -51,7 +50,7 @@ FormImageSupport? formImageSupportFor({
       probe: sessionImages.probe,
       preview: (path) {
         final bytes = sessionImages.read(path);
-        return bytes == null ? null : MemoryImage(bytes);
+        return bytes == null ? null : cappedMemoryImage(bytes);
       },
     );
   }
