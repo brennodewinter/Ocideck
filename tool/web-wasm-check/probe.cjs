@@ -7,6 +7,7 @@ const {execFileSync} = require('node:child_process');
 const {performance} = require('node:perf_hooks');
 const playwright = require('playwright');
 const scenarios = require('./scenarios.cjs');
+const {webFirstFrameEncodedBytes} = require('../release_size_limits.json');
 const root = path.resolve(process.argv[2] || 'build/web');
 const engines = (process.argv[3] || 'chromium,firefox,webkit').split(',');
 const mode = process.argv[4] || 'auto';
@@ -41,12 +42,23 @@ const server = require('./server.cjs')(root, mode);
           const observedReadyMs = performance.now() - started;
           await page.waitForTimeout(500);
           const measurements = await page.evaluate(() => ({
+            firstFrameMs: performance.getEntriesByName('probe:first-frame')[0].startTime,
             isolated:crossOriginIsolated,
             marks:performance.getEntriesByType('measure').filter(e=>e.name.startsWith('ocideck:'))
               .map(e=>({name:e.name,ms:e.duration})),
             resources:performance.getEntriesByType('resource').map(e=>({
-              url:e.name,encoded:e.encodedBodySize,decoded:e.decodedBodySize,transfer:e.transferSize})),
+              url:e.name,encoded:e.encodedBodySize,decoded:e.decodedBodySize,transfer:e.transferSize,startedMs:e.startTime})),
           }));
+          const origin = `http://127.0.0.1:${server.address().port}/`;
+          const encodedToFirstFrame = measurements.resources
+            .filter(resource => resource.url.startsWith(origin)
+              && resource.startedMs <= measurements.firstFrameMs)
+            .reduce((bytes, resource) => bytes + resource.encoded, 0);
+          const bytesLimit = webFirstFrameEncodedBytes[mode];
+          if (engine === 'chromium' && bytesLimit
+              && (encodedToFirstFrame <= 0 || encodedToFirstFrame > bytesLimit)) {
+            throw new Error(`Chromium ${mode} first-frame payload: ${encodedToFirstFrame} bytes (limit ${bytesLimit})`);
+          }
           const startupRequests = [...requests];
           const startupWorkers = [...workers];
           const snapshot = async name => {
@@ -84,7 +96,7 @@ const server = require('./server.cjs')(root, mode);
             !url.startsWith('blob:') && !url.startsWith('data:'));
           if (remote.length) throw new Error(`Third-party startup requests: ${remote.join(', ')}`);
           const item = {engine,browser:browser.version(),mode,run,wasm,skwasm,fallback,
-            observedReadyMs,workers:startupWorkers,journeyRequests:requests.slice(startupRequests.length),errors,badResponses,scenarios:[fileGuard.name,...journey],...measurements};
+            observedReadyMs,encodedToFirstFrame,workers:startupWorkers,journeyRequests:requests.slice(startupRequests.length),errors,badResponses,scenarios:[fileGuard.name,...journey],...measurements};
           results.push(item);
           if (run === 0 && process.env.OCIDECK_WASM_SCREENSHOT_DIR) {
             const output = path.resolve(process.env.OCIDECK_WASM_SCREENSHOT_DIR);

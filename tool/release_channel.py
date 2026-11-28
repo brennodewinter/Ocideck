@@ -33,13 +33,17 @@ def identity(tag, sha, channel):
     return tag[1:]
 
 
-def file_hash(path):
+def file_hash(path, byte_limit=None):
     # O_NOFOLLOW also rejects replacement with a symlink between listing and open.
     fd = os.open(path, os.O_RDONLY | os.O_NONBLOCK | os.O_NOFOLLOW)
     with os.fdopen(fd, 'rb') as stream:
         info = os.fstat(stream.fileno())
         if not stat.S_ISREG(info.st_mode) or info.st_size == 0:
             raise ValueError('asset must be a nonempty regular file: ' + path.name)
+        if byte_limit is not None:
+            print(f'{path.name}: {info.st_size} bytes (limit {byte_limit})')
+            if info.st_size > byte_limit:
+                raise ValueError(f'asset exceeds its size budget: {path.name}')
         hasher = hashlib.sha256()
         for chunk in iter(lambda: stream.read(1024 * 1024), b''):
             hasher.update(chunk)
@@ -47,7 +51,7 @@ def file_hash(path):
     return digest
 
 
-def assets(dist, version, channel):
+def assets(dist, version, channel, *, size_limits=None):
     if dist.is_symlink() or not dist.is_dir():
         raise ValueError('dist must be a real directory')
     owned = {name.format(v=version) for name in CHANNELS[channel]}
@@ -65,7 +69,9 @@ def assets(dist, version, channel):
     missing = owned - entries.keys()
     if missing:
         raise ValueError('missing assets: ' + ', '.join(sorted(missing)))
-    return {name: file_hash(entries[name]) for name in sorted(owned | (shared & entries.keys()))}
+    limits = {name.format(v=version): limit for name, limit in (size_limits or {}).items()}
+    return {name: file_hash(entries[name], limits.get(name))
+            for name in sorted(owned | (shared & entries.keys()))}
 
 
 def no_duplicates(pairs):
@@ -107,7 +113,8 @@ def create(args):
     identity(args.tag, args.controller_sha, args.channel)
     if not re.fullmatch(r'[1-9][0-9]*', args.run_id):
         raise ValueError('run-id must be a positive integer')
-    hashes = assets(args.dist, version, args.channel)
+    limits = json.loads(Path(__file__).with_name('release_size_limits.json').read_text(encoding='utf-8'))
+    hashes = assets(args.dist, version, args.channel, size_limits=limits['desktopArtifactBytes'])
     manifest = {'schema': 1, 'tag': args.tag, 'version': version, 'source': args.sha, 'controller_sha': args.controller_sha, 'channel': args.channel,
                 'run_id': args.run_id, 'files': hashes}
     checksum = ''.join(f'{digest}  {name}\n' for name, digest in hashes.items()).encode()

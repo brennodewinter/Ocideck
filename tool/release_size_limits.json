@@ -1,0 +1,14 @@
+{
+  "webRawBytes": 138000000,
+  "webFirstFrameEncodedBytes": {
+    "auto": 16700000,
+    "fallback": 15800000,
+    "single-thread": 16700000
+  },
+  "desktopArtifactBytes": {
+    "ocideck-linux-amd64-{v}.deb": 210000000,
+    "ocideck-linux-x86_64-{v}.AppImage": 229000000,
+    "ocideck-macos-{v}.zip": 142000000,
+    "ocideck-windows-x64-setup-{v}.exe": 52000000
+  }
+}

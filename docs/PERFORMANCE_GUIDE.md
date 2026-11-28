@@ -301,6 +301,37 @@ each step before the first frame took. That is observation, not a budget: it
 tells you where a user's machine stalled, and the fix still needs a measurement
 here.
 
+## Release size budgets
+
+The [size limits](../tool/release_size_limits.json) bound the uncompressed
+finished web tree, compressed Chromium startup resources and the four named
+desktop installers. The web packer measures the assembled tree. The browser
+probe counts response bodies for same-origin resource requests started by the
+first frame, from a fresh browser context. The release-channel manifest
+checks installer bytes before sealing a new candidate. Keep each limit at
+or below its current value unless the change is reviewed with new measurements.
+
+Measured on 2026-11-28. The web sample is pinned Chromium from
+[Linux web run 6943](https://pawprint.vigilis.online/LibreKAT/Ocideck/actions/runs/6943)
+on source `d2e778167`. That report includes resources seen immediately after the
+first frame and provides the baseline for the more narrowly timed check.
+The installer and full web tree baselines are from the 0.7.19 candidate.
+
+| Surface | Baseline, bytes | Budget, bytes |
+| --- | ---: | ---: |
+| Web, assembled tree | 133321857 | 138000000 |
+| Chromium WASM, first frame | 15305007 | 16700000 |
+| Chromium JS fallback, first frame | 13830532 | 15800000 |
+| Debian package | 205331838 | 210000000 |
+| Linux AppImage | 224270840 | 229000000 |
+| macOS ZIP | 137380774 | 142000000 |
+| Windows setup | 47703554 | 52000000 |
+
+Static PDF font faces are bundled and loaded when exporting a document. The
+four retained style faces per family provide real bold and italic outlines
+with the PDF library, and bundling keeps document export available offline.
+The installed size check includes those bytes.
+
 ## WebAssembly release (Flutter 3.50, 2026-11-18)
 
 The normal `make build-web` now produces both Dart WASM + skwasm and the

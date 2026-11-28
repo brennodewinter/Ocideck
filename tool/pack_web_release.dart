@@ -165,6 +165,20 @@ Future<void> main(List<String> args) async {
     exit(1);
   }
 
+  final limits =
+      jsonDecode(File('tool/release_size_limits.json').readAsStringSync())
+          as Map<String, Object?>;
+  final limit = limits['webRawBytes'] as int;
+  final bytes = [
+    checksumBestand,
+    ...bundelBestanden(bundel),
+  ].fold(0, (total, path) => total + File('${bundel.path}/$path').lengthSync());
+  stdout.writeln('Webbundle: $bytes bytes (budget $limit).');
+  if (bytes > limit) {
+    stderr.writeln('Webbundle overschrijdt het groottebudget.');
+    exit(1);
+  }
+
   final digest = bundelDigest(bundel);
   stdout.writeln(
     'Release-artefacten geplaatst en $checksumBestand geschreven.',
