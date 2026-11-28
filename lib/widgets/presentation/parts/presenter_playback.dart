@@ -212,6 +212,7 @@ extension _PresenterPlayback on _FullscreenPresenterState {
   Future<void> _exit({bool completed = false}) async {
     if (_exiting) return;
     _exiting = true;
+    logInfo('Presenter exit diagnostic: started');
     _advanceTimer?.cancel();
     // De mic vrijgeven vóór het eindscherm: het oefenoverzicht kan even open
     // blijven staan en de doorvoer hoort dan al stil te zijn (#2158).
@@ -228,7 +229,21 @@ extension _PresenterPlayback on _FullscreenPresenterState {
     // Het presentatorvenster staat in beide modi volledig scherm — ook met een
     // publieksvenster ernaast (#2289).
     await setPresenterFullscreen(false);
-    if (mounted) Navigator.pop(context, _exitSlideId(widget.slides, _index));
+    logInfo('Presenter exit diagnostic: native exit returned, mounted=$mounted');
+    if (mounted) {
+      final route = ModalRoute.of(context);
+      logInfo('Presenter exit diagnostic: presentation route current=${route?.isCurrent}');
+      if (route != null) {
+        unawaited(route.completed.then((_) {
+          logInfo('Presenter exit diagnostic: presentation route completed');
+        }));
+      }
+      Navigator.pop(context, _exitSlideId(widget.slides, _index));
+      logInfo('Presenter exit diagnostic: navigator pop returned');
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        logInfo('Presenter exit diagnostic: frame following navigator pop');
+      });
+    }
   }
 
   /// Toon na afloop de oefenrun-samenvatting wanneer de deck-schakelaar aan

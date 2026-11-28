@@ -348,7 +348,8 @@ def exercise_presentation(driver, app, evidence):
 
     def open_deck():
         state = driver.window(app.pid)
-        if state and state[2] == 'HEADLESS-1' and text_position(state[1], 'dualprobe'):
+        # The title appears in both the slide and the editor. This label is editor-only.
+        if state and state[2] == 'HEADLESS-1' and text_position(state[1], 'opsommingsteken'):
             return state
         return None
 

@@ -166,7 +166,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        backend: [x11, wayland]
+        backend: [wayland]
     container:
       image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.50.0@sha256:e43e18573ee176a5f19165230e959d559d3f5d0116d9f151619529f99cba2841
     steps:
