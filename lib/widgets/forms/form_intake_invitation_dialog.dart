@@ -268,6 +268,11 @@ class _FormIntakeInvitationDialogState
 
   List<Widget> _history(AppLocalizations l10n) => [
     Text(l10n.d('Mijn inzendingen')),
+    if (_form case final form?) Text(form.snapshot.title),
+    if (_parsed case final parsed?)
+      Text(
+        l10n.d('Bestemming: {server}').replaceAll('{server}', parsed.baseUrl),
+      ),
     if (_ownItems.isEmpty) Text(l10n.d('Je hebt nog geen inzendingen.')),
     for (final item in _ownItems)
       Card(
@@ -277,6 +282,16 @@ class _FormIntakeInvitationDialogState
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(item.title),
+              Text(
+                l10n
+                    .d('Ontvangen {datum}')
+                    .replaceAll(
+                      '{datum}',
+                      MaterialLocalizations.of(
+                        context,
+                      ).formatShortDate(item.submittedAt.toLocal()),
+                    ),
+              ),
               Text(switch (item.status) {
                 IntakeEditorialStatus.submitted => l10n.d('Ingediend'),
                 IntakeEditorialStatus.approved => l10n.d('Goedgekeurd'),

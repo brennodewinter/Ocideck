@@ -855,6 +855,7 @@ class IntakeOwnItem {
     this.title,
     this.status,
     this.revision,
+    this.submittedAt,
     this.reason,
     this.publicUrl,
   );
@@ -862,6 +863,7 @@ class IntakeOwnItem {
   final String title;
   final IntakeEditorialStatus status;
   final int revision;
+  final DateTime submittedAt;
   final String? reason;
   final String? publicUrl;
 
@@ -870,6 +872,7 @@ class IntakeOwnItem {
     _requiredString(json, 'title'),
     IntakeEditorialStatus.parse(json['editorial_status']),
     _requiredInt(json, 'revision'),
+    DateTime.parse(_requiredString(json, 'submitted_at')),
     json['reason_for_submitter'] as String?,
     json['public_article_url'] as String?,
   );

@@ -1,3 +1,6 @@
+@TestOn('browser')
+library;
+
 import 'dart:convert';
 import 'dart:typed_data';
 
@@ -94,6 +97,7 @@ class _EditorialTransport implements OciServeHttpTransport {
               'title': 'Recept dat opnieuw kan',
               'revision': 1,
               'editorial_status': 'rejected',
+              'submitted_at': '2026-11-26T12:00:00Z',
               'reason_for_submitter': 'Voeg de bereiding toe.',
             },
             {
@@ -101,6 +105,7 @@ class _EditorialTransport implements OciServeHttpTransport {
               'title': 'Recept dat online staat',
               'revision': 2,
               'editorial_status': 'published',
+              'submitted_at': '2026-11-27T13:00:00Z',
               'public_article_url': 'https://public.example.nl/recept/indo',
             },
           ],
@@ -213,6 +218,9 @@ void main() {
         tester,
         () => find.text('Gepubliceerd').evaluate().isNotEmpty,
       );
+      expect(find.text('Kookboek'), findsOneWidget);
+      expect(find.text('Bestemming: https://serve.example.nl'), findsOneWidget);
+      expect(find.textContaining('Ontvangen '), findsNWidgets(2));
       expect(find.text('Geweigerd'), findsOneWidget);
       expect(find.text('Voeg de bereiding toe.'), findsOneWidget);
       expect(find.text('Wijziging indienen'), findsOneWidget);
