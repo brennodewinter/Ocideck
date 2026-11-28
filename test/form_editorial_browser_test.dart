@@ -30,15 +30,16 @@ final _filled = _markdown.replaceFirst(
   '<!-- answer -->\nNasi goreng',
 );
 
-IntakeFormSnapshot _snapshot() => buildIntakeSnapshot(
-  markdown: _markdown,
-  title: 'Kookboek',
-  purposes: ['recept'],
-  privacyText: 'Een jaar bewaren.',
-  retentionDraftDays: 30,
-  retentionSubmittedDays: 365,
-  correctionAllowed: true,
-);
+IntakeFormSnapshot _snapshot({String markdown = _markdown}) =>
+    buildIntakeSnapshot(
+      markdown: markdown,
+      title: 'Kookboek',
+      purposes: ['recept'],
+      privacyText: 'Een jaar bewaren.',
+      retentionDraftDays: 30,
+      retentionSubmittedDays: 365,
+      correctionAllowed: true,
+    );
 
 class _EditorialTransport implements OciServeHttpTransport {
   final routes = <String>[];
@@ -61,10 +62,12 @@ class _EditorialTransport implements OciServeHttpTransport {
         return _json(
           {
             'form_ref': 'ref',
-            'version': 1,
+            'version': 2,
             'accepting': true,
             'operational_status': 'open',
-            'snapshot': _snapshot().toJson(),
+            'snapshot': _snapshot(
+              markdown: _markdown.replaceFirst('version=1', 'version=2'),
+            ).toJson(),
           },
           headers: {'x-ociserve-editorial': 'true', 'etag': '"${'a' * 64}"'},
         );
@@ -107,6 +110,20 @@ class _EditorialTransport implements OciServeHttpTransport {
               'editorial_status': 'published',
               'submitted_at': '2026-11-27T13:00:00Z',
               'public_article_url': 'https://public.example.nl/recept/indo',
+            },
+            {
+              'submission_id': 'three',
+              'title': 'Recept in behandeling',
+              'revision': 1,
+              'editorial_status': 'submitted',
+              'submitted_at': '2026-11-27T14:00:00Z',
+            },
+            {
+              'submission_id': 'four',
+              'title': 'Goedgekeurd recept',
+              'revision': 1,
+              'editorial_status': 'approved',
+              'submitted_at': '2026-11-27T15:00:00Z',
             },
           ],
           'next_cursor': '',
@@ -220,18 +237,37 @@ void main() {
       );
       expect(find.text('Kookboek'), findsOneWidget);
       expect(find.text('Bestemming: https://serve.example.nl'), findsOneWidget);
-      expect(find.textContaining('Ontvangen '), findsNWidgets(2));
-      expect(find.text('Geweigerd'), findsOneWidget);
+      expect(find.textContaining('Ontvangen '), findsNWidgets(4));
+      for (final status in [
+        'Ingediend',
+        'Goedgekeurd',
+        'Gepubliceerd',
+        'Geweigerd',
+      ]) {
+        expect(find.text(status), findsOneWidget);
+      }
       expect(find.text('Voeg de bereiding toe.'), findsOneWidget);
-      expect(find.text('Wijziging indienen'), findsOneWidget);
+      expect(find.text('Wijziging indienen'), findsNWidgets(3));
+      expect(
+        find.descendant(
+          of: find.widgetWithText(Card, 'Recept dat online staat'),
+          matching: find.text('Wijziging indienen'),
+        ),
+        findsNothing,
+      );
       expect(
         find.text('https://public.example.nl/recept/indo'),
         findsOneWidget,
       );
-      await tester.ensureVisible(find.text('Wijziging indienen'));
-      await tester.tap(find.text('Wijziging indienen'));
+      final reviseRejected = find.descendant(
+        of: find.widgetWithText(Card, 'Recept dat opnieuw kan'),
+        matching: find.text('Wijziging indienen'),
+      );
+      await tester.ensureVisible(reviseRejected);
+      await tester.tap(reviseRejected);
       await pumpUntil(tester, () => editing != null);
       expect(openedText, _filled);
+      expect(editing!.publishedMarkdown, _markdown);
       expect(editing!.context.revision, 1);
       expect(editing!.context.locator, 'existing');
       expect(editing!.revisionGrant?.token, 'revision-proof');
