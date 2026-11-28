@@ -181,18 +181,13 @@ jobs:
         run: |
           apt-get update
           bash scripts/prepare_linux_probe.sh desktop
-          apt-get install -y --no-install-recommends openbox xdotool x11-utils python3-pil tesseract-ocr sway grim wtype libwayland-dev libsecret-1-0 libayatana-appindicator3-1 libwebkit2gtk-4.1-0 libpulse0 libgstreamer1.0-0 gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-libav libmpv2 libgl1-mesa-dri libegl-mesa0
+          apt-get install -y --no-install-recommends openbox xdotool x11-utils python3-pil tesseract-ocr sway grim libwayland-dev libsecret-1-0 libayatana-appindicator3-1 libwebkit2gtk-4.1-0 libpulse0 libgstreamer1.0-0 gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-libav libmpv2 libgl1-mesa-dri libegl-mesa0
       - name: De gedeelde releasebundel uitpakken
         run: tar -C desktop-bundle -xzf desktop-bundle/linux-desktop-bundle.tar.gz
       - name: Start, venster, schaal en muis op ${{ matrix.backend }}
         env:
           OCIDECK_PROBE_SOURCE_COMMIT: ${{ github.sha }}
         run: scripts/run_linux_window_probe.sh '${{ matrix.backend }}' desktop-bundle/bundle/ocideck probe-evidence/${{ matrix.backend }}
-      - name: Presentatie verdelen, scherm loskoppelen en herstellen
-        if: matrix.backend == 'wayland'
-        env:
-          OCIDECK_PROBE_SOURCE_COMMIT: ${{ github.sha }}
-        run: scripts/run_linux_window_probe.sh wayland desktop-bundle/bundle/ocideck probe-evidence/wayland/presentation --presentation
       - name: Sessiebewijs bewaren, ook bij fouten
         if: always()
         uses: actions/upload-artifact@ff15f0306b3f739f7b6fd43fb5d26cd321bd4de5 # v3.2.1

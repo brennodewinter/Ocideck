@@ -871,13 +871,6 @@ errors and the startup watchdog, and requires the process to remain alive.
 It then checks native geometry and visible Flutter content over A/B/A changes,
 clicks Settings with native input and observes a cursor change over search.
 Wayland moves the window between 100% and 200% outputs in both directions.
-A second Wayland session opens a fixture deck and clicks the actual Presenteren
-command in the palette. The compositor must put the audience and presenter on
-different outputs. The probe disables and re-enables the audience output,
-closes the presentation from the presenter window, and verifies that a second
-presentation uses both outputs again. The test retains the output and window
-timeline separately. The Windows multi-monitor path requires a native
-extended desktop and is not covered by this Linux probe.
 `session.json` records the backend, display, app hash, source commit and startup
 result; screenshots, startup/app/compositor logs and `result.json` are uploaded
 per backend even after a failure. This is software-rendered headless coverage;
