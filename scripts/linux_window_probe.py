@@ -359,9 +359,14 @@ def exercise_presentation(driver, app, evidence):
         if not replies or not all(reply.get('success') for reply in replies):
             raise RuntimeError(f'Sway could not focus the presenter: {replies}')
 
+    def press_keys(*keys):
+        # GTK must bind the new keyboard before the first event and retain it
+        # through release. Each wtype process creates a keyboard on this seat.
+        run('wtype', '-s', '700', *keys, '-s', '350')
+
     def start():
         focus_presenter()
-        run('wtype', '-M', 'ctrl', '-k', 'k', '-m', 'ctrl')
+        press_keys('-M', 'ctrl', '-k', 'k', '-m', 'ctrl')
         wait_for('command palette', lambda: text_position(rect, 'commando'), app)
         command = wait_for('Presenteren command',
                            lambda: text_position(rect, 'presenteren'), app)
@@ -410,9 +415,7 @@ def exercise_presentation(driver, app, evidence):
 
     def finish():
         focus_presenter()
-        # Creating a virtual keyboard changes the seat capabilities. Give GTK
-        # time to bind it before sending Escape, and keep it alive through release.
-        run('wtype', '-s', '700', '-k', 'Escape', '-s', '350')
+        press_keys('-k', 'Escape')
         try:
             wait_for('audience closed and editor visible',
                      lambda: open_deck() if len(driver.windows(app.pid)) == 1 else None, app)
