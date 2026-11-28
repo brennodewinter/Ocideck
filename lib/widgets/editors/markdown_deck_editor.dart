@@ -729,21 +729,8 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
   /// hier immers niet verder, hij springt tekst in.
   void _focusNextPanel() => FocusManager.instance.primaryFocus?.nextFocus();
 
-  KeyEventResult _handleEditorKey(FocusNode node, KeyEvent event) {
+  KeyEventResult _handleEscape(FocusNode node, KeyEvent event) {
     if (event is! KeyDownEvent) return KeyEventResult.ignored;
-    final keyboard = HardwareKeyboard.instance;
-    if (event.logicalKey == LogicalKeyboardKey.tab &&
-        _editorFocusNode.hasPrimaryFocus &&
-        !keyboard.isControlPressed &&
-        !keyboard.isMetaPressed &&
-        !keyboard.isAltPressed) {
-      if (keyboard.isShiftPressed) {
-        MarkdownEditorActions.outdentSelection(_ctrl);
-      } else {
-        MarkdownEditorActions.indentSelection(_ctrl);
-      }
-      return KeyEventResult.handled;
-    }
     if (event.logicalKey != LogicalKeyboardKey.escape) {
       return KeyEventResult.ignored;
     }
@@ -819,7 +806,7 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
             _focusNextPanel,
       },
       child: Focus(
-        onKeyEvent: _handleEditorKey,
+        onKeyEvent: _handleEscape,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [

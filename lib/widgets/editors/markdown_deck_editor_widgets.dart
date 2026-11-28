@@ -8,7 +8,7 @@ part of 'markdown_deck_editor.dart';
 /// Het schrijfvlak zelf. Staat in de part omdat het hoofdbestand op zijn
 /// regelplafond zit (#1509) — zelfde reden als de widgets hierboven.
 Widget _sourceTextField(_MarkdownDeckEditorState state) {
-  return Semantics(
+  final field = Semantics(
     label: state.context.l10n.d('Markdown-broneditor'),
     textField: true,
     child: EdgeDragAutoScroll(
@@ -56,6 +56,15 @@ Widget _sourceTextField(_MarkdownDeckEditorState state) {
         ),
       ),
     ),
+  );
+  return CallbackShortcuts(
+    bindings: {
+      const SingleActivator(LogicalKeyboardKey.tab): () =>
+          MarkdownEditorActions.indentSelection(state._ctrl),
+      const SingleActivator(LogicalKeyboardKey.tab, shift: true): () =>
+          MarkdownEditorActions.outdentSelection(state._ctrl),
+    },
+    child: field,
   );
 }
 
