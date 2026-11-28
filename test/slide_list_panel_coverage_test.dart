@@ -392,6 +392,21 @@ void main() {
     await tester.pump(const Duration(milliseconds: 200));
     expect(container.read(editorProvider).selectedIndex, 0);
 
+    final railFrame = find.descendant(
+      of: find.byType(SlideListPanel),
+      matching: find.byWidgetPredicate(
+        (w) =>
+            w is Container &&
+            w.decoration is BoxDecoration &&
+            (w.decoration! as BoxDecoration).border is Border &&
+            ((w.decoration! as BoxDecoration).border! as Border).top.width == 2,
+      ),
+    );
+    final visibleFrame = tester.widget<Container>(railFrame.first);
+    final outline =
+        (visibleFrame.decoration! as BoxDecoration).border! as Border;
+    expect(outline.top.color, AppTheme.light.colorScheme.secondary);
+
     // Delete with a single selection drops that one slide (4 → 3).
     await tester.sendKeyEvent(LogicalKeyboardKey.delete);
     await tester.pump();
@@ -404,6 +419,12 @@ void main() {
     await tester.sendKeyUpEvent(LogicalKeyboardKey.controlLeft);
     await tester.pump();
     expect(container.read(editorProvider).selection.length, 3);
+    container.read(deckProvider.notifier).undo();
+    await tester.pump();
+    expect(
+      container.read(deckProvider).deck!.slides.map((slide) => slide.title),
+      ['A', 'B', 'C', 'D'],
+    );
     expect(tester.takeException(), isNull);
   });
 

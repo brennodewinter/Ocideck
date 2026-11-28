@@ -83,6 +83,33 @@ void main() {
     );
   });
 
+  for (final shortcut in ['Escape', 'Ctrl+Tab']) {
+    testWidgets('$shortcut exits the Markdown text without editing it', (
+      tester,
+    ) async {
+      const source = '# Titel';
+      await tester.pumpWidget(_host(content: source, onApply: (_) {}));
+      final field = find.byType(TextField).last;
+      await tester.tap(field);
+      await tester.pumpAndSettle();
+      final editable = tester.widget<EditableText>(
+        find.byType(EditableText).last,
+      );
+      expect(editable.focusNode.hasPrimaryFocus, isTrue);
+
+      if (shortcut == 'Escape') {
+        await tester.sendKeyEvent(LogicalKeyboardKey.escape);
+      } else {
+        await sendControlKey(tester, LogicalKeyboardKey.tab);
+      }
+      await tester.pumpAndSettle();
+
+      expect(editable.focusNode.hasFocus, isFalse);
+      expect(FocusManager.instance.primaryFocus?.context, isNotNull);
+      expect(editable.controller.text, source);
+    });
+  }
+
   testWidgets('opens find bar on Ctrl+F', (tester) async {
     await tester.pumpWidget(
       _host(content: '# Titel\n\nfoo bar', onApply: (_) {}),
@@ -130,7 +157,41 @@ void main() {
     await tester.pumpAndSettle();
 
     final fields = find.byType(TextField);
-    await tester.enterText(fields.at(0), 'foo');
+    final findField = tester.widget<EditableText>(
+      find.descendant(of: fields.at(0), matching: find.byType(EditableText)),
+    );
+    await tester.tap(fields.at(0));
+    await tester.pumpAndSettle();
+    for (final query in ['f', 'fo', 'foo']) {
+      tester.testTextInput.enterText(query);
+      await tester.pumpAndSettle();
+      expect(findField.focusNode.hasPrimaryFocus, isTrue);
+      expect(findField.controller.text, query);
+    }
+    final replaceField = tester.widget<EditableText>(
+      find.descendant(of: fields.at(1), matching: find.byType(EditableText)),
+    );
+    var steps = 0;
+    do {
+      await tester.sendKeyEvent(LogicalKeyboardKey.tab);
+      await tester.pump();
+      steps++;
+    } while (!replaceField.focusNode.hasPrimaryFocus && steps < 12);
+    expect(replaceField.focusNode.hasPrimaryFocus, isTrue);
+    await tester.sendKeyDownEvent(LogicalKeyboardKey.shiftLeft);
+    for (var i = 0; i < steps; i++) {
+      await tester.sendKeyEvent(LogicalKeyboardKey.tab);
+      await tester.pump();
+    }
+    await tester.sendKeyUpEvent(LogicalKeyboardKey.shiftLeft);
+    expect(findField.focusNode.hasPrimaryFocus, isTrue);
+    expect(
+      tester
+          .widget<EditableText>(find.byType(EditableText).last)
+          .controller
+          .text,
+      'foo bar foo',
+    );
     await tester.enterText(fields.at(1), 'baz');
     await tester.pumpAndSettle();
 

@@ -729,8 +729,21 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
   /// hier immers niet verder, hij springt tekst in.
   void _focusNextPanel() => FocusManager.instance.primaryFocus?.nextFocus();
 
-  KeyEventResult _handleEscape(FocusNode node, KeyEvent event) {
+  KeyEventResult _handleEditorKey(FocusNode node, KeyEvent event) {
     if (event is! KeyDownEvent) return KeyEventResult.ignored;
+    final keyboard = HardwareKeyboard.instance;
+    if (event.logicalKey == LogicalKeyboardKey.tab &&
+        _editorFocusNode.hasPrimaryFocus &&
+        !keyboard.isControlPressed &&
+        !keyboard.isMetaPressed &&
+        !keyboard.isAltPressed) {
+      if (keyboard.isShiftPressed) {
+        MarkdownEditorActions.outdentSelection(_ctrl);
+      } else {
+        MarkdownEditorActions.indentSelection(_ctrl);
+      }
+      return KeyEventResult.handled;
+    }
     if (event.logicalKey != LogicalKeyboardKey.escape) {
       return KeyEventResult.ignored;
     }
@@ -798,10 +811,6 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
             _openCommandPalette,
         const SingleActivator(LogicalKeyboardKey.space, meta: true):
             _openCommandPalette,
-        const SingleActivator(LogicalKeyboardKey.tab): () =>
-            MarkdownEditorActions.indentSelection(_ctrl),
-        const SingleActivator(LogicalKeyboardKey.tab, shift: true): () =>
-            MarkdownEditorActions.outdentSelection(_ctrl),
         // Uit het bewerkveld zonder de tekst te wijzigen (#2729): Ctrl/Cmd+Tab
         // springt naar de volgende focusbare plek, net als Escape.
         const SingleActivator(LogicalKeyboardKey.tab, control: true):
@@ -810,7 +819,7 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
             _focusNextPanel,
       },
       child: Focus(
-        onKeyEvent: _handleEscape,
+        onKeyEvent: _handleEditorKey,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
