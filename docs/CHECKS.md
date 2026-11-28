@@ -2227,6 +2227,40 @@ that reaches beyond `build/test_cache`.
 
 ---
 
+## Escaped bugs reviewed in November 2026
+
+The [bug closure procedure](../CONTRIBUTING.md#closing-a-bug-that-escaped-to-users)
+was checked against eight reports submitted by accounts other than the
+maintainer and labelled `bug` in Pawprint, using the created-date window
+2026-10-25 through 2026-11-25 UTC. The original issue cited thirteen reports
+without a list or a query. The sample below uses the eight tracker records
+identified with these explicit filters.
+
+| Report | Where it should have been caught |
+| --- | --- |
+| [#2612] | A documentation render check. The section was present in the source, but the raw-text tag hid it on Forgejo. The Markdown raw-text tag check now covers that input. |
+| [#2660] | A browser journey with a real style edit and image input. The automatic browser probe added in #3212 now exercises a logo change. |
+| [#2899] | Native pointer interaction on a Wayland compositor. Successful startup with a window establishes neither input delivery nor behaviour on Sway. |
+| [#3106] | Compositor-driven resizing with a scale change. The Linux X11 and Wayland startup probes establish the backend and first frame. Live scale changes need separate coverage. |
+| [#3145] | File discovery with a renamed deck in a linked library directory. The scan regression checks the symlink case. |
+| [#3148] | An AppImage consumer job with a clean dependency environment and a required app frame. The earlier image supplied the missing library. See #3197–#3199. |
+| [#3149] | Closing a real extended-desktop presentation with Escape. The bounded-channel regression proves the control returns when the audience channel is stuck. |
+| [#3150] | Native presentation with extended displays and a display disappearing during placement. The snapshot regression in #3216 covers Dart decisions, and native multi-display acceptance is tracked in #3209. |
+
+The recurring gap in this sample is native desktop behaviour after startup.
+Four reports concern live compositor, input or display changes. See
+[#3209](https://pawprint.vigilis.online/LibreKAT/Ocideck/issues/3209) for the
+extended-display scenario.
+
+[#2612]: https://pawprint.vigilis.online/LibreKAT/Ocideck/issues/2612
+[#2660]: https://pawprint.vigilis.online/LibreKAT/Ocideck/issues/2660
+[#2899]: https://pawprint.vigilis.online/LibreKAT/Ocideck/issues/2899
+[#3106]: https://pawprint.vigilis.online/LibreKAT/Ocideck/issues/3106
+[#3145]: https://pawprint.vigilis.online/LibreKAT/Ocideck/issues/3145
+[#3148]: https://pawprint.vigilis.online/LibreKAT/Ocideck/issues/3148
+[#3149]: https://pawprint.vigilis.online/LibreKAT/Ocideck/issues/3149
+[#3150]: https://pawprint.vigilis.online/LibreKAT/Ocideck/issues/3150
+
 ## Continuous integration
 
 Pawprint’s registered Actions runners read `.forgejo/workflows/`. The GitHub

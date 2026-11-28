@@ -30,5 +30,8 @@ triggers the issue.
 **Additional context**
 Anything else that might help.
 
+**Where should this have been caught? (maintainer triage)**
+<!-- Name the verification step and why it missed. Link the evidence when closing the issue. -->
+
 > For **security vulnerabilities**, do not open a public issue — see
 > [SECURITY.md](../../SECURITY.md).

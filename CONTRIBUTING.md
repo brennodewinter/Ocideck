@@ -388,3 +388,23 @@ rewritten rather than extended.
 
 Use the issue templates in the [Forgejo tracker](https://pawprint.vigilis.online/LibreKAT/Ocideck/issues). For **security issues, do not open a public
 issue** — follow [`SECURITY.md`](SECURITY.md).
+
+
+### Closing a bug that escaped to users
+
+Fill in **Where should this have been caught?** in the issue before closing
+it. Link the fix and verification evidence. Record the first applicable case.
+
+- **Existing check missed it.** Identify the check and the missing assertion,
+  input or platform. Record how the check now detects the failure.
+- **Existing check ran too late.** Identify when it ran and where it can give
+  timely feedback. Record the timing gap if it remains.
+- **Coverage gap.** Name the missing check or record the concrete gap and
+  why it remains open.
+
+For a recurring failure, name and count the related cases before choosing a
+regression test. Record the search or inventory used to get the count, what
+you inspected and any unavailable cases. This can be the complete set of
+call sites, slide types, platforms, or release formats that share the failed
+condition. Keep the evidence in the issue so it is searchable and the scope
+can be checked in review.
