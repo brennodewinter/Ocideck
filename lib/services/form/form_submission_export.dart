@@ -107,11 +107,14 @@ Future<FormSubmissionResult> buildFormSubmission({
   }
 
   final sid = newFormId(random);
+  // De pakketbouwer leest toestemmingslabels op hun posities in de
+  // publicatie. De antwoorden kunnen die posities in fill.spec verschuiven.
+  final publishedSpec = readSubmissionStructure(published).spec!;
   try {
     final bytes = buildFormPackage(
       submission: submission,
       template: published,
-      spec: fill.spec,
+      spec: publishedSpec,
       images: images,
       submissionId: sid,
       created: now,

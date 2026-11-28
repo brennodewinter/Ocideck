@@ -103,6 +103,38 @@ void main() {
     expect(a.bytes, isNot((c as FormSubmissionBuilt).bytes));
   });
 
+  test('hasht het gepubliceerde toestemmingslabel na lange antwoorden', () async {
+    const consent = '''
+<!-- field id=beeld type=consent -->
+Ik geef toestemming voor de besloten voorvertoning.
+<!-- answer -->
+<!-- /field id=beeld -->
+''';
+    final template = leeg.replaceFirst(' max-chars=40', '') + consent;
+    final filled = template
+        .replaceFirst(
+          '<!-- answer -->\n<!-- /field id=naam -->',
+          '<!-- answer -->\n${'Een lang antwoord ' * 12}\n<!-- /field id=naam -->',
+        )
+        .replaceFirst(
+          '<!-- answer -->\n<!-- /field id=beeld -->',
+          '<!-- answer -->\n- [x]\n<!-- /field id=beeld -->',
+        );
+    final result = await build(
+      fillOf(filled),
+      published: frontMatter + template,
+    );
+    expect(result, isA<FormSubmissionBuilt>());
+    final record = open(result as FormSubmissionBuilt).manifest.consent.single;
+    expect(record.field, 'beeld');
+    expect(
+      record.textSha256,
+      sha256Hex(
+        'Ik geef toestemming voor de besloten voorvertoning.'.codeUnits,
+      ),
+    );
+  });
+
   test('een open fout houdt het pakket tegen', () async {
     final result = await build(fillOf(leeg));
     expect(result, isA<FormSubmissionBlocked>());
