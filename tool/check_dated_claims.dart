@@ -119,6 +119,15 @@ class GemetenBewering {
 /// [looptijdBasislijn] en blijft daar staan.
 const List<GemetenBewering> gemetenBeweringen = [
   GemetenBewering(
+    id: 'web-first-frame',
+    bestand: 'docs/PERFORMANCE_GUIDE.md',
+    anker: '## WebAssembly release (Flutter 3.50, 2026-11-18)',
+    grootheid: 'de webpayload en de tijd tot het eerste appframe per browser',
+    gemetenOp: '2026-11-18',
+    houdbaarDagen: 120,
+    hermeetMet: 'make check-web en de browsercommando’s in de gids',
+  ),
+  GemetenBewering(
     id: 'linux-gate-oordeel',
     bestand: 'docs/CHECKS.md',
     anker: 'measured 2026-09-03',

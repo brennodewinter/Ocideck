@@ -874,16 +874,18 @@ test-age-interop:
 
 test-packages: package-deps
 	@echo "== OciDeck check: package tests =="
-	@echo "Command: dart test --coverage in each packages/<name> after package-deps,"
+	@echo "Command: dart --enable-vm-service=0 test --coverage in each packages/<name> after package-deps,"
 	@echo "         then dart run tool/package_coverage.dart --min=$(PACKAGE_COVERAGE_MIN) --per-file-floor=$(PACKAGE_PER_FILE_FLOOR)"
 	@echo "Covers: the tests of every first-party package, in random order, plus its coverage floors:"
 	@echo "        the average, every lib/ file in a test, and a floor per file."
 	@echo "Failure means: a package test failed, its lock file drifted (run 'dart pub get' in the"
 	@echo "        package and commit pubspec.lock), or coverage fell below the floor."
+# Dekking vraagt vanuit parallelle suite-loads om dezelfde VM-service. Start die
+# vooraf, zodat de verbinding al klaarstaat vóór de loads beginnen (#3297).
 	@set -e; for p in $(PACKAGE_DIRS); do \
 	  echo "-- $$p"; \
 	  ( cd $$p && rm -rf coverage \
-	    && dart test --test-randomize-ordering-seed random --coverage=coverage \
+	    && dart --enable-vm-service=0 test --test-randomize-ordering-seed random --coverage=coverage \
 	    && dart run coverage:format_coverage --lcov --in=coverage --out=coverage/lcov.info --report-on=lib --check-ignore ); \
 	  dart run tool/package_coverage.dart --package=$$p --min=$(PACKAGE_COVERAGE_MIN) --per-file-floor=$(PACKAGE_PER_FILE_FLOOR); \
 	done
@@ -1036,6 +1038,7 @@ check-dated-claims:
 	@echo "        looptijdBasislijn bij als het geschiedenis is."
 	@echo "        Houdbaarheid: dart run tool/check_dated_claims.dart --tegen-de-klok"
 	dart run tool/check_dated_claims.dart
+	dart tool/performance_inventory.dart --check
 
 # De zes tellingen voor de bekende LTR-lay-outbeperking zijn afgeleid uit lib/.
 check-rtl-inventory:

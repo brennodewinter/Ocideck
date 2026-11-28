@@ -1088,7 +1088,7 @@ cannot satisfy that counterfactual. The ordinary static workaround checks remain
 
 ### `make test-packages`
 - **Runs:** per package under `packages/`: `dart pub get --enforce-lockfile`,
-  `dart test --test-randomize-ordering-seed random --coverage=coverage`,
+  `dart --enable-vm-service=0 test --test-randomize-ordering-seed random --coverage=coverage`,
   `coverage:format_coverage` to `coverage/lcov.info`, then
   `dart run tool/package_coverage.dart --package=<dir> --min=90 --per-file-floor=60`
   (`PACKAGE_COVERAGE_MIN` and `PACKAGE_PER_FILE_FLOOR` override the floors).
@@ -1108,6 +1108,12 @@ cannot satisfy that counterfactual. The ordinary static workaround checks remain
   static half is `check-packages`.
 - **Failure means:** a package test failed, the package's `pubspec.lock` drifted
   (run `dart pub get` in the package and commit it), or coverage fell below a floor.
+
+Coverage uses the test runner's loopback VM service. The command starts that
+service before loading parallel suites. This avoids the observed startup failure
+in #3297, where a suite's WebSocket closed before its HTTP header arrived. All
+tests, random ordering and coverage floors remain required; a failed connection
+still fails the gate.
 
 ### `make test-age-interop`
 - **Runs:** `GOBIN=.dart_tool/age-bin go install filippo.io/age/cmd/age@$(AGE_VERSION)` (default
@@ -2059,13 +2065,17 @@ For focused work, run only the relevant slice instead of the whole suite:
   `make test-golden UPDATE=1` accepts an intentional visual change. The target
   runs `flutter test test/golden --tags golden`, so it loads only the golden
   directory. Keep golden-tagged tests there; `macos_gate_concurrency_test.dart`
-  guards literal tags outside that directory. (Gated in CI
-  since #1988: `macos-gate.yml` runs `make test-golden` on every push to `main`
-  on the Mac-runner — a post-merge vangnet that een sub-promille renderlaag-
-  verschuiving binnen minuten ziet in plaats van pas wanneer iemand lokaal `make
-  check` draait. The release candidate also runs the goldens on the exact
-  merged commit before a tag is made. Geen required PR-check, want de Mac-runner staat
-  niet altijd aan en de goldens zijn machine-specifiek.)
+  guards literal tags outside that directory. On macOS, the workflow
+  compares committed PNGs before merging PRs from repository branches and on
+  pushes to `main`. PR checks are advisory because the Mac host is sometimes
+  offline. A fork needs a maintainer branch to use that host. The release
+  candidate compares the exact commit before tagging.
+
+  Linux and Windows have no pixel-golden suite. Flutter's test font does not
+  make platform rasterisation and text fallback identical, so the Mac PNGs
+  would give unreliable comparisons there. Both platforms have native app
+  journeys and ordinary widget assertions, which do not compare rendered
+  pixels.
 
   *Corrected 2026-07-22 (#617): this said "each slide type" while the file
   covered **eight** of the 24 types there were then. Everything built after the
@@ -2075,13 +2085,7 @@ For focused work, run only the relevant slice instead of the whole suite:
   `SlideType.values`, which also means a new type gets its golden without anyone
   remembering to add one. (Corrected again 2026-08-30: the sentence above still
   read "every one of the 24 slide types" while the enum had reached 32. A loop
-  over `SlideType.values` needs no count beside it, so the number is gone rather
-  than raised — it would only rot again.) Two sentences to keep straight: they
-  are still excluded from `make check`, deliberately — a pixel comparison in the default
-  gate would fail on any machine but this one — and they are still only as good
-  as somebody typing `make test-golden`. Sinds #1988 draait `macos-gate.yml` ze
-  op `push: main` op de Mac-runner, dus een vergeten handmatige run is niet meer
-  de enige vangst.*
+  over `SlideType.values` needs no count beside it.)*
 
 - **`make clean-test-cache`** — deletes `build/test_cache` and nothing else.
   `flutter test` keeps an incremental kernel cache there
@@ -2269,6 +2273,7 @@ status is required.
 | [`macos-build.yml`](../.forgejo/workflows/macos-build.yml) | `workflow_dispatch` | On demand |
 | [`macos-build.yml`](../.forgejo/workflows/macos-build.yml) | `push` · `branches` `main` · `paths` `pubspec.yaml`, `pubspec.lock`, `macos/**`, `third_party/**`, `.tool-versions`, `.forgejo/workflows/macos-build.yml`, `scripts/macos_window_probe.swift` | Automatic on push to main |
 | [`macos-gate.yml`](../.forgejo/workflows/macos-gate.yml) | `workflow_dispatch` | On demand |
+| [`macos-gate.yml`](../.forgejo/workflows/macos-gate.yml) | `pull_request` · `branches` `main` | Automatic before merge |
 | [`macos-gate.yml`](../.forgejo/workflows/macos-gate.yml) | `push` · `branches` `main` | Automatic on push to main |
 | [`macos-signing-preflight.yml`](../.forgejo/workflows/macos-signing-preflight.yml) | `workflow_dispatch` | On demand |
 | [`release-channel.yml`](../.forgejo/workflows/release-channel.yml) | `workflow_dispatch` | On demand |
