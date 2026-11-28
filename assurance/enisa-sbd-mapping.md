@@ -38,8 +38,8 @@ of het ASVS-dossier verwezen in plaats van het argument over te schrijven.
 De onderhouder draait `make check-full` en legt het getoetste commit vast vóór
 de merge. Dat is een afspraak. De PR-geheimenscan op Pawprint geeft een
 automatische uitslag. De branchregel eist geen statuschecks. De nachtelijke
-Linux-suite, macOS-goldens op `main` en tijdscontroles geven bewijs op andere
-momenten. De releaseketen toetst een kandidaat vóór de tag. Zie
+Linux-suite, macOS-goldens op repository-PR’s en `main`, en de tijdscontroles
+leveren aanvullend uitvoeringsbewijs. De releaseketen toetst een kandidaat vóór de tag. Zie
 [Checks & CI](../docs/CHECKS.md#all-checks-at-a-glance).
 
 ## Legenda voor het oordeel
@@ -79,7 +79,7 @@ Verwijzingen zijn naar **bestandsnaam plus symbool**, nooit naar een regelnummer
 | 11 | Configuration & change management | **Afgedwongen** | Alles in git + DCO (`dco.txt`, `PULL_REQUEST_TEMPLATE.md`); `test/pinned_versions_manifest_test.dart` (harde pin-poort) + `.github/pinned-ci-versions.json`; `make check-toolchain` | Sterk op versiebeheer, pins en toolchain-basislijn. De gate-regel "dev/test/prod gescheiden" heeft geen onderwerp: er is geen IaC en geen productieomgeving. |
 | 12 | Incident response & recovery | **Deels** | `SECURITY.md` (rollen, escalatieadres `security@librekat.nl`, runbook detect→reproduce→tracker); SLA gemeten door `tool/check_service_norms.dart` (5/10/90 werkdagen); herstel via git-opslag + crash-recovery-snapshot | Intern proces bestaat en wordt gemeten. De **externe meldroute** (CSIRT/ENISA) is géén openstaand gat: die hoort bij een fabrikants- of rentmeestersplicht, en [`CRA-2024-2847-positie.md`](CRA-2024-2847-positie.md) §artikel 24 concludeert dat geen van beide op LibreKAT rust. Komt die rol ooit alsnog, dan is het een adres en een afspraak — zie daar. |
 | 13 | Vulnerability & patch management | **Deels** | `make deps-check` (OSV over de gebundelde JS), `make sbom`, `make sast`, `make check-secrets`; triage vastgelegd in `risicoafweging.md`, `AUDIT_RESPONSE.md`, CHANGELOG; fix staat op `main` zodra gemerged | Proces en JS-graaf gedekt. Open: de **Dart-afhankelijkheidsgraaf** wordt niet automatisch afgezocht — Trivy draait adviserend, niet als poort (#517). |
-| 14 | Supply chain controls | **Afgedwongen** | `make sbom` (CycloneDX 1.6 + SPDX 2.3) + `sbom-verify`-poort + `test/sbom_test.dart`; leveranciersweging in `ketenkeuring-matrix-sdk.md` / `-rust-sdk.md` (GO/NO-GO); build-secrets minimaal in de workflows | Een uitschieter. De release-manifest `SHA256SUMS` draagt nu een **minisign detached signature** (`SHA256SUMS.minisig`, publieke sleutel `minisign.pub` in de repo-root, lokaal-handmatig getekend met `make sign-release`), die élk genoemd artefact verankert — alle platformen tegelijk (#1014, `SECURITY.md` §"Release artifact integrity and signing", `docs/BUILD.md`). macOS is daarbovenop Developer-ID-getekend + genotariseerd (`scripts/notarize_macos.sh`); per-binary Windows-ondertekening (Authenticode) is na weging **bewust aanvaard** (#1013, gesloten). **Provenance/SLSA** (reproduceerbare build, **#1027**) is onderzocht en gewogen ([`reproduceerbare-builds.md`](reproduceerbare-builds.md)): de webbundel is content-reproduceerbaar gemaakt en het determinisme is getoetst binnen een vaste bouwomgeving, desktop en SLSA-attestatie zijn gewogen weg. De enige niet-gemeten restrand is cross-OS (samen met de Linux-tak, #520); de eerder aangewezen "native-assets pinnen" bleek een vals spoor (#1033). Zie [open punt O1](#de-open-punten). |
+| 14 | Supply chain controls | **Afgedwongen** | `make sbom` (CycloneDX 1.6 + SPDX 2.3) + `sbom-verify`-poort + `test/sbom_test.dart`; leveranciersweging in `ketenkeuring-matrix-sdk.md` / `-rust-sdk.md` (GO/NO-GO); build-secrets minimaal in de workflows | Een uitschieter. De release-manifest `SHA256SUMS` draagt nu een **minisign detached signature** (`SHA256SUMS.minisig`, publieke sleutel `minisign.pub` in de repo-root, lokaal-handmatig getekend met `make sign-release`), die élk genoemd artefact verankert — alle platformen tegelijk (#1014, `SECURITY.md` §"Release artifact integrity and signing", `docs/BUILD.md`). macOS is daarbovenop Developer-ID-getekend + genotariseerd (`scripts/notarize_macos.sh`); per-binary Windows-ondertekening (Authenticode) is na weging **bewust aanvaard** (#1013, gesloten). **Provenance/SLSA** (reproduceerbare build, **#1027**) is onderzocht en gewogen ([`reproduceerbare-builds.md`](reproduceerbare-builds.md)): de webbundel is content-reproduceerbaar gemaakt en het determinisme is getoetst binnen een vaste bouwomgeving, desktop en SLSA-attestatie zijn gewogen weg. Een cross-OS-meting toont verschillen in de gecompileerde webartefacten. Zie [meetbewijs #3247](#meetbewijs-3247-28-november-2026) en [O1](#de-open-punten). |
 
 ## Secure by Default — Default Hardening (15–18)
 
@@ -105,8 +105,9 @@ Verwijzingen zijn naar **bestandsnaam plus symbool**, nooit naar een regelnummer
 
 O1 en O2 staan hieronder met hun uitkomst. De resterende onderwerpen in de
 matrix zijn adviescontrole van de Dart-graaf (#517), verificatiediepte (CRA-dossier)
-en het bewijs voor platformdistributie en cross-OS-bouw (#520). Het
-verificatievervolg staat in [#3247](https://pawprint.vigilis.online/LibreKAT/Ocideck/issues/3247).
+en het bewijs voor platformdistributie en cross-OS-bouw (#520). De gerichte
+metingen uit [#3247](https://pawprint.vigilis.online/LibreKAT/Ocideck/issues/3247)
+staan hieronder.
 Voor de nieuwe grenzen staan de uitrolafhankelijke risico’s in de risicoafweging en volgt
 dossierherziening via #3243.
 
@@ -124,10 +125,9 @@ dossierherziening via #3243.
   per-build-willekeur is weg, `pack_web_release.dart`), bit-repro voor macOS en
   Windows is principieel resp. qua opbrengst gewogen weg, en een aparte
   SLSA-provenance-attestatie voegt voor één vertrouwenswortel niets toe boven de
-  off-runner getekende manifest. De enige niet-gemeten restrand is een build op
-  een ander OS (samen met de Linux-tak); de eerder aangewezen "native-assets
-  pinnen" bleek een vals spoor van een vervuilde meting (**#1033**). Alles onder
-  de veilige-distributievraag **#520**.
+  off-runner getekende manifest. De vergelijking tussen Linux en macOS
+  hieronder laat zien dat beide bouwomgevingen verschillende gecompileerde
+  webartefacten leveren. Dit valt onder de veilige-distributievraag **#520**.
 
 - **O2 — verversingstrigger voor het dreigingsmodel.** De PR-checklist vraagt
   een review bij veranderingen aan interfaces, identiteit, gevoelige gegevens,
@@ -136,6 +136,98 @@ dossierherziening via #3243.
   netwerksinkpaden. #3243 voegt de servicemodule-inventaris en termijn voor
   herziening toe. De inhoud en acceptatie van restrisico’s blijven een
   menselijke beoordeling.
+
+### Meetbewijs #3247, 28 november 2026
+
+**Dart-advisories.** De hoofdlockfile bevat 223 vermeldingen (SHA-256
+`71db73781b8dbd3c3b83edca03b1bd6a7849c927c1f3c404e17e1ccb96639fb3`).
+Daarvan zijn er 201 via pub.dev op naam en exacte versie te bevragen
+(90,1%). De andere 22 zijn zeven git-, zeven pad- en acht SDK-dependencies.
+De [OSV-export van de Pub-bron](https://osv-vulnerabilities.storage.googleapis.com/Pub/all.zip)
+bevatte 14 records, met actuele advisories voor elf pakketnamen. De bron noemt vier
+pakketnamen uit de lockfile (`archive`, `http`, `jose` en
+`shared_preferences_android`). Dat meet historische zichtbaarheid per
+naam. [OSV QueryBatch](https://google.github.io/osv.dev/post-v1-querybatch/)
+antwoordde voor alle 201 vastgezette versies met nul toepasselijke advisories.
+
+Trivy 0.76.2 met database bijgewerkt op 2026-11-28 om 07:04 UTC
+(`mirror.gcr.io/aquasec/trivy-db:2`) herkende alle 223 lockfilevermeldingen.
+Het rapporteerde nul Pub-kwetsbaarheden in de hoofdlockfile en de twee
+aangetroffen pakketlockfiles. De [Trivy-bronbeschrijving](https://trivy.dev/docs/latest/guide/scanner/vulnerability/)
+documenteert de GitHub Advisory Database voor Pub. Houd het oordeel adviserend
+totdat een automatisering de databron beschikbaar en actueel kan houden, de
+git-/pad-/SDK-dependencies apart adresseert en een test met een publiek bekende
+getroffen versie betrouwbaar ziet.
+
+```sh
+curl -fLO https://osv-vulnerabilities.storage.googleapis.com/Pub/all.zip
+trivy fs --scanners vuln --list-all-pkgs --format json --output trivy-dart.json .
+jq '.Results[] | select(.Type == "pub") | {Target, packages: (.Packages|length), findings: ((.Vulnerabilities // [])|length)}' trivy-dart.json
+```
+
+Selecteer voor de OSV-batch uit `pubspec.lock` de entries met
+`source: hosted` en URL `https://pub.dev`. Stuur die als
+`queries: [{package: {name, ecosystem: "Pub"}, version}]` naar
+`POST https://api.osv.dev/v1/querybatch` en vergelijk het antwoord op
+volgorde met alle invoerregels. Een onbekende pakketnaam en een pakket zonder
+advisory kunnen beide een lege lijst opleveren.
+
+**Webrelease op Linux en macOS.** De [Linux/amd64-uitvoering op Pawprint](https://pawprint.vigilis.online/LibreKAT/Ocideck/actions/runs/6943)
+en de lokale macOS/arm64-uitvoering op 27.3 gebruikten commit
+`d2e778167d8e1c446379554cd9debdd0dd30b499`, Flutter 3.50.0 met frameworkrevisie
+`ab2912035e160d9cad6306df307576da6128ebdb` en dezelfde lockfile als hierboven.
+`make check-web` slaagde op beide hosts.
+
+| Omgeving | SHA-256 van `build/web/SHA256SUMS` |
+|---|---|
+| Linux, ondiepe checkout | `779a3ad6e36940940a4a817df2fb61fa6d5740a534658c135b51d53f6ace33f0` |
+| macOS, volledige Git-geschiedenis | `7732a727a66b57e760d1dfba9e03ed57321412da46b3b3dcc75551749bf3daaf` |
+| macOS, na gelijktrekken van de Git-aanduiding | `a3d432931303cd41232a1a9fd15d67228ec7299f96d21a7a8c4549775458e370` |
+
+Het verschil tussen `d2e7781` in Linux en `v0.7.15-240-gd2e778167` in
+macOS wijzigt twee bestanden, `build-info.json` en de cacheverwijzing ernaar
+in `precache_manifest.json`. Ook met `d2e7781` in beide bundels wijkt de
+checksumlijst af. Twee inhoudsgehashte compilerartefacten verschillen al in de
+bestandsnaam. De Linux-browserlog laadt `main.dart.c02d0c5c.wasm` en bij
+terugval `main.dart.50a87307.js`. Op macOS zijn dat respectievelijk
+`main.dart.884d76ce.wasm` en `main.dart.4d1fd39e.js`. De moduleloader
+`main.dart.83f18b95.mjs` heeft op beide dezelfde inhoudsprefix. De Linux-run
+bewaart de digest en de geladen bestanden, waardoor andere verschilregels
+pas bij een vervolgmeting met beide volledige lijsten te herleiden zijn.
+De meting toont reproduceerbaarheid van deze bundel tussen de twee
+bouwomgevingen niet aan. Houd cross-OS-gelijkheid daarom buiten de
+releasevoorwaarden.
+
+Maak op beide hosts een schone checkout met dezelfde commit, dezelfde
+ondiepe Git-geschiedenis (`--depth=1`, geen tags) en dezelfde Flutter-pin.
+Bewaar de checksumlijst naast het log zodra de controle gereed is.
+
+```sh
+git rev-parse HEAD
+make check-toolchain
+shasum -a 256 pubspec.lock
+flutter pub get --enforce-lockfile
+make check-web
+shasum -a 256 build/web/SHA256SUMS
+```
+
+Vergelijk de twee `SHA256SUMS`-bestanden met `diff -u` als de totalen
+verschillen. Onderzoek `build-info.json` afzonderlijk. De aanduiding uit
+`git describe` hangt mede van aanwezige tags en geschiedenis af en werkt door
+in `precache_manifest.json`.
+
+**Gerichte mutatie.** De fixture van
+`test/json_depth_guard_test.dart` draait op de productiegrens in
+`lib/utils/json_depth_guard.dart`. Met het maximum tijdelijk elf niveaus
+ruimer faalt de bestaande test *diep geneste input wordt geweigerd vóór
+jsonDecode*. De bestaande suite blijft groen wanneer de vergelijking van
+`>` naar `>=` gaat. Daarmee is acceptatie precies op de maximale diepte
+een aantoonbaar ongetoetste rand. De ongewijzigde bron slaagt met zeven
+tests. Dit resultaat blijft beperkt tot de JSON-dieptevergelijking.
+
+```sh
+flutter test test/json_depth_guard_test.dart
+```
 
 ### Na weging géén open punt
 
