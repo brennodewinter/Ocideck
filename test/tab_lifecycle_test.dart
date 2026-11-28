@@ -1,3 +1,4 @@
+import 'package:flutter/widgets.dart' show debugOnRebuildDirtyWidget;
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -12,6 +13,7 @@ import 'package:ocideck/state/editor_provider.dart';
 import 'package:ocideck/state/privacy_provider.dart';
 import 'package:ocideck/state/tabs_provider.dart';
 import 'package:ocideck/widgets/app_shell.dart';
+import 'package:ocideck/widgets/slides/slide_thumbnail.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
@@ -271,21 +273,46 @@ void main() {
     deckNotifier.loadDeck(
       Deck(
         title: 'Deck',
-        slides: [Slide.create(SlideType.title).copyWith(title: 'Dia')],
+        slides: List.generate(
+          4,
+          (index) =>
+              Slide.create(SlideType.title).copyWith(title: 'Dia $index'),
+        ),
       ),
     );
-    await tester.pump();
-    // openen (en de vuil-stip van de eerste bewerking) mogen wél uitzenden.
-    final baseline = emissions + 1;
+    await tester.pumpAndSettle();
+    expect(find.byType(SlideThumbnail), findsNWidgets(3));
+    final original = debugOnRebuildDirtyWidget;
+    var shellBuilds = 0;
+    final thumbnailBuilds = <int, int>{};
+    debugOnRebuildDirtyWidget = (element, builtBefore) {
+      original?.call(element, builtBefore);
+      if (element.widget is AppShell) shellBuilds++;
+      if (element.widget case SlideThumbnail(:final index)) {
+        thumbnailBuilds.update(index, (count) => count + 1, ifAbsent: () => 1);
+      }
+    };
+    addTearDown(() => debugOnRebuildDirtyWidget = original);
 
-    // Tien 'toetsaanslagen': dezelfde dia steeds anders — geen enkel tabfeit
-    // (label, vuil-stip, open, pad) wijzigt na de eerste.
-    for (var i = 0; i < 10; i++) {
+    // The first edit may change the dirty indicator. Measure subsequent edits.
+    deckNotifier.updateSlide(
+      0,
+      deckNotifier.currentState.deck!.slides.first.copyWith(title: 'A'),
+    );
+    await tester.pumpAndSettle();
+    final baseline = emissions;
+    shellBuilds = 0;
+    thumbnailBuilds.clear();
+
+    for (var i = 1; i <= 10; i++) {
       final slide = deckNotifier.currentState.deck!.slides.first;
-      deckNotifier.updateSlide(0, slide.copyWith(title: 'a' * (i + 1)));
+      deckNotifier.updateSlide(0, slide.copyWith(title: 'a' * i));
       await tester.pump();
     }
-    expect(emissions, lessThanOrEqualTo(baseline));
+    expect(shellBuilds, 0);
+    expect(emissions, baseline);
+    expect(thumbnailBuilds.keys, [0]);
+    expect(thumbnailBuilds[0], inInclusiveRange(1, 10));
 
     // Een écht tabfeit — de titel van het deck is het tablabel als er geen
     // bestandspad is — moet wél uitzenden.

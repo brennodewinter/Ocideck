@@ -483,6 +483,8 @@ void main() {
     await tester.pump();
     // Vóór de eerste tik staat de balk er nog niet (_progress == 0).
     expect(find.byType(LinearProgressIndicator), findsNothing);
+    final beforeTicks = debugPresenterViewBuilds;
+    expect(beforeTicks, greaterThan(0));
 
     await tester.pump(const Duration(milliseconds: 300));
     final p1 = tester
@@ -496,6 +498,7 @@ void main() {
         .widget<LinearProgressIndicator>(find.byType(LinearProgressIndicator))
         .value;
     expect(p2!, greaterThan(p1));
+    expect(debugPresenterViewBuilds, beforeTicks);
 
     // Na ~1 s schakelt de dia door. Dia twee heeft geen advanceDuration,
     // dus verdwijnt de balk — bewijs dat _autoAdvance echt gelopen heeft
@@ -503,6 +506,7 @@ void main() {
     await tester.pump(const Duration(milliseconds: 700));
     await tester.pump();
     expect(find.byType(LinearProgressIndicator), findsNothing);
+    expect(debugPresenterViewBuilds - beforeTicks, inInclusiveRange(1, 2));
 
     await tester.pumpWidget(const SizedBox());
   });
